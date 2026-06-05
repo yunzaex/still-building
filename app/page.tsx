@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -17,10 +17,10 @@ export default function Home() {
         </p>
 
         <div className="mt-12 flex gap-6 text-sm text-[#B7C9D9]">
-          <span>Projects</span>
-          <span>Notes</span>
-          <span>Archive</span>
-          <span>Now</span>
+          <Link href="/projects">Projects</Link>
+          <Link href="/notes">Notes</Link>
+          <Link href="/archive">Archive</Link>
+          <Link href="/now">Now</Link>
         </div>
       </section>
     </main>
