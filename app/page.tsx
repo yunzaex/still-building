@@ -15,13 +15,6 @@ export default function Home() {
         <p className="mt-6 max-w-xl text-lg text-[#B5ACA3]">
           Projects, notes, and everything in between.
         </p>
-
-        <div className="mt-12 flex gap-6 text-sm text-[#B7C9D9]">
-          <Link href="/projects">Projects</Link>
-          <Link href="/notes">Notes</Link>
-          <Link href="/archive">Archive</Link>
-          <Link href="/now">Now</Link>
-        </div>
       </section>
     </main>
   );
