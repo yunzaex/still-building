@@ -1,10 +1,8 @@
-import Link from "next/link";
-
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0F1115] text-[#F2EFEA]">
+    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <section className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-8">
-        <p className="mb-4 text-sm tracking-[0.3em] text-[#9AA3AD]">
+        <p className="mb-4 text-sm tracking-[0.3em] text-[var(--brown-light)]">
           YOONJAE ARCHIVE
         </p>
 
@@ -12,7 +10,7 @@ export default function Home() {
           Still building.
         </h1>
 
-        <p className="mt-6 max-w-xl text-lg text-[#B5ACA3]">
+        <p className="mt-6 max-w-xl text-lg text-[var(--brown-light)]">
           Projects, notes, and everything in between.
         </p>
       </section>
