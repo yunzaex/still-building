@@ -31,7 +31,7 @@ export default function Home() {
               YOONJAE ARCHIVE
             </p>
 
-            <h1 className="text-7xl font-semibold uppercase leading-[0.9] tracking-tight md:text-9xl">
+            <h1 className="font-serif text-7xl font-semibold uppercase leading-[0.9] tracking-tight md:text-9xl">
               Still
               <br />
               Building
