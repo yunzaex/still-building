@@ -11,7 +11,7 @@ const navItems = [
 export default function Navbar() {
   return (
     <header className="fixed left-0 top-0 z-50 w-full px-8 py-6">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between text-sm text-[#F2EFEA]">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between text-sm text-[var(--white)]">
         <Link href="/" className="tracking-[0.25em] text-[#9AA3AD]">
           YOONJAE
         </Link>

@@ -1,21 +1,27 @@
+import MenuCard from "@/components/MenuCard";
+
 const menuItems = [
   {
-    number: "01",
+    href: "/projects",
+    label: "01",
     title: "Projects",
     description: "Things I've built and am building.",
   },
   {
-    number: "02",
+    href: "/notes",
+    label: "02",
     title: "Notes",
     description: "Thoughts, studies, and ideas.",
   },
   {
-    number: "03",
+    href: "/archive",
+    label: "03",
     title: "Archive",
     description: "Snapshots of the past.",
   },
   {
-    number: "04",
+    href: "/now",
+    label: "04",
     title: "Now",
     description: "What I'm into right now.",
   },
@@ -45,24 +51,15 @@ export default function Home() {
 
         <div className="mt-16 h-[520px] w-full bg-[var(--surface)]" />
 
-        <section className="mt-8 grid gap-6 border-t border-[var(--line)] pt-6 md:grid-cols-4">
+        <section className="grid gap-8 py-24 md:grid-cols-4">
           {menuItems.map((item) => (
-            <article
-              key={item.number}
-              className="border-r border-[var(--line)] pr-6 last:border-r-0"
-            >
-              <p className="mb-4 text-xs text-[var(--brown-light)]">
-                {item.number}
-              </p>
-
-              <h2 className="text-2xl font-medium uppercase">{item.title}</h2>
-
-              <p className="mt-3 text-sm leading-6 text-[var(--brown-light)]">
-                {item.description}
-              </p>
-
-              <p className="mt-6 text-lg">↗</p>
-            </article>
+            <MenuCard
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              description={item.description}
+            />
           ))}
         </section>
       </section>
