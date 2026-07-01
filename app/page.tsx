@@ -25,6 +25,12 @@ const menuItems = [
     title: "Now",
     description: "What I'm into right now.",
   },
+  {
+    href: "about",
+    label: "05",
+    title: "About",
+    description: "All about this site, and me.",
+  },
 ];
 
 export default function Home() {

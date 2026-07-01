@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import Divider from "@/components/Divider";
 import PageHeader from "@/components/PageHeader";
 import SectionTitle from "@/components/SectionTitle";
+import Button from "@/components/Button";
 
 export default function AboutPage() {
   return (
@@ -21,6 +22,9 @@ export default function AboutPage() {
           description="프로젝트, 공부 기록, 여행, 사진, 생각들을 하나의 공간에 축적하며 시간이 흐를수록 계속 성장하는 웹사이트를 만들고 있습니다."
         />
       </section>
+      <div className="mt-10">
+        <Button href="/projects">View Projects</Button>
+      </div>
     </Container>
   );
 }
