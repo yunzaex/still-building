@@ -60,9 +60,10 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 
 - 최대 콘텐츠 폭은 `max-w-6xl` 기준
 - 좌우 여백은 주로 `px-8`
-- 상단 시작 여백은 홈 기준 `pt-32`
+- 상단 시작 여백은 홈과 서브 페이지 모두 `pt-32` 계열을 기준으로 한다
 - 구분은 진한 박스보다 `border`와 `line` 컬러로 해결
 - 홈에서는 `grid` 기반 2단 구성과 4열 메뉴 요약 구조를 사용
+- 서브 페이지는 `Container` + `PageHeader` + `Divider` + `SectionTitle` 조합을 기본 구조로 삼는다
 
 ## 컴포넌트 기준
 
@@ -70,13 +71,41 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 
 - `Navbar`
 - `Footer`
-
-현재 파일은 있으나 아직 구현되지 않은 컴포넌트:
-
 - `components/Container.tsx`
 - `components/PageHeader.tsx`
+- `components/SectionTitle.tsx`
+- `components/Divider.tsx`
+- `components/MenuCard.tsx`
+- `components/Button.tsx`
 
-따라서 현재 시점의 디자인 시스템은 "완성된 컴포넌트 라이브러리"라기보다 "홈 화면 중심의 스타일 기준선"에 가깝다.
+### 컴포넌트 역할
+
+- `Navbar`
+  - 고정 상단 네비게이션
+  - 브랜드 텍스트는 `STILL BUILDING`
+  - 홈, 프로젝트, 노트, 아카이브, 나우 라우트를 노출
+  - hover 시 번호가 왼쪽에서 나타나고 메뉴 텍스트가 이동하는 인터랙션 사용
+  - 브랜드 hover 시 커서 형태의 짧은 blink 인터랙션 사용
+- `Footer`
+  - 저채도 브라운 계열의 작은 대문자 텍스트 사용
+  - 사이트 소개, 이메일, GitHub, Colophon, Uses 링크 영역으로 구성
+  - 일부 링크 대상 라우트는 아직 구현되지 않았으므로 추후 라우트 정리가 필요
+- `Container`
+  - `max-w-6xl`, `px-8` 기준의 공통 콘텐츠 폭 제공
+- `PageHeader`
+  - 서브 페이지의 label, 큰 세리프 title, description 구조 제공
+- `SectionTitle`
+  - 섹션 상단 라인, eyebrow, title, description 구조 제공
+- `Divider`
+  - `--line` 토큰 기반의 얇은 구분선
+- `MenuCard`
+  - 홈 하단 메뉴 요약 카드
+  - hover 시 위로 살짝 이동
+- `Button`
+  - `primary`, `ghost` variant 제공
+  - 내부 링크는 `next/link`, 외부 링크는 `<a>` 사용
+
+따라서 현재 시점의 디자인 시스템은 홈 화면 중심의 기준선에서 서브 페이지용 기본 컴포넌트 세트로 확장되는 단계다.
 
 ## 현재 컬러 기준
 
@@ -93,16 +122,11 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 | `--white`       | `#f7f7f5` | 밝은 중립 색상           |
 | `--accent`      | `#4c6074` | 포인트 컬러              |
 
-추가로 네비게이션에는 아래 하드코딩 색상이 쓰이고 있다.
-
-- `#F2EFEA`
-- `#9AA3AD`
-- `#B7C9D9`
-
 ### 컬러 운영 원칙
 
 - 새 UI를 만들 때는 가능하면 하드코딩보다 CSS 변수 사용을 우선한다.
-- 네비게이션의 하드코딩 컬러는 추후 토큰화 대상이다.
+- Tailwind CSS 변수 유틸리티는 현재 `text-(--brown)`, `border-(--line)` 같은 형태를 주로 사용한다.
+- 일부 기존 컴포넌트에는 `text-[var(--brown-light)]` 형태도 남아 있으므로, 새 작업에서는 한 파일 안에서 표기 방식을 일관되게 맞춘다.
 - 현재 팔레트는 "밝은 배경 + 저채도 블루/브라운 조합"을 유지하는 것이 맞다.
 
 ## 현재 폰트 기준
@@ -133,18 +157,22 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 - 메인 타이포 조합은 `Hanken Grotesk` + `EB Garamond`다.
 - 홈 화면은 넓은 여백, 대문자 제목, 얇은 라인, 아카이브형 카피를 중심으로 구성된다.
 - 글로벌 네비게이션과 푸터는 모든 페이지 공통 레이아웃에 포함된다.
+- 홈의 메인 카피는 `Between logic and aesthetics.`를 사용한다.
+- 주요 네비게이션은 `/`, `/projects`, `/notes`, `/archive`, `/now` 기준으로 정리되어 있다.
 
 ### 부분 확정
 
-- 컬러 시스템은 CSS 변수로 선언되어 있으나, 일부 네비게이션 색상은 하드코딩되어 있다.
-- 홈 화면의 레이아웃 언어는 잡혀 있으나 서브 페이지는 아직 플레이스홀더 상태다.
-- 공용 컴포넌트 구조는 시작되었지만 실제 재사용 가능한 UI 시스템으로는 아직 확장되지 않았다.
+- 컬러 시스템은 CSS 변수로 선언되어 있고, Tailwind 변수 유틸리티 사용으로 옮겨가는 중이다.
+- `/projects`, `/notes`, `/now`는 공통 서브 페이지 템플릿을 적용했다.
+- `/archive`는 아직 매우 단순한 플레이스홀더 상태다.
+- 푸터에는 `/about`, `/colophon`, `/uses` 링크가 있으나 해당 라우트는 아직 구현되지 않았다.
 
 ### 아직 미확정
 
 - 페이지별 상세 레이아웃 규칙
-- 버튼, 링크, 카드, 섹션 헤더 등 세부 컴포넌트 규격
+- 버튼, 링크, 카드, 섹션 헤더의 세부 상태 규격
 - 반응형 기준의 명확한 설계 원칙
+- 푸터 보조 링크의 실제 라우트 구성
 
 ## 유지해야 하는 기준
 
@@ -154,9 +182,9 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 
 ## 다음으로 확정해야 할 항목
 
-1. `Container`, `PageHeader` 등 기본 레이아웃 컴포넌트 정의
-2. 네비게이션 컬러의 토큰화
-3. 서브 페이지 공통 템플릿 정의
+1. `/about`, `/colophon`, `/uses` 라우트를 만들지, 링크를 제거할지 결정
+2. `/archive`를 다른 서브 페이지와 같은 템플릿으로 정리
+3. 버튼, 링크, 카드의 hover/focus 상태 규격 확정
 4. 타이포 스케일과 spacing 규칙 문서화
 
 ## 기준 페이지
@@ -178,3 +206,6 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 - [`app/page.tsx`](/Users/jeje/Documents/GitHub/still-building/app/page.tsx)
 - [`components/Navbar.tsx`](/Users/jeje/Documents/GitHub/still-building/components/Navbar.tsx)
 - [`components/Footer.tsx`](/Users/jeje/Documents/GitHub/still-building/components/Footer.tsx)
+- [`components/PageHeader.tsx`](/Users/jeje/Documents/GitHub/still-building/components/PageHeader.tsx)
+- [`components/SectionTitle.tsx`](/Users/jeje/Documents/GitHub/still-building/components/SectionTitle.tsx)
+- [`components/Button.tsx`](/Users/jeje/Documents/GitHub/still-building/components/Button.tsx)

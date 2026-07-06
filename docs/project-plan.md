@@ -42,16 +42,21 @@
 - `app/` 라우터 구조를 사용한다.
 - 프로젝트 철학과 페이지 역할이 정리되었다.
 - 디자인 규칙은 별도 문서로 분리되었다.
+- 홈, 프로젝트, 노트, 아카이브, 나우를 주요 라우트로 운영한다.
+- 상단 네비게이션과 푸터는 `app/layout.tsx`에서 공통으로 적용한다.
 
 ### 부분 확정
 
-- 디자인 시스템은 방향이 정리되었지만 실제 공용 컴포넌트 구현은 아직 초기 상태다.
-- 대부분의 서브 페이지는 아직 플레이스홀더 상태다.
+- 디자인 시스템은 방향이 정리되었고, 기본 레이아웃/타이포 컴포넌트가 구현되기 시작했다.
+- `/projects`, `/notes`, `/now`는 공통 서브 페이지 템플릿을 적용했다.
+- `/archive`는 아직 단순 플레이스홀더 상태다.
+- 푸터에는 보조 링크가 준비되어 있으나 일부 대상 라우트는 아직 없다.
 
 ### 아직 미확정
 
 - 콘텐츠 모델과 데이터 구조
 - SEO/metadata 문구
+- `/about`, `/colophon`, `/uses` 라우트의 유지 여부
 
 ## 현재 프로젝트 구조
 
@@ -59,7 +64,6 @@
 
 ```text
 app/
-  about/page.tsx
   archive/page.tsx
   favicon.ico
   globals.css
@@ -69,10 +73,14 @@ app/
   page.tsx
   projects/page.tsx
 components/
+  Button.tsx
   Container.tsx
+  Divider.tsx
   Footer.tsx
+  MenuCard.tsx
   Navbar.tsx
   PageHeader.tsx
+  SectionTitle.tsx
 public/
 docs/
 ```
@@ -83,12 +91,14 @@ docs/
   - 글로벌 폰트, `Navbar`, `Footer`를 묶는 최상위 레이아웃
 - `app/page.tsx`
   - 현재 가장 완성도가 높은 기준 페이지
-- `app/about`, `app/archive`, `app/notes`, `app/now`, `app/projects`
-  - 라우트는 존재하지만 아직 제목만 있는 초기 상태
+- `app/projects`, `app/notes`, `app/now`
+  - `Container`, `PageHeader`, `Divider`, `SectionTitle` 기반의 서브 페이지 구조 적용
+- `app/archive`
+  - 아직 제목만 있는 초기 플레이스홀더
 - `app/globals.css`
-  - 컬러 토큰과 기본 타이포 설정 보관
+  - 컬러 토큰, 기본 타이포 설정, 네비게이션 커서 blink 애니메이션 보관
 - `components/`
-  - 공용 UI 영역이 될 예정이지만 현재는 `Navbar`, `Footer` 중심
+  - 공용 레이아웃, 네비게이션, 푸터, 버튼, 섹션 타이틀, 메뉴 카드 컴포넌트 보관
 
 ## 페이지 역할
 
@@ -118,21 +128,29 @@ docs/
 - 현재 집중하는 것
 - 월별 업데이트
 
-### About
+### Footer-only 후보 페이지
 
-- 자기소개
-- 사이트 소개
+- `/about`
+  - 자기소개와 사이트 소개 후보
+- `/colophon`
+  - 사이트 제작 환경과 기술 스택 소개 후보
+- `/uses`
+  - 사용하는 도구와 장비 소개 후보
+
+현재 위 라우트들은 푸터 링크로만 준비되어 있으며 실제 페이지 파일은 없다.
 
 ## 페이지별 구현 상태
 
 | 영역 | 상태 | 메모 |
 | --- | --- | --- |
-| 홈 (`/`) | 진행 중 | 현재 디자인 기준선 역할 |
-| 프로젝트 (`/projects`) | 미구현 | 제목만 존재 |
-| 노트 (`/notes`) | 미구현 | 제목만 존재 |
+| 홈 (`/`) | 진행 중 | 현재 디자인 기준선 역할, 메뉴는 Projects/Notes/Archive/Now 4개 |
+| 프로젝트 (`/projects`) | 진행 중 | 공통 헤더와 정적 프로젝트 카드 2개 구성 |
+| 노트 (`/notes`) | 진행 중 | 공통 헤더와 Coming Soon 섹션 구성 |
 | 아카이브 (`/archive`) | 미구현 | 제목만 존재 |
-| 나우 (`/now`) | 미구현 | 제목만 존재 |
-| 소개 (`/about`) | 미구현 | 제목만 존재 |
+| 나우 (`/now`) | 진행 중 | 공통 헤더와 Current Focus 섹션 구성 |
+| 소개 (`/about`) | 없음 | 페이지 파일은 삭제되었으나 푸터 링크는 남아 있음 |
+| Colophon (`/colophon`) | 없음 | 푸터 링크만 존재 |
+| Uses (`/uses`) | 없음 | 푸터 링크만 존재 |
 
 ## 디자인 시스템 문서
 
@@ -154,7 +172,7 @@ docs/
 ### v1
 
 - 디자인 시스템
-- 정적 페이지
+- 정적 페이지와 주요 라우트 정리
 - 반응형
 - 배포
 
@@ -163,7 +181,7 @@ docs/
 - MDX
 - 태그
 - 검색
-- Theme
+- Theme 또는 다크 모드 전략 재검토
 
 ### v3
 

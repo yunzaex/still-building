@@ -22,26 +22,26 @@ export default function ProjectsPage() {
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <article className="border border-[var(--line)] p-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-[var(--brown-light)]">
+          <article className="border border-(--line) p-6">
+            <p className="text-xs uppercase tracking-[0.2em] text-(--brown-light)">
               Web
             </p>
-            <h3 className="mt-4 font-serif text-3xl text-[var(--brown)]">
+            <h3 className="mt-4 font-serif text-3xl text-(--brown)">
               Still Building
             </h3>
-            <p className="mt-4 leading-7 text-[var(--text)]">
+            <p className="mt-4 leading-7 text-(--text)">
               개인 포트폴리오이자 계속 업데이트되는 아카이브 사이트.
             </p>
           </article>
 
-          <article className="border border-[var(--line)] p-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-[var(--brown-light)]">
+          <article className="border border-(--line) p-6">
+            <p className="text-xs uppercase tracking-[0.2em] text-(--brown-light)">
               Product
             </p>
-            <h3 className="mt-4 font-serif text-3xl text-[var(--brown)]">
+            <h3 className="mt-4 font-serif text-3xl text-(--brown)">
               WearTrack
             </h3>
-            <p className="mt-4 leading-7 text-[var(--text)]">
+            <p className="mt-4 leading-7 text-(--text)">
               스마트 옷장과 패션 소비 기록을 연결하는 모바일 서비스.
             </p>
           </article>

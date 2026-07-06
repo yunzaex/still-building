@@ -1,3 +1,3 @@
 export default function Divider() {
-  return <div className="h-px w-full bg-[var(--line)]" />;
+  return <div className="h-px w-full bg-(--line)" />;
 }
