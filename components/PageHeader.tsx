@@ -15,7 +15,7 @@ export default function PageHeader({
         {label}
       </p>
 
-      <h1 className="max-w-4xl font-serif text-6xl leading-none text-(--brown) md:text-8xl">
+      <h1 className="font-quote max-w-4xl text-6xl leading-none text-(--brown) md:text-8xl">
         {title}
       </h1>
 

@@ -2,27 +2,19 @@
 
 :root {
   --bg: #e2eaf2;
-
   --surface: #cec8c2;
-
   --text: #2d3536;
-
   --brown: #3b2823;
-
   --brown-light: #88665c;
-
   --line: #c1ccd8;
-
   --white: #f7f7f5;
-
   --accent: #4c6074;
+  --font-body: var(--font-body-latin), var(--font-body-korean), sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -52,9 +44,25 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-body);
 }
 
-.font-serif {
-  font-family: var(--font-serif), serif;
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-hero {
+  font-family: var(--font-hero), serif;
+}
+
+.font-quote {
+  font-family: var(--font-quote), serif;
+}
+
+.font-body-latin {
+  font-family: var(--font-body-latin), sans-serif;
+}
+
+.font-body-korean {
+  font-family: var(--font-body-korean), sans-serif;
 }

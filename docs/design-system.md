@@ -135,26 +135,31 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 
 ### 실제 사용 기준
 
-- 기본 산세리프: `Hanken Grotesk`
-- 세리프 디스플레이: `EB Garamond`
+- Hero 메인 타이틀: `Monomakh`
+- 기본 본문: `Hanken Grotesk` + `KoPubWorld Dotum`
+- 긴 영문 문장/문장형 헤드라인: `EB Garamond`
 
-### 함께 로드되지만 보조 성격인 폰트
+### 글로벌 토큰
 
-- `Geist`
-- `Geist Mono`
+- `--font-hero`
+- `--font-quote`
+- `--font-body-latin`
+- `--font-body-korean`
+- `--font-body`
 
 ### 운영 원칙
 
-- 본문, 네비게이션, 설명 텍스트는 산세리프 기준
-- 메인 헤드라인과 브랜드성 타이포는 세리프 기준
-- 새 페이지를 만들 때는 홈 화면의 `font-serif` 사용 패턴을 우선 참고한다
+- 홈 Hero의 메인 타이틀만 `font-hero`를 사용한다
+- 본문, 네비게이션, 버튼, 카드 제목, 설명 텍스트는 `font-body` 기준으로 유지한다
+- 긴 영문 문장이나 문장형 헤드라인은 `font-quote`를 우선 사용한다
+- 한국어 본문은 `KoPubWorld Dotum`, 영문/숫자 본문은 `Hanken Grotesk`가 자연스럽게 선택되는 스택을 기준으로 한다
 
 ## 현재 디자인 구현 상태
 
 ### 확정된 것
 
 - 전체 무드는 차가운 블루-그레이 배경과 따뜻한 브라운 텍스트를 섞은 에디토리얼 포트폴리오 방향이다.
-- 메인 타이포 조합은 `Hanken Grotesk` + `EB Garamond`다.
+- 메인 타이포 조합은 `Monomakh` + `EB Garamond` + `Hanken Grotesk` + `KoPubWorld Dotum`이다.
 - 홈 화면은 넓은 여백, 대문자 제목, 얇은 라인, 아카이브형 카피를 중심으로 구성된다.
 - 글로벌 네비게이션과 푸터는 모든 페이지 공통 레이아웃에 포함된다.
 - 홈의 메인 카피는 `Between logic and aesthetics.`를 사용한다.

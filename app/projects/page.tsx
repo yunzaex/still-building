@@ -26,7 +26,7 @@ export default function ProjectsPage() {
             <p className="text-xs uppercase tracking-[0.2em] text-(--brown-light)">
               Web
             </p>
-            <h3 className="mt-4 font-serif text-3xl text-(--brown)">
+            <h3 className="mt-4 text-3xl text-(--brown)">
               Still Building
             </h3>
             <p className="mt-4 leading-7 text-(--text)">
@@ -38,7 +38,7 @@ export default function ProjectsPage() {
             <p className="text-xs uppercase tracking-[0.2em] text-(--brown-light)">
               Product
             </p>
-            <h3 className="mt-4 font-serif text-3xl text-(--brown)">
+            <h3 className="mt-4 text-3xl text-(--brown)">
               WearTrack
             </h3>
             <p className="mt-4 leading-7 text-(--text)">

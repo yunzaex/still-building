@@ -22,7 +22,7 @@ export default function MenuCard({
         {label}
       </p>
 
-      <h3 className="mt-4 font-serif text-3xl text-(--brown)">{title}</h3>
+      <h3 className="mt-4 text-3xl text-(--brown)">{title}</h3>
 
       <p className="mt-4 text-sm leading-6 text-(--text)">{description}</p>
 

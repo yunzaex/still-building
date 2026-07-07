@@ -17,7 +17,7 @@ export default function SectionTitle({
         </p>
       )}
 
-      <h2 className="font-serif text-4xl leading-tight text-(--brown) md:text-5xl">
+      <h2 className="text-4xl leading-tight text-(--brown) md:text-5xl">
         {title}
       </h2>
 
