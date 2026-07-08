@@ -1,3 +1,4 @@
+import Image from "next/image";
 import MenuCard from "@/components/MenuCard";
 
 const menuItems = [
@@ -45,7 +46,15 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-16 h-[520px] w-full bg-(--surface)" />
+        <div className="relative mt-16 aspect-[16/9] w-full overflow-hidden md:aspect-[2.2/1]">
+          <Image
+            src="/hero-image.webp"
+            alt="Hero image"
+            fill
+            priority
+            className="object-contain"
+          />
+        </div>
 
         <section className="grid gap-8 py-24 md:grid-cols-4">
           {menuItems.map((item) => (

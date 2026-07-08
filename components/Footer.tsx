@@ -18,7 +18,7 @@ export default function Footer() {
           <Link href="/about" className={footerTextStyle}>
             About this site
           </Link>
-          <a href="mailto:yunjae27@g" className={footerTextStyle}>
+          <a href="mailto:yunjae27@gmail.com" className={footerTextStyle}>
             Email
           </a>
           <a
