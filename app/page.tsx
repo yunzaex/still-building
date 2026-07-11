@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Container from "@/components/Container";
 import MenuCard from "@/components/MenuCard";
 
 const menuItems = [
@@ -31,7 +32,7 @@ const menuItems = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-(--bg) text-(--text)">
-      <section className="mx-auto max-w-6xl px-8 pb-16 pt-32">
+      <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
         <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:items-end">
           <div>
             <h1 className="font-hero text-7xl uppercase leading-[0.9] tracking-tight md:text-9xl">
@@ -46,13 +47,15 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="relative mt-16 aspect-[16/9] w-full overflow-hidden md:aspect-[2.2/1]">
+        <div className="mt-16 w-full">
           <Image
-            src="/hero-image.webp"
+            src="/main-home.webp"
             alt="Hero image"
-            fill
+            width={4622}
+            height={2600}
             priority
-            className="object-contain"
+            sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1199px) 85vw, 1152px"
+            className="h-auto w-full"
           />
         </div>
 
@@ -67,7 +70,7 @@ export default function Home() {
             />
           ))}
         </section>
-      </section>
+      </Container>
     </main>
   );
 }

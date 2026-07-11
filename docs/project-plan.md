@@ -2,196 +2,137 @@
 
 ## 목적
 
-이 문서는 `still-building` 프로젝트의 현재 기준선을 정리하는 문서다.
+이 문서는 `still-building` 프로젝트의 현재 기준선과 다음 작업 순서를 정리하는 살아 있는 로드맵이다.
 
-- 현재 무엇이 이미 확정되었는지
-- 어떤 시각 언어를 기준으로 작업해야 하는지
-- 어떤 영역이 아직 미완성인지
+- 무엇이 이미 확정되었는지
+- 지금 어디까지 구현되었는지
+- 다음에 어떤 순서로 확장할지
 
-앞으로의 디자인/개발 작업은 이 문서를 기준으로 일관성을 맞춘다.
+앞으로의 디자인과 개발 작업은 이 문서를 우선 기준으로 맞춘다.
 
-## 프로젝트 철학
+## 판단
 
-`Still Building`은 단순한 개발자 포트폴리오가 아니다.
+이 문서는 기존 `docs/project-plan.md`를 현재 프로젝트 상태에 맞게 갱신한 버전이다.
 
-이 프로젝트는 시간이 지날수록 계속 업데이트되는 개인 아카이브를 지향한다.
+## 현재 기준선
 
-- 포트폴리오
-- 프로젝트
-- 공부 기록
-- 여행
-- 사진
-- 생각
-
-위와 같은 축적물을 하나의 공간 안에 쌓아가며, 사용자의 성장 과정을 기록하는 `Living Archive`를 목표로 한다.
-
-이 프로젝트에서 중요한 것은 "완성"이 아니라 "지속적인 업데이트"다.
-
-### 철학적 기준
-
-- 완결된 결과물보다 축적되는 과정이 중요하다.
-- 사이트는 이력서가 아니라 살아 있는 개인 기록 저장소여야 한다.
-- 각 페이지는 정보 정리뿐 아니라 시간의 흐름과 변화의 흔적을 담아야 한다.
-- 이후 기능 추가 역시 "계속 쌓이는 구조"를 우선으로 판단한다.
+- Stack: `Next.js 16.2.6`, `React 19.2.4`, `Tailwind CSS 4`
+- Router: `app/` 라우터
+- 공통 레이아웃: `app/layout.tsx`에서 `Navbar`와 `Footer`를 전역 적용
+- 디자인 기준 문서: `docs/design-system.md`
+- 현재 기준 페이지: `app/page.tsx`
+- 글로벌 스타일과 토큰: `app/globals.css`
+- 폰트 설정: `app/fonts.ts`
+- 공용 컴포넌트: `components/Navbar.tsx`, `components/Footer.tsx`, `components/Container.tsx`, `components/PageHeader.tsx`, `components/SectionTitle.tsx`, `components/Divider.tsx`, `components/MenuCard.tsx`, `components/Button.tsx`
+- 현재 구현된 주요 라우트: `/`, `/projects`, `/notes`, `/archive`, `/now`
+- 아직 실제 라우트가 없는 푸터 링크: `/about`, `/colophon`, `/uses`
 
 ## 현재 상태 요약
 
-### 확정된 것
-
-- 프로젝트는 `Next.js 16`, `React 19`, `Tailwind CSS 4` 기반이다.
-- `app/` 라우터 구조를 사용한다.
-- 프로젝트 철학과 페이지 역할이 정리되었다.
-- 디자인 규칙은 별도 문서로 분리되었다.
-- 홈, 프로젝트, 노트, 아카이브, 나우를 주요 라우트로 운영한다.
-- 상단 네비게이션과 푸터는 `app/layout.tsx`에서 공통으로 적용한다.
-
-### 부분 확정
-
-- 디자인 시스템은 방향이 정리되었고, 기본 레이아웃/타이포 컴포넌트가 구현되기 시작했다.
-- `/projects`, `/notes`, `/now`는 공통 서브 페이지 템플릿을 적용했다.
-- `/archive`는 아직 단순 플레이스홀더 상태다.
-- 푸터에는 보조 링크가 준비되어 있으나 일부 대상 라우트는 아직 없다.
-
-### 아직 미확정
-
-- 콘텐츠 모델과 데이터 구조
-- SEO/metadata 문구
-- `/about`, `/colophon`, `/uses` 라우트의 유지 여부
-
-## 현재 프로젝트 구조
-
-### 루트 구조
-
-```text
-app/
-  archive/page.tsx
-  favicon.ico
-  globals.css
-  layout.tsx
-  notes/page.tsx
-  now/page.tsx
-  page.tsx
-  projects/page.tsx
-components/
-  Button.tsx
-  Container.tsx
-  Divider.tsx
-  Footer.tsx
-  MenuCard.tsx
-  Navbar.tsx
-  PageHeader.tsx
-  SectionTitle.tsx
-public/
-docs/
-```
-
-### 구조 해석
-
-- `app/layout.tsx`
-  - 글로벌 폰트, `Navbar`, `Footer`를 묶는 최상위 레이아웃
-- `app/page.tsx`
-  - 현재 가장 완성도가 높은 기준 페이지
-- `app/projects`, `app/notes`, `app/now`
-  - `Container`, `PageHeader`, `Divider`, `SectionTitle` 기반의 서브 페이지 구조 적용
-- `app/archive`
-  - 아직 제목만 있는 초기 플레이스홀더
-- `app/globals.css`
-  - 컬러 토큰, 기본 타이포 설정, 네비게이션 커서 blink 애니메이션 보관
-- `components/`
-  - 공용 레이아웃, 네비게이션, 푸터, 버튼, 섹션 타이틀, 메뉴 카드 컴포넌트 보관
-
-## 페이지 역할
-
-### Home
-
-- 사이트의 첫인상
-- Editorial Landing Page
-
-### Projects
-
-- 프로젝트 아카이브
-
-### Notes
-
-- 공부 및 생각 기록
-
-### Archive
-
-- 사진
-- 여행
-- 공연
-- 일상
-- 추억
-
-### Now
-
-- 현재 집중하는 것
-- 월별 업데이트
-
-### Footer-only 후보 페이지
-
-- `/about`
-  - 자기소개와 사이트 소개 후보
-- `/colophon`
-  - 사이트 제작 환경과 기술 스택 소개 후보
-- `/uses`
-  - 사용하는 도구와 장비 소개 후보
-
-현재 위 라우트들은 푸터 링크로만 준비되어 있으며 실제 페이지 파일은 없다.
-
-## 페이지별 구현 상태
-
-| 영역 | 상태 | 메모 |
+| 범위 | 상태 | 메모 |
 | --- | --- | --- |
-| 홈 (`/`) | 진행 중 | 현재 디자인 기준선 역할, 메뉴는 Projects/Notes/Archive/Now 4개 |
-| 프로젝트 (`/projects`) | 진행 중 | 공통 헤더와 정적 프로젝트 카드 2개 구성 |
-| 노트 (`/notes`) | 진행 중 | 공통 헤더와 Coming Soon 섹션 구성 |
-| 아카이브 (`/archive`) | 미구현 | 제목만 존재 |
-| 나우 (`/now`) | 진행 중 | 공통 헤더와 Current Focus 섹션 구성 |
-| 소개 (`/about`) | 없음 | 페이지 파일은 삭제되었으나 푸터 링크는 남아 있음 |
-| Colophon (`/colophon`) | 없음 | 푸터 링크만 존재 |
-| Uses (`/uses`) | 없음 | 푸터 링크만 존재 |
+| Home (`/`) | 진행 중 | 기본 레이아웃과 hero 이미지는 적용됐고, 반응형 세부 조정이 남아 있다. |
+| Projects (`/projects`) | 기본 구조 완료 | 공통 템플릿은 적용됐고, 콘텐츠를 데이터화하는 단계가 남아 있다. |
+| Notes (`/notes`) | 기본 구조 완료 | 공통 템플릿은 적용됐고, MDX 또는 목록형 콘텐츠 구조가 필요하다. |
+| Archive (`/archive`) | 미완성 | 현재는 placeholder 수준이라 전체 구조를 새로 잡아야 한다. |
+| Now (`/now`) | 기본 구조 완료 | 공통 템플릿은 적용됐고, 월별 기록 체계를 붙여야 한다. |
+| About / Colophon / Uses | 미구현 | 푸터 링크가 먼저 노출되어 있으므로, 라우트를 만들거나 링크를 정리해야 한다. |
+| 404 | 미구현 | 커스텀 404 페이지가 필요하다. |
 
-## 디자인 시스템 문서
+## 우선순위 로드맵
 
-디자인 규칙은 별도 문서에서 관리한다.
+### 1. Foundation polish
 
-- [`docs/design-system.md`](/Users/jeje/Documents/GitHub/still-building/docs/design-system.md)
+- [ ] `Label` 컴포넌트 추가
+- [ ] `ImageFrame` 컴포넌트 추가
+- [ ] hover 애니메이션 통일
+- [ ] 디자인 토큰 정리: spacing / radius / shadow
+- [ ] focus / accessibility 상태 정리
+- [x] Home 실제 이미지 적용
+- [ ] Home 반응형 세부 조정
+- [ ] Footer 정보 완성
+- [ ] 커스텀 404 페이지
 
-이 문서에는 아래 항목이 정리되어 있다.
+### 2. Core route completion
 
-- 디자인 방향과 페이지별 컨셉
-- 레이아웃 기준
-- 컬러 토큰과 운영 원칙
-- 폰트 기준
-- 공용 컴포넌트 상태
-- 디자인 기준 페이지와 다음 확정 항목
+- [ ] `/archive` 페이지 구축
+- [ ] `/about` 페이지 구축
+- [ ] `/colophon` 페이지 구축
+- [ ] `/uses` 페이지 구축
+- [ ] 푸터 링크와 실제 라우트 상태를 일치시키기
 
-## 장기 로드맵
+현재는 푸터에 링크가 먼저 노출되어 있으므로, dead link를 없애려면 라우트를 먼저 채우는 쪽이 맞다.
 
-### v1
+### 3. Editorial polish
 
-- 디자인 시스템
-- 정적 페이지와 주요 라우트 정리
-- 반응형
-- 배포
+- [ ] 반응형 디자인 전반 정리
+- [ ] 스크롤 애니메이션
+- [ ] 페이지 전환 애니메이션
+- [ ] 이미지 hover 효과
+- [ ] 다크 / 라이트 테마 또는 커스텀 테마 전략 재검토
 
-### v2
+### 4. Content production
 
-- MDX
-- 태그
-- 검색
-- Theme 또는 다크 모드 전략 재검토
+- [ ] 프로젝트 상세 작성
+- [ ] 노트 작성
+- [ ] Archive 콘텐츠 추가
+- [ ] About 작성
+- [ ] Now 페이지 월별 기록
 
-### v3
+### 5. CMS / content workflow
 
-- Guestbook
-- Supabase CRUD
-- 방문자 기능
+- [ ] MDX 기반 노트 시스템
+- [ ] MDX 기반 프로젝트 시스템
+- [ ] 자동 목차 생성
+- [ ] 코드 하이라이팅
 
-### v4
+### 6. Discovery / utility features
 
-- Reading
-- Photography
-- Bookmarks
-- Uses
+- [ ] 태그 필터
+- [ ] 검색 기능
+- [ ] Random Archive
+- [ ] 사이트맵 페이지
+- [ ] 방명록 (`Supabase` CRUD)
+- [ ] Mood Stamp
+- [ ] 방문자 통계
+
+### 7. Launch
+
+- [ ] SEO 설정
+- [ ] Open Graph 이미지
+- [ ] favicon 제작
+- [ ] `Vercel` 배포
+- [ ] Google Analytics 적용
+- [ ] 커스텀 도메인 연결
+
+### 8. Later expansions
+
+- [ ] Guestbook 디자인 개선
+- [ ] 연도별 Archive
+- [ ] Reading List
+- [ ] Learning Progress
+- [ ] Tech Stack 페이지
+- [ ] Changelog 페이지
+- [ ] Uses 페이지 고도화
+- [ ] Inspirations 페이지
+- [ ] Photography 페이지
+- [ ] Bookmarks 페이지
+
+## 운영 원칙
+
+- 전체 무드는 계속해서 editorial, calm, archive-like 방향을 유지한다.
+- 새 화면은 가능한 한 토큰과 공용 컴포넌트를 먼저 재사용한다.
+- 링크가 노출되는 라우트는 실제 페이지로 연결되도록 관리한다.
+- `/archive`는 다른 페이지보다 더 감성적이고 아날로그한 실험을 허용하는 공간으로 둔다.
+
+## 참고 문서
+
+- `docs/design-system.md`
+- `app/layout.tsx`
+- `app/page.tsx`
+- `app/globals.css`
+- `components/Navbar.tsx`
+- `components/Footer.tsx`
+- `components/PageHeader.tsx`
+- `components/SectionTitle.tsx`
+- `components/Button.tsx`
