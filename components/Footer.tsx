@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
 const footerLinks = [
@@ -12,17 +13,17 @@ export default function Footer() {
   return (
     <footer className="border-t border-[var(--line)] px-8 py-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <p className={footerTextStyle}>© YOONJAE ARCHIVE — STILL BUILDING</p>
+        <p className={footerTextStyle}>{siteConfig.copyright}</p>
 
         <nav className="flex gap-6">
           <Link href="/about" className={footerTextStyle}>
             About this site
           </Link>
-          <a href="mailto:yunjae27@gmail.com" className={footerTextStyle}>
+          <a href={`mailto:${siteConfig.email}`} className={footerTextStyle}>
             Email
           </a>
           <a
-            href="https://github.com/yunzaex"
+            href={siteConfig.githubUrl}
             target="_blank"
             rel="noreferrer"
             className={footerTextStyle}
