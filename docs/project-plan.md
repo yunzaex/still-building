@@ -13,6 +13,9 @@
 ## 판단
 
 이 문서는 기존 `docs/project-plan.md`를 현재 프로젝트 상태에 맞게 갱신한 버전이다.
+현재 기준 커밋은 `fb6d83e`이며, 최근에는 Home 반응형 1차 적용과 Footer 정보·링크 정리가 반영되었다.
+
+2026-07-21 제공된 시안을 페이지별 상세 디자인 기준으로 추가한다. 시안이 확정된 페이지는 `Projects`, `Notes`, `Now`, `About`, `Colophon`, `Uses`이며, `Archive`는 아직 별도의 상세 시안이 없다.
 
 ## 현재 기준선
 
@@ -25,45 +28,65 @@
 - 폰트 설정: `app/fonts.ts`
 - 공용 컴포넌트: `components/Navbar.tsx`, `components/Footer.tsx`, `components/Container.tsx`, `components/PageHeader.tsx`, `components/SectionTitle.tsx`, `components/Divider.tsx`, `components/MenuCard.tsx`, `components/Button.tsx`
 - 현재 구현된 주요 라우트: `/`, `/projects`, `/notes`, `/archive`, `/now`
-- 아직 실제 라우트가 없는 푸터 링크: `/about`, `/colophon`, `/uses`
+- 콘텐츠가 구현되지 않은 푸터 링크: `/about`, `/colophon`, `/uses` (`/about`은 빈 `page.tsx` 파일만 존재)
+- 상세 디자인 시안이 확정된 페이지: `/projects`, `/notes`, `/now`, `/about`, `/colophon`, `/uses`
+- 상세 디자인 시안이 아직 없는 페이지: `/archive`
 
 ## 현재 상태 요약
 
 | 범위 | 상태 | 메모 |
 | --- | --- | --- |
-| Home (`/`) | 진행 중 | 기본 레이아웃과 hero 이미지는 적용됐고, 반응형 세부 조정이 남아 있다. |
-| Projects (`/projects`) | 기본 구조 완료 | 공통 템플릿은 적용됐고, 콘텐츠를 데이터화하는 단계가 남아 있다. |
-| Notes (`/notes`) | 기본 구조 완료 | 공통 템플릿은 적용됐고, MDX 또는 목록형 콘텐츠 구조가 필요하다. |
-| Archive (`/archive`) | 미완성 | 현재는 placeholder 수준이라 전체 구조를 새로 잡아야 한다. |
-| Now (`/now`) | 기본 구조 완료 | 공통 템플릿은 적용됐고, 월별 기록 체계를 붙여야 한다. |
-| About / Colophon / Uses | 미구현 | 푸터 링크가 먼저 노출되어 있으므로, 라우트를 만들거나 링크를 정리해야 한다. |
+| Home (`/`) | 진행 중 | 기본 레이아웃, hero 이미지, 1차 반응형이 적용됐고 세부 QA가 남아 있다. |
+| Projects (`/projects`) | 시안 확정·구현 전 | 2단 hero, 카테고리 필터, 프로젝트 리스트, 페이지네이션 CTA 구조를 구현해야 한다. |
+| Notes (`/notes`) | 시안 확정·구현 전 | 2단 hero, 카테고리 필터, 글 목록, 읽기 시간, 페이지네이션 CTA 구조를 구현해야 한다. |
+| Now (`/now`) | 시안 확정·구현 전 | 월간 캘린더, 오늘의 체크리스트, 이번 달 기록, 아카이브 CTA 구조를 구현해야 한다. |
+| Archive (`/archive`) | 시안 미정·placeholder | 현재는 제목만 있는 상태이며, 상세 디자인 방향을 먼저 확정해야 한다. |
+| Footer | 기본 구성 완료·시안 반영 중 | 어두운 브라운 배경의 4열 정보 영역과 링크 구조를 시안 기준으로 정리한다. |
+| About (`/about`) | 시안 확정·미구현 | Purpose, Approach, Philosophy와 이미지 영역을 구현해야 한다. 현재는 빈 `page.tsx`만 있다. |
+| Colophon (`/colophon`) | 시안 확정·미구현 | 사이트·작성자·디자인/코드·폰트·배포 정보와 이미지를 구현해야 한다. |
+| Uses (`/uses`) | 시안 확정·미구현 | Development, Design, Writing, Assets, 기타 도구를 그룹형 목록으로 구현해야 한다. |
 | 404 | 미구현 | 커스텀 404 페이지가 필요하다. |
 
 ## 우선순위 로드맵
 
-### 1. Foundation polish
+### 1. Shared page system
 
-- [ ] `Label` 컴포넌트 추가
-- [ ] `ImageFrame` 컴포넌트 추가
-- [ ] hover 애니메이션 통일
-- [ ] 디자인 토큰 정리: spacing / radius / shadow
-- [ ] focus / accessibility 상태 정리
+- [ ] 시안 공통 구조 정의: global navigation / 2단 hero / divider / content area / dark footer
+- [ ] 서브 페이지의 반응형 기준 확정: desktop 2단 구성, mobile 단일 열 전환
+- [ ] 카테고리 필터 바와 정렬 컨트롤 패턴 정의
+- [ ] 프로젝트·노트 목록 행과 메타데이터 패턴 정의
+- [ ] 월간 캘린더와 체크리스트 패턴 정의
+- [ ] `Label`, `ImageFrame` 등 시안에 필요한 공용 컴포넌트 추가
+- [ ] hover / focus / accessibility 상태 정리
+- [ ] 디자인 토큰 정리: spacing / type scale / line / surface
 - [x] Home 실제 이미지 적용
 - [ ] Home 반응형 세부 조정
-- [ ] Footer 정보 완성
+- [x] Footer 기본 정보 및 링크 구성
+- [ ] Footer 시안 스타일 반영 및 반응형 정리
 - [ ] 커스텀 404 페이지
 
-### 2. Core route completion
+공통 시스템을 먼저 확정하되, 전체 Foundation polish를 끝낼 때까지 페이지 구현을 멈추지는 않는다. 시안의 공통 패턴을 `Projects` 구현에 먼저 적용하고, 그 결과를 `Notes`, `Now`, 정보 페이지에 확장한다.
 
-- [ ] `/archive` 페이지 구축
-- [ ] `/about` 페이지 구축
-- [ ] `/colophon` 페이지 구축
-- [ ] `/uses` 페이지 구축
+### 2. Primary page implementation
+
+- [ ] `/projects` 시안 구현: hero / filter bar / project rows / count / CTA
+- [ ] `/notes` 시안 구현: hero / filter bar / note rows / read time / count / CTA
+- [ ] `/now` 시안 구현: calendar / today checklist / monthly note / archive CTA
+
+### 3. Information page implementation
+
+- [ ] `/about` 시안 구현: Purpose / Approach / Philosophy / image
+- [ ] `/colophon` 시안 구현: site metadata / design & code / font / deploy / image
+- [ ] `/uses` 시안 구현: grouped tools list / last updated
 - [ ] 푸터 링크와 실제 라우트 상태를 일치시키기
 
-현재는 푸터에 링크가 먼저 노출되어 있으므로, dead link를 없애려면 라우트를 먼저 채우는 쪽이 맞다.
+### 4. Archive direction and implementation
 
-### 3. Editorial polish
+- [ ] `/archive` 상세 디자인 방향 확정
+- [ ] `/archive` 페이지 구축
+- [ ] 사진·여행·공연·일상 등 Archive 콘텐츠 유형 정의
+
+### 5. Editorial polish
 
 - [ ] 반응형 디자인 전반 정리
 - [ ] 스크롤 애니메이션
@@ -71,7 +94,7 @@
 - [ ] 이미지 hover 효과
 - [ ] 다크 / 라이트 테마 또는 커스텀 테마 전략 재검토
 
-### 4. Content production
+### 6. Content production
 
 - [ ] 프로젝트 상세 작성
 - [ ] 노트 작성
@@ -79,14 +102,14 @@
 - [ ] About 작성
 - [ ] Now 페이지 월별 기록
 
-### 5. CMS / content workflow
+### 7. CMS / content workflow
 
 - [ ] MDX 기반 노트 시스템
 - [ ] MDX 기반 프로젝트 시스템
 - [ ] 자동 목차 생성
 - [ ] 코드 하이라이팅
 
-### 6. Discovery / utility features
+### 8. Discovery / utility features
 
 - [ ] 태그 필터
 - [ ] 검색 기능
@@ -96,7 +119,7 @@
 - [ ] Mood Stamp
 - [ ] 방문자 통계
 
-### 7. Launch
+### 9. Launch
 
 - [ ] SEO 설정
 - [ ] Open Graph 이미지
@@ -105,7 +128,7 @@
 - [ ] Google Analytics 적용
 - [ ] 커스텀 도메인 연결
 
-### 8. Later expansions
+### 10. Later expansions
 
 - [ ] Guestbook 디자인 개선
 - [ ] 연도별 Archive

@@ -1,0 +1,33 @@
+import Link from "next/link";
+
+type CollectionFooterProps = {
+  current: number;
+  total: number;
+  href: string;
+  label: string;
+};
+
+export default function CollectionFooter({
+  current,
+  total,
+  href,
+  label,
+}: CollectionFooterProps) {
+  const formattedCurrent = String(current).padStart(2, "0");
+  const formattedTotal = String(total).padStart(2, "0");
+
+  return (
+    <div className="flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between">
+      <p className="text-xs tracking-[0.16em] text-(--brown-light)">
+        {formattedCurrent} / {formattedTotal}
+      </p>
+
+      <Link
+        href={href}
+        className="text-xs uppercase tracking-[0.16em] transition-colors hover:text-(--brown)"
+      >
+        {label} →
+      </Link>
+    </div>
+  );
+}

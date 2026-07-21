@@ -1,27 +1,41 @@
-import { siteConfig } from "@/config/site";
 import Link from "next/link";
+
+import { siteConfig } from "@/config/site";
 
 const footerLinks = [
   { name: "Colophon", href: "/colophon" },
   { name: "Uses", href: "/uses" },
 ];
 
-export default function Footer() {
-  const footerTextStyle =
-    "text-xs uppercase tracking-[0.18em] text-[var(--brown-light)] transition-colors hover:text-[var(--brown)]";
+const footerTextStyle = [
+  "text-xs uppercase tracking-[0.18em]",
+  "text-(--surface)",
+  "transition-colors duration-300",
+  "hover:text-(--white)",
+].join(" ");
 
+const footerNavStyle = "flex flex-wrap items-center gap-x-6 gap-y-3";
+
+export default function Footer() {
   return (
-    <footer className="border-t border-[var(--line)] px-8 py-8">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <footer className="border-t border-(--line) bg-(--accent)">
+      <div
+        className={[
+          "mx-auto flex max-w-6xl flex-col gap-6 px-8 py-8",
+          "md:flex-row md:items-end md:justify-between",
+        ].join(" ")}
+      >
         <p className={footerTextStyle}>{siteConfig.copyright}</p>
 
-        <nav className="flex gap-6">
+        <nav aria-label="Contact links" className={footerNavStyle}>
           <Link href="/about" className={footerTextStyle}>
             About this site
           </Link>
+
           <a href={`mailto:${siteConfig.email}`} className={footerTextStyle}>
             Email
           </a>
+
           <a
             href={siteConfig.githubUrl}
             target="_blank"
@@ -32,10 +46,10 @@ export default function Footer() {
           </a>
         </nav>
 
-        <nav className="flex gap-6">
-          {footerLinks.map((item) => (
-            <Link key={item.href} href={item.href} className={footerTextStyle}>
-              {item.name}
+        <nav aria-label="Site information" className={footerNavStyle}>
+          {footerLinks.map(({ name, href }) => (
+            <Link key={href} href={href} className={footerTextStyle}>
+              {name}
             </Link>
           ))}
         </nav>

@@ -10,18 +10,20 @@ export default function PageHeader({
   description,
 }: PageHeaderProps) {
   return (
-    <section className="pt-32 pb-20">
-      <p className="mb-5 text-xs uppercase tracking-[0.28em] text-(--brown-light)">
-        {label}
-      </p>
+    <header className="grid gap-8 border-b border-(--line) pb-12 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+      <div>
+        <p className="mb-4 text-xs uppercase tracking-[0.2em] text-(--brown-light)">
+          {label}
+        </p>
 
-      <h1 className="font-quote max-w-4xl text-6xl leading-none text-(--brown) md:text-8xl">
-        {title}
-      </h1>
+        <h1 className="font-serif text-5xl leading-none md:text-7xl">
+          {title}
+        </h1>
+      </div>
 
-      <p className="mt-8 max-w-2xl text-lg leading-8 text-(--text)">
+      <p className="max-w-md text-sm leading-7 text-(--brown-light) md:justify-self-end">
         {description}
       </p>
-    </section>
+    </header>
   );
 }
