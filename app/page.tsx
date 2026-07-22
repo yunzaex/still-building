@@ -7,7 +7,7 @@ const menuItems = [
     href: "/projects",
     label: "01",
     title: "Projects",
-    description: "Things I've built and am building.",
+    description: "Things I'm building.",
   },
   {
     href: "/notes",

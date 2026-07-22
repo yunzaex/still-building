@@ -7,11 +7,7 @@ export default function NotesPage() {
   return (
     <main className="min-h-screen bg-(--bg)">
       <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
-        <PageHeader
-          label="Notes"
-          title="Thoughts, studies, and small records."
-          description="공부하며 정리한 개념, 개발하면서 배운 점, 오래 남기고 싶은 생각들을 기록하는 공간입니다."
-        />
+        <PageHeader label="Notes" title="Thoughts, studies, and small records." />
 
         <Divider />
 

@@ -20,35 +20,32 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
       </div>
 
       <div>
-        <div className="mb-3 flex items-center gap-3">
-          <h2 className="type-label">
-            {project.title}
-          </h2>
+        <div className="mb-3 flex items-center gap-7">
+          <h2 className="type-title">{project.title}</h2>
 
-          <span className="type-meta text-(--brown-light)">
+          <span className="type-body-small text-(--brown-light)">
             {project.category}
           </span>
         </div>
 
-        <p className="type-body-small mb-5 max-w-lg text-(--brown-light)">
+        <p className="type-body mb-5 max-w-lg text-(--brown-light)">
           {project.description}
         </p>
 
-        <ul className="flex flex-wrap gap-x-4 gap-y-2">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
           {project.tags.map((tag) => (
             <li
               key={tag}
-              className="type-label text-(--brown-light)"
+              className="type-label rounded-full border border-(--brown-light) px-3 py-1 text-(--brown-light)"
             >
-              {tag}
+              {" "}
+              # {tag}
             </li>
           ))}
         </ul>
       </div>
 
-      <p className="type-meta text-(--brown-light)">
-        {project.year}
-      </p>
+      <p className="type-meta text-(--brown-light)">{project.year}</p>
     </article>
   );
 }

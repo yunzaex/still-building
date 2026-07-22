@@ -7,11 +7,7 @@ export default function NowPage() {
   return (
     <main className="min-h-screen bg-(--bg)">
       <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
-        <PageHeader
-          label="Now"
-          title="What I am focusing on now."
-          description="현재 진행 중인 프로젝트와 배우고 있는 것들을 꾸준히 업데이트하는 공간입니다."
-        />
+        <PageHeader label="Now" title="What I am focusing on now." />
 
         <Divider />
 

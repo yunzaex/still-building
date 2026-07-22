@@ -8,11 +8,7 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-(--bg)">
       <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
-        <PageHeader
-          label="01 / Projects"
-          title="Things I’m building."
-          description="A collection of selected projects, experiments, and ongoing work."
-        />
+        <PageHeader label="01 / Projects" title="Things I’m building." />
 
         <ProjectFilterBar />
 

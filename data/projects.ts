@@ -15,6 +15,7 @@ export const projects: Project[] = [
     category: "Web",
     description: "Personal website and digital archive.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    image: "/project-stillbuilding.png",
   },
   {
     title: "WEARTRACK",
