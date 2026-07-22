@@ -1,4 +1,3 @@
-import CollectionFooter from "@/components/CollectionFooter";
 import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
 import ProjectFilterBar from "@/components/ProjectFilterBar";
@@ -7,8 +6,8 @@ import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
   return (
-    <main>
-      <Container>
+    <main className="min-h-screen bg-(--bg)">
+      <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
         <PageHeader
           label="01 / Projects"
           title="Things I’m building."
@@ -22,13 +21,6 @@ export default function ProjectsPage() {
             <ProjectListItem key={project.title} project={project} />
           ))}
         </div>
-
-        <CollectionFooter
-          current={1}
-          total={2}
-          href="/projects"
-          label="View all projects"
-        />
       </Container>
     </main>
   );

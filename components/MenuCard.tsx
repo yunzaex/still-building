@@ -18,15 +18,13 @@ export default function MenuCard({
       href={href}
       className="group block border-t border-(--line) pt-6 transition hover:-translate-y-1"
     >
-      <p className="text-xs uppercase tracking-[0.22em] text-(--brown-light)">
-        {label}
-      </p>
+      <p className="type-label text-(--brown-light)">{label}</p>
 
-      <h3 className="mt-4 text-3xl text-(--brown)">{title}</h3>
+      <h3 className="type-title mt-4 text-(--brown)">{title}</h3>
 
-      <p className="mt-4 text-sm leading-6 text-(--text)">{description}</p>
+      <p className="type-body-small mt-4 text-(--text)">{description}</p>
 
-      <span className="mt-6 inline-block text-xs uppercase tracking-[0.2em] text-(--brown-light) transition group-hover:text-(--brown)">
+      <span className="type-label mt-6 inline-block text-(--brown-light) transition group-hover:text-(--brown)">
         View →
       </span>
     </Link>

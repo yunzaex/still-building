@@ -147,11 +147,44 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 - `--font-body-korean`
 - `--font-body`
 
+### Typography Design Token
+
+타이포그래피는 [`app/globals.css`](/Users/jeje/Documents/GitHub/still-building/app/globals.css)의 `type-*` 클래스가 단일 진입점이다. 각 토큰은 폰트 패밀리, 크기, 굵기, 행간, 자간, 필요한 경우 대소문자 규칙을 함께 가진다. 컴포넌트에서는 토큰 하나를 먼저 적용하고, 색상·여백·정렬처럼 문맥에만 필요한 값만 추가한다.
+
+| Token | Font | Size | Weight | Line Height | Letter Spacing | Transform | Usage |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `type-display` | Monomakh | `clamp(72px, 11vw, 144px)` | 400 | 0.86 | -0.055em | uppercase | Home의 사이트명처럼 넓은 여백을 점유하는 대표 문구 |
+| `type-heading` | EB Garamond | `clamp(48px, 6vw, 72px)` | 400 | 0.98 | -0.035em | none | 페이지 제목, 문장형 에디토리얼 헤드라인 |
+| `type-lede` | EB Garamond | `clamp(30px, 3vw, 36px)` | 400 | 1.25 | -0.015em | none | Home hero의 보조 문장, 짧은 인트로 카피 |
+| `type-title` | Hanken Grotesk + KoPubWorld Dotum | `clamp(18px, 2vw, 28px)` | 500 | 1.08 | -0.035em | none | 섹션 제목, 카드 제목 |
+| `type-body` | Hanken Grotesk + KoPubWorld Dotum | 16px | 400 | 1.7 | -0.012em | none | 한국어/영문 본문, 설명이 긴 문단 |
+| `type-body-small` | Hanken Grotesk + KoPubWorld Dotum | 14px | 400 | 1.65 | -0.01em | none | 카드·프로젝트의 짧은 설명, 페이지 보조 설명 |
+| `type-label` | Hanken Grotesk + KoPubWorld Dotum | 12px | 500 | 1.35 | 0.16em | uppercase | eyebrow, 버튼, 필터, 태그, Footer 링크 |
+| `type-nav` | Hanken Grotesk + KoPubWorld Dotum | 14px | 500 | 1.4 | 0.08em | none | 전역 Navigation, 브랜드명 |
+| `type-meta` | Hanken Grotesk + KoPubWorld Dotum | 12px | 400 | 1.4 | 0.08em | none | 연도, 카테고리, 순번 등 보조 데이터 |
+
+### Typography 운영 원칙
+
+- `type-*` 토큰 안에 이미 모든 활자 속성이 들어 있으므로 `text-*`, `leading-*`, `tracking-*`, `font-*`, `uppercase` 유틸리티를 함께 추가하지 않는다.
+- 한 요소에는 목적에 맞는 토큰 하나만 사용한다. 크기를 조금 조정하기보다 인접 토큰 중 의미가 맞는 것을 선택한다.
+- 색상(`text-(--brown-light)`), 폭(`max-w-*`), 정렬, 간격은 콘텐츠 문맥에 따라 각 컴포넌트에서 조합한다.
+- 새 페이지는 `PageHeader`와 `SectionTitle`을 우선 사용해 제목·eyebrow·본문 리듬을 상속한다. 새 텍스트 역할이 생겨도 기존 9개 토큰에 명확히 들어가지 않을 때만 토큰 추가를 검토한다.
+
+### 통합 기준
+
+서로 다른 역할은 유지하되, 시각적인 미세 차이만 있던 스타일은 하나로 합쳤다.
+
+- 12px 대문자 텍스트의 6개 자간 변형(`0.12em`~`0.24em`)을 `type-label` 1종으로 통합했다.
+- 14px 설명 텍스트의 2개 행간 변형(24px, 28px)을 `type-body-small` 1종으로 통합했다.
+- 12px 보조 정보의 3개 자간/대소문자 변형을 `type-meta` 1종으로 통합했다.
+- 카드·섹션 제목의 3개 크기/행간 조합을 `type-title` 1종으로 통합했다.
+- 기존의 페이지 제목과 Home의 보조 문장은 같은 세리프 계열을 유지하되, 정보 위계가 달라 `type-heading`과 `type-lede`로 분리했다.
+
 ### 운영 원칙
 
-- 홈 Hero의 메인 타이틀만 `font-hero`를 사용한다
-- 본문, 네비게이션, 버튼, 카드 제목, 설명 텍스트는 `font-body` 기준으로 유지한다
-- 긴 영문 문장이나 문장형 헤드라인은 `font-quote`를 우선 사용한다
+- Home Hero의 메인 타이틀에는 `type-display`를 사용한다
+- 본문, 네비게이션, 버튼, 카드 제목, 설명 텍스트는 역할에 맞는 `type-*` 토큰을 사용한다
+- 긴 영문 문장이나 문장형 헤드라인은 `type-heading` 또는 `type-lede`를 우선 사용한다
 - 한국어 본문은 `KoPubWorld Dotum`, 영문/숫자 본문은 `Hanken Grotesk`가 자연스럽게 선택되는 스택을 기준으로 한다
 
 ## 현재 디자인 구현 상태
@@ -190,7 +223,7 @@ Archive는 Home과 반대로 아날로그 감성을 적극적으로 사용한다
 1. `/about`, `/colophon`, `/uses` 라우트를 만들지, 링크를 제거할지 결정
 2. `/archive`를 다른 서브 페이지와 같은 템플릿으로 정리
 3. 버튼, 링크, 카드의 hover/focus 상태 규격 확정
-4. 타이포 스케일과 spacing 규칙 문서화
+4. spacing 규칙 문서화
 
 ## 기준 페이지
 

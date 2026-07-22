@@ -18,13 +18,13 @@ export default function CollectionFooter({
 
   return (
     <div className="flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-xs tracking-[0.16em] text-(--brown-light)">
+      <p className="type-meta text-(--brown-light)">
         {formattedCurrent} / {formattedTotal}
       </p>
 
       <Link
         href={href}
-        className="text-xs uppercase tracking-[0.16em] transition-colors hover:text-(--brown)"
+        className="type-label transition-colors hover:text-(--brown)"
       >
         {label} →
       </Link>

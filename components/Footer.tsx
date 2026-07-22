@@ -8,7 +8,7 @@ const footerLinks = [
 ];
 
 const footerTextStyle = [
-  "text-xs uppercase tracking-[0.18em]",
+  "type-label",
   "text-(--surface)",
   "transition-colors duration-300",
   "hover:text-(--white)",

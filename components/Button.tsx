@@ -17,8 +17,8 @@ export default function Button({
 }: ButtonProps) {
   const className =
     variant === "primary"
-      ? "inline-flex items-center border border-(--brown) px-5 py-3 text-sm uppercase tracking-[0.18em] text-(--brown) transition hover:bg-(--brown) hover:text-(--white)"
-      : "inline-flex items-center border border-(--line) px-5 py-3 text-sm uppercase tracking-[0.18em] text-(--brown-light) transition hover:border-(--brown) hover:text-(--brown)";
+      ? "type-label inline-flex items-center border border-(--brown) px-5 py-3 text-(--brown) transition hover:bg-(--brown) hover:text-(--white)"
+      : "type-label inline-flex items-center border border-(--line) px-5 py-3 text-(--brown-light) transition hover:border-(--brown) hover:text-(--brown)";
 
   if (external) {
     return (

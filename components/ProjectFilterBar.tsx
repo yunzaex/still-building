@@ -10,8 +10,8 @@ export default function ProjectFilterBar() {
             type="button"
             className={
               index === 0
-                ? "text-xs uppercase tracking-[0.16em] text-(--text)"
-                : "text-xs uppercase tracking-[0.16em] text-(--brown-light) transition-colors hover:text-(--text)"
+                ? "type-label text-(--text)"
+                : "type-label text-(--brown-light) transition-colors hover:text-(--text)"
             }
           >
             {category}
@@ -21,9 +21,9 @@ export default function ProjectFilterBar() {
 
       <button
         type="button"
-        className="self-start text-xs uppercase tracking-[0.16em] text-(--brown-light) md:self-auto"
+        className="type-label self-start text-(--brown-light) md:self-auto"
       >
-        Newest ↕
+        NEWEST ↓
       </button>
     </div>
   );

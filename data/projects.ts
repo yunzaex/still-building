@@ -22,7 +22,8 @@ export const projects: Project[] = [
     category: "App",
     description: "A smart wardrobe service for managing clothing.",
     tags: ["React Native", "Expo", "TypeScript"],
+    image: "/project-weartrack.svg",
   },
 ];
 
-export const projectCategories = ["All", "Web", "App", "AI", "Experiment"];
+export const projectCategories = ["All", "Web", "App"];

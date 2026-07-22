@@ -35,14 +35,14 @@ export default function Home() {
       <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
         <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:items-end">
           <div>
-            <h1 className="font-hero text-7xl uppercase leading-[0.9] tracking-tight md:text-9xl">
+            <h1 className="type-display">
               Still
               <br />
               Building
             </h1>
           </div>
 
-          <p className="font-quote max-w-md text-3xl leading-[1.25] text-(--brown-light) italic md:justify-self-end md:text-right md:text-4xl">
+          <p className="type-lede ml-auto w-full max-w-[18rem] text-right text-(--brown-light) italic">
             Between logic and aesthetics.
           </p>
         </div>

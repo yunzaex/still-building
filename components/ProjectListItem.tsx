@@ -1,4 +1,5 @@
 import type { Project } from "@/data/projects";
+import Image from "next/image";
 
 type ProjectListItemProps = {
   project: Project;
@@ -7,20 +8,29 @@ type ProjectListItemProps = {
 export default function ProjectListItem({ project }: ProjectListItemProps) {
   return (
     <article className="grid gap-6 border-b border-(--line) py-8 md:grid-cols-[0.8fr_1.6fr_auto] md:items-start">
-      <div className="aspect-4/3 bg-(--surface)" />
+      <div className="relative aspect-16/9 overflow-hidden bg-(--surface)">
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={`${project.title} project preview`}
+            fill
+            className="object-cover"
+          />
+        ) : null}
+      </div>
 
       <div>
         <div className="mb-3 flex items-center gap-3">
-          <h2 className="text-sm uppercase tracking-[0.16em]">
+          <h2 className="type-label">
             {project.title}
           </h2>
 
-          <span className="text-xs text-(--brown-light)">
+          <span className="type-meta text-(--brown-light)">
             {project.category}
           </span>
         </div>
 
-        <p className="mb-5 max-w-lg text-sm leading-6 text-(--brown-light)">
+        <p className="type-body-small mb-5 max-w-lg text-(--brown-light)">
           {project.description}
         </p>
 
@@ -28,7 +38,7 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
           {project.tags.map((tag) => (
             <li
               key={tag}
-              className="text-xs uppercase tracking-[0.12em] text-(--brown-light)"
+              className="type-label text-(--brown-light)"
             >
               {tag}
             </li>
@@ -36,7 +46,7 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
         </ul>
       </div>
 
-      <p className="text-xs tracking-[0.16em] text-(--brown-light)">
+      <p className="type-meta text-(--brown-light)">
         {project.year}
       </p>
     </article>

@@ -12,17 +12,17 @@ export default function SectionTitle({
   return (
     <header className="border-t border-(--line) pt-8">
       {eyebrow && (
-        <p className="mb-3 text-xs uppercase tracking-[0.24em] text-(--brown-light)">
+        <p className="type-label mb-3 text-(--brown-light)">
           {eyebrow}
         </p>
       )}
 
-      <h2 className="text-4xl leading-tight text-(--brown) md:text-5xl">
+      <h2 className="type-title text-(--brown)">
         {title}
       </h2>
 
       {description && (
-        <p className="mt-4 max-w-2xl text-base leading-7 text-(--text)">
+        <p className="type-body mt-4 max-w-2xl text-(--text)">
           {description}
         </p>
       )}

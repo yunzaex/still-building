@@ -17,7 +17,7 @@ export default function Navbar() {
         <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
           <Link
             href="/"
-            className="group w-fit text-sm font-medium tracking-[0.16em] text-(--brown)"
+            className="type-nav group w-fit text-(--brown)"
           >
             <span>STILL BUILDING</span>
             <span className="ml-0.5 inline-block opacity-0 animate-cursor">
@@ -40,8 +40,7 @@ export default function Navbar() {
                     className="
       absolute
       left-0
-      text-xs
-      tracking-[0.2em]
+      type-label
       opacity-0
       -translate-x-4
       transition-all
@@ -53,7 +52,7 @@ export default function Navbar() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <span className="transition-transform duration-300 group-hover:translate-x-8">
+                  <span className="type-nav transition-transform duration-300 group-hover:translate-x-8">
                     {item.name}
                   </span>
                 </Link>
