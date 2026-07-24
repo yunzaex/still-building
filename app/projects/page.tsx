@@ -1,7 +1,6 @@
 import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
-import ProjectFilterBar from "@/components/ProjectFilterBar";
-import ProjectListItem from "@/components/ProjectListItem";
+import ProjectGallery from "@/components/projects/ProjectGallery";
 import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
@@ -9,14 +8,7 @@ export default function ProjectsPage() {
     <main className="min-h-screen bg-(--bg)">
       <Container className="pb-12 pt-32 sm:pb-16 sm:pt-36">
         <PageHeader label="01 / Projects" title="Things I’m building." />
-
-        <ProjectFilterBar />
-
-        <div>
-          {projects.map((project) => (
-            <ProjectListItem key={project.title} project={project} />
-          ))}
-        </div>
+        <ProjectGallery projects={projects} />
       </Container>
     </main>
   );

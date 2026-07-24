@@ -2,114 +2,106 @@
 
 ## 목적
 
-이 문서는 `still-building` 프로젝트의 현재 기준선과 다음 작업 순서를 정리하는 살아 있는 로드맵이다.
+이 문서는 `still-building` 프로젝트의 현재 코드 기준선과 다음 작업 순서를 정리하는 살아 있는 로드맵이다.
 
-- 무엇이 이미 확정되었는지
-- 지금 어디까지 구현되었는지
-- 다음에 어떤 순서로 확장할지
+- 무엇이 구현되어 있는지
+- 어떤 페이지와 기능이 아직 placeholder인지
+- 다음 작업을 어떤 순서로 확장할지
 
-앞으로의 디자인과 개발 작업은 이 문서를 우선 기준으로 맞춘다.
-
-## 판단
-
-이 문서는 기존 `docs/project-plan.md`를 현재 프로젝트 상태에 맞게 갱신한 버전이다.
-현재 기준 커밋은 `fb6d83e`이며, 최근에는 Home 반응형 1차 적용과 Footer 정보·링크 정리가 반영되었다.
-
-2026-07-21 제공된 시안을 페이지별 상세 디자인 기준으로 추가한다. 시안이 확정된 페이지는 `Projects`, `Notes`, `Now`, `About`, `Colophon`, `Uses`이며, `Archive`는 아직 별도의 상세 시안이 없다.
+앞으로의 디자인과 개발 작업은 이 문서를 기준으로 맞춘다.
 
 ## 현재 기준선
 
+기준일: `2026-07-24`
+
 - Stack: `Next.js 16.2.6`, `React 19.2.4`, `Tailwind CSS 4`
 - Router: `app/` 라우터
-- 공통 레이아웃: `app/layout.tsx`에서 `Navbar`와 `Footer`를 전역 적용
-- 디자인 기준 문서: `docs/design-system.md`
-- 현재 기준 페이지: `app/page.tsx`
-- 글로벌 스타일과 토큰: `app/globals.css`
+- 전역 레이아웃: `app/layout.tsx`에서 `Navbar`와 `Footer` 적용
+- 글로벌 스타일과 타이포그래피 토큰: `app/globals.css`
 - 폰트 설정: `app/fonts.ts`
-- 공용 컴포넌트: `components/Navbar.tsx`, `components/Footer.tsx`, `components/Container.tsx`, `components/PageHeader.tsx`, `components/SectionTitle.tsx`, `components/Divider.tsx`, `components/MenuCard.tsx`, `components/Button.tsx`
-- 현재 구현된 주요 라우트: `/`, `/projects`, `/notes`, `/archive`, `/now`
-- 콘텐츠가 구현되지 않은 푸터 링크: `/about`, `/colophon`, `/uses` (`/about`은 빈 `page.tsx` 파일만 존재)
-- 상세 디자인 시안이 확정된 페이지: `/projects`, `/notes`, `/now`, `/about`, `/colophon`, `/uses`
-- 상세 디자인 시안이 아직 없는 페이지: `/archive`
+- 사이트 설정: `config/site.ts`
+- 현재 라우트: `/`, `/projects`, `/notes`, `/archive`, `/now`, `/about`
+- 푸터 연결 라우트: `/about`은 placeholder 페이지가 있고, `/colophon`과 `/uses`는 아직 없다.
+- 프로젝트 데이터: `data/projects.ts`에 `STILL BUILDING`, `WEARTRACK` 두 항목이 정의되어 있다.
+- 프로젝트 목록 UI: `components/projects/ProjectGallery.tsx`, `ProjectCard.tsx`, `ProjectGallery.module.css` 기반의 가로 갤러리다.
+- 프로젝트 상세 라우트: 아직 없으며, 현재 프로젝트 카드에도 실제 상세 페이지 `href`가 연결되어 있지 않다.
 
 ## 현재 상태 요약
 
-| 범위 | 상태 | 메모 |
+| 범위 | 상태 | 현재 구현 |
 | --- | --- | --- |
-| Home (`/`) | 진행 중 | 기본 레이아웃, hero 이미지, 1차 반응형이 적용됐고 세부 QA가 남아 있다. |
-| Projects (`/projects`) | 시안 확정·구현 전 | 2단 hero, 카테고리 필터, 프로젝트 리스트, 페이지네이션 CTA 구조를 구현해야 한다. |
-| Notes (`/notes`) | 시안 확정·구현 전 | 2단 hero, 카테고리 필터, 글 목록, 읽기 시간, 페이지네이션 CTA 구조를 구현해야 한다. |
-| Now (`/now`) | 시안 확정·구현 전 | 월간 캘린더, 오늘의 체크리스트, 이번 달 기록, 아카이브 CTA 구조를 구현해야 한다. |
-| Archive (`/archive`) | 시안 미정·placeholder | 현재는 제목만 있는 상태이며, 상세 디자인 방향을 먼저 확정해야 한다. |
-| Footer | 기본 구성 완료·시안 반영 중 | 어두운 브라운 배경의 4열 정보 영역과 링크 구조를 시안 기준으로 정리한다. |
-| About (`/about`) | 시안 확정·미구현 | Purpose, Approach, Philosophy와 이미지 영역을 구현해야 한다. 현재는 빈 `page.tsx`만 있다. |
-| Colophon (`/colophon`) | 시안 확정·미구현 | 사이트·작성자·디자인/코드·폰트·배포 정보와 이미지를 구현해야 한다. |
-| Uses (`/uses`) | 시안 확정·미구현 | Development, Design, Writing, Assets, 기타 도구를 그룹형 목록으로 구현해야 한다. |
-| 404 | 미구현 | 커스텀 404 페이지가 필요하다. |
+| Home (`/`) | 1차 구현 완료·QA 중 | `Still Building` hero, 실제 hero 이미지, 4개 메뉴 카드, 반응형 레이아웃 |
+| Projects (`/projects`) | 1차 구현 완료·상세 페이지 미구현 | `PageHeader`와 프로젝트 갤러리, 데스크톱 가로 스크롤, 모바일 세로 스택, 이미지·연도·설명·역할·태그 패널 |
+| Project detail (`/projects/[slug]`) | 미구현 | slug 기반 라우트, 상세 콘텐츠, 이전/다음 이동, 목록 카드 연결이 필요하다. |
+| Notes (`/notes`) | placeholder | 페이지 헤더와 “Notes Archive” 안내만 있다. |
+| Now (`/now`) | placeholder | 페이지 헤더와 현재 집중 영역 안내만 있다. |
+| Archive (`/archive`) | placeholder | 제목만 있으며 콘텐츠 모델과 상세 디자인이 정해지지 않았다. |
+| About (`/about`) | placeholder | 페이지 헤더만 있다. |
+| Colophon (`/colophon`) | 미구현 | 푸터 링크만 존재한다. |
+| Uses (`/uses`) | 미구현 | 푸터 링크만 존재한다. |
+| Footer | 기본 구현 완료 | About, Email, GitHub, Colophon, Uses 링크를 제공한다. 연결 대상 라우트 정리가 남아 있다. |
+| 404 | 미구현 | 커스텀 not-found 화면이 필요하다. |
 
 ## 우선순위 로드맵
 
-### 1. Shared page system
+### 1. 공통 기반과 품질 정리
 
-- [ ] 시안 공통 구조 정의: global navigation / 2단 hero / divider / content area / dark footer
-- [ ] 서브 페이지의 반응형 기준 확정: desktop 2단 구성, mobile 단일 열 전환
-- [ ] 카테고리 필터 바와 정렬 컨트롤 패턴 정의
-- [ ] 프로젝트·노트 목록 행과 메타데이터 패턴 정의
-- [ ] 월간 캘린더와 체크리스트 패턴 정의
-- [ ] `Label`, `ImageFrame` 등 시안에 필요한 공용 컴포넌트 추가
-- [ ] hover / focus / accessibility 상태 정리
-- [ ] 디자인 토큰 정리: spacing / type scale / line / surface
+- [x] 전역 `Navbar`, `Footer`, `Container` 구성
 - [x] Home 실제 이미지 적용
-- [ ] Home 반응형 세부 조정
-- [x] Footer 기본 정보 및 링크 구성
-- [ ] Footer 시안 스타일 반영 및 반응형 정리
+- [x] Home 1차 반응형 레이아웃 적용
+- [x] `type-*` 타이포그래피 토큰 정리
+- [x] `PageHeader`, `SectionTitle`, `Divider` 기반 서브 페이지 구조 적용
+- [x] 프로젝트 카드·갤러리 1차 UI 구현
+- [ ] Home 반응형 세부 QA
+- [ ] 프로젝트 갤러리의 hover / focus / keyboard / reduced-motion 상태 QA
+- [ ] 공통 spacing, responsive breakpoint, 상태 스타일을 문서화
 - [ ] 커스텀 404 페이지
+- [ ] `app/layout.tsx`의 starter metadata를 사이트 정보에 맞게 갱신
 
-공통 시스템을 먼저 확정하되, 전체 Foundation polish를 끝낼 때까지 페이지 구현을 멈추지는 않는다. 시안의 공통 패턴을 `Projects` 구현에 먼저 적용하고, 그 결과를 `Notes`, `Now`, 정보 페이지에 확장한다.
+### 2. Projects 목록과 프로젝트 상세 페이지
 
-### 2. Primary page implementation
+프로젝트 목록은 이미 1차 갤러리로 구현되어 있으므로, 다음 단계는 각 프로젝트를 실제로 읽을 수 있는 상세 경험을 연결하는 것이다.
 
-- [ ] `/projects` 시안 구현: hero / filter bar / project rows / count / CTA
-- [ ] `/notes` 시안 구현: hero / filter bar / note rows / read time / count / CTA
-- [ ] `/now` 시안 구현: calendar / today checklist / monthly note / archive CTA
+- [x] `/projects` 페이지의 프로젝트 갤러리 구현
+- [ ] 프로젝트 데이터에 `slug`와 상세 콘텐츠 필드 추가
+- [ ] `/projects/[slug]` 동적 라우트 구현
+- [ ] 상세 페이지 구성: hero 이미지, 제목, 연도, 카테고리, 역할, 태그, 설명, 외부 링크
+- [ ] 프로젝트 목록 카드의 `href`와 “View project” CTA를 상세 라우트에 연결
+- [ ] 상세 페이지의 이전/다음 프로젝트 이동 및 `/projects` 복귀 링크 추가
+- [ ] 존재하지 않는 slug의 not-found 처리
+- [ ] 상세 페이지 반응형·접근성·이미지 최적화 QA
 
-### 3. Information page implementation
+### 3. Notes와 Now 구현
 
-- [ ] `/about` 시안 구현: Purpose / Approach / Philosophy / image
-- [ ] `/colophon` 시안 구현: site metadata / design & code / font / deploy / image
-- [ ] `/uses` 시안 구현: grouped tools list / last updated
-- [ ] 푸터 링크와 실제 라우트 상태를 일치시키기
+- [ ] `/notes` 목록 구현: 카테고리/태그, 글 목록, 작성일, 읽기 시간, 페이지네이션 또는 더보기 CTA
+- [ ] `/now` 구현: 현재 집중 영역, 체크리스트, 월별 기록, Archive 연결
+- [ ] Notes와 Now에 프로젝트 갤러리에서 검증한 공통 헤더·구분선·메타 패턴 확장
 
-### 4. Archive direction and implementation
+### 4. Information 페이지와 Footer 연결 정리
 
-- [ ] `/archive` 상세 디자인 방향 확정
+- [ ] `/about` 구현: Purpose / Approach / Philosophy / 이미지
+- [ ] `/colophon` 라우트와 페이지 구현: 사이트, 작성자, 디자인·코드, 폰트, 배포 정보
+- [ ] `/uses` 라우트와 페이지 구현: Development / Design / Writing / Assets 도구 목록
+- [ ] Footer의 모든 링크가 실제 라우트로 연결되도록 정리
+
+### 5. Archive 방향과 구현
+
+- [ ] `/archive`의 콘텐츠 유형과 상세 디자인 방향 확정
 - [ ] `/archive` 페이지 구축
-- [ ] 사진·여행·공연·일상 등 Archive 콘텐츠 유형 정의
+- [ ] 사진·여행·공연·일상 등 Archive 콘텐츠 모델 정의
+- [ ] 필요할 경우 Archive 상세 페이지 라우트 추가
 
-### 5. Editorial polish
+### 6. 콘텐츠와 콘텐츠 워크플로
 
-- [ ] 반응형 디자인 전반 정리
-- [ ] 스크롤 애니메이션
-- [ ] 페이지 전환 애니메이션
-- [ ] 이미지 hover 효과
-- [ ] 다크 / 라이트 테마 또는 커스텀 테마 전략 재검토
-
-### 6. Content production
-
-- [ ] 프로젝트 상세 작성
-- [ ] 노트 작성
+- [ ] STILL BUILDING과 WEARTRACK 프로젝트 상세 콘텐츠 작성
+- [ ] Notes 글 작성
 - [ ] Archive 콘텐츠 추가
-- [ ] About 작성
-- [ ] Now 페이지 월별 기록
+- [ ] About 및 Now의 실제 콘텐츠 작성
+- [ ] MDX 기반 Notes 시스템 도입
+- [ ] MDX 기반 Project detail 시스템 도입
+- [ ] 자동 목차와 코드 하이라이팅
 
-### 7. CMS / content workflow
-
-- [ ] MDX 기반 노트 시스템
-- [ ] MDX 기반 프로젝트 시스템
-- [ ] 자동 목차 생성
-- [ ] 코드 하이라이팅
-
-### 8. Discovery / utility features
+### 7. 탐색·유틸리티 기능
 
 - [ ] 태그 필터
 - [ ] 검색 기능
@@ -119,16 +111,16 @@
 - [ ] Mood Stamp
 - [ ] 방문자 통계
 
-### 9. Launch
+### 8. 출시 준비
 
-- [ ] SEO 설정
+- [ ] SEO metadata 설정
 - [ ] Open Graph 이미지
-- [ ] favicon 제작
+- [ ] favicon 제작 또는 정리
 - [ ] `Vercel` 배포
-- [ ] Google Analytics 적용
+- [ ] Google Analytics 적용 여부 결정 및 적용
 - [ ] 커스텀 도메인 연결
 
-### 10. Later expansions
+### 9. 이후 확장
 
 - [ ] Guestbook 디자인 개선
 - [ ] 연도별 Archive
@@ -143,19 +135,23 @@
 
 ## 운영 원칙
 
-- 전체 무드는 계속해서 editorial, calm, archive-like 방향을 유지한다.
-- 새 화면은 가능한 한 토큰과 공용 컴포넌트를 먼저 재사용한다.
-- 링크가 노출되는 라우트는 실제 페이지로 연결되도록 관리한다.
-- `/archive`는 다른 페이지보다 더 감성적이고 아날로그한 실험을 허용하는 공간으로 둔다.
+- 전체 무드는 `editorial`, `calm`, `archive-like` 방향을 유지한다.
+- 새 화면은 가능한 한 CSS 토큰과 공용 컴포넌트를 먼저 재사용한다.
+- 상세 라우트가 연결된 프로젝트는 실제 링크 CTA로 제공하고, 그 전에는 정보 패널로만 표시한다.
+- `/projects`의 상세 페이지는 목록 갤러리와 동일한 타이포그래피·색상·여백 체계를 공유한다.
+- `/archive`는 다른 페이지보다 감성적이고 아날로그한 실험을 허용하는 공간으로 둔다.
 
-## 참고 문서
+## 참고 문서와 파일
 
 - `docs/design-system.md`
 - `app/layout.tsx`
 - `app/page.tsx`
+- `app/projects/page.tsx`
 - `app/globals.css`
+- `data/projects.ts`
 - `components/Navbar.tsx`
 - `components/Footer.tsx`
 - `components/PageHeader.tsx`
 - `components/SectionTitle.tsx`
-- `components/Button.tsx`
+- `components/projects/ProjectGallery.tsx`
+- `components/projects/ProjectCard.tsx`
