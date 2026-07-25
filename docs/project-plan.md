@@ -52,11 +52,11 @@
 - [x] `type-*` 타이포그래피 토큰 정리
 - [x] `PageHeader`, `SectionTitle`, `Divider` 기반 서브 페이지 구조 적용
 - [x] 프로젝트 카드·갤러리 1차 UI 구현
-- [ ] Home 반응형 세부 QA
+- [x] Home 반응형 세부 QA
 - [ ] 프로젝트 갤러리의 hover / focus / keyboard / reduced-motion 상태 QA
 - [ ] 공통 spacing, responsive breakpoint, 상태 스타일을 문서화
-- [ ] 커스텀 404 페이지
-- [ ] `app/layout.tsx`의 starter metadata를 사이트 정보에 맞게 갱신
+- [x] 커스텀 404 페이지
+- [x] `app/layout.tsx`의 starter metadata를 사이트 정보에 맞게 갱신
 
 ### 2. Projects 목록과 프로젝트 상세 페이지
 
