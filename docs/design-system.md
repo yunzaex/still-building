@@ -36,6 +36,68 @@
 - 서브 페이지는 `Container` + `PageHeader`를 기본으로 사용하고, 콘텐츠 성격에 따라 `Divider`와 `SectionTitle`을 조합한다.
 - 모바일에서는 가로 탐색이 필요한 프로젝트 갤러리만 스크롤 레일을 유지하고, 카드 콘텐츠는 세로로 읽을 수 있게 전환한다.
 
+## Spacing 기준
+
+이 프로젝트에는 별도의 CSS spacing 토큰이 없다. 따라서 새 화면은 Tailwind의 기본 spacing 단위와 아래의 공통 조합을 사용한다. 임의의 픽셀 값이나 컴포넌트마다 다른 여백을 추가하기 전에, 같은 역할의 조합을 우선 재사용한다.
+
+| 구분 | 기본값 | 큰 화면 값 | 적용 위치 |
+| --- | --- | --- | --- |
+| 컨테이너 좌우 여백 | `px-4` (16px) | `sm:px-6` (24px), `lg:px-8` (32px) | 모든 `Container` 내부 콘텐츠 |
+| 페이지 상·하단 여백 | `pt-32 pb-12` (128px / 48px) | `sm:pt-36 sm:pb-16` (144px / 64px) | Navbar 아래에서 시작하는 페이지 |
+| 페이지 헤더 간격 | `gap-8 pb-12` (32px / 48px) | `md`에서 2열 전환 | `PageHeader`의 label·제목·하단 구분선 |
+| 섹션 여백 | `py-20` (80px) | 콘텐츠에 따라 유지 | 일반 서브 페이지의 독립 섹션 |
+| Home 주요 메뉴 섹션 | `py-24` (96px) | `md`에서 4열 전환 | Hero 다음 메뉴 카드 영역 |
+| 컴포넌트 내부 여백 | `gap-4`~`gap-6`, `p-6` (16px~24px) | 필요 시 유지 | 카드 메타데이터, 패널, 링크 묶음 |
+| 작은 메타데이터 간격 | `gap-2`~`gap-3`, `mt-4` | 필요 시 유지 | label, 설명, 태그, 보조 링크 |
+
+### Spacing 운영 원칙
+
+- `Container` 밖에서 페이지별 좌우 여백을 다시 정의하지 않는다. 전체 폭이 필요한 영역만 예외로 하고, 그 안의 콘텐츠는 다시 `Container`에 맞춘다.
+- 읽기 흐름의 큰 단위는 `48px` 이상, 카드·메타데이터 같은 작은 단위는 `8px`의 배수 범위에서 조정한다.
+- border는 간격을 대체하지 않는다. 구분선 앞뒤에도 콘텐츠 역할에 맞는 여백을 둔다.
+- 같은 화면에서 같은 정보 계층에는 같은 간격을 쓴다. 예를 들어 eyebrow와 제목 사이에는 `mt-4`, 카드 CTA 앞에는 `mt-6`을 기본으로 한다.
+- 새 숫자 값이 필요하면 기존 조합으로 해결되지 않는 이유와 적용 범위를 함께 기록한다.
+
+## Responsive breakpoint 기준
+
+모바일 우선(base)으로 작성하고, 레이아웃 변화가 필요한 시점에만 breakpoint를 추가한다. 현재 공통 기준은 Tailwind의 기본 breakpoint와 프로젝트 갤러리의 모바일 예외를 따른다.
+
+| 범위 | 기준 | 현재 사용하는 변화 | 새 UI 적용 원칙 |
+| --- | --- | --- | --- |
+| Mobile | 기본 ~639px | 단일 열, 좁은 좌우 여백, Projects는 세로 목록 | 기본 스타일을 먼저 작성하고 가로 스크롤·hover 전용 정보에 의존하지 않는다. |
+| `sm` | 640px 이상 | `Container` 좌우 여백 확대, Navbar 가로 정렬, 페이지 상·하단 여백 확대 | 콘텐츠가 한 줄에 안정적으로 읽히는 최소 변화만 둔다. |
+| `md` | 768px 이상 | Home hero 2열, Home 메뉴 4열, `PageHeader`와 Footer의 가로 배치 | 두 개 이상의 정보 묶음을 나란히 놓을 때 사용한다. |
+| `lg` | 1024px 이상 | `Container` 좌우 여백을 32px로 확대 | 더 넓은 빈 공간이 실제로 필요한 경우에만 사용한다. |
+| Gallery 예외 | 640px 미만 (`max-width: 639px`) | 가로 scroll-snap 레일을 세로 목록으로 바꾸고 정보 패널을 항상 노출 | 이 예외를 다른 컴포넌트의 일반 breakpoint로 확장하지 않는다. |
+
+### Responsive 운영 원칙
+
+- breakpoint는 화면 크기 자체보다 콘텐츠가 더 이상 읽기 좋지 않은 지점을 근거로 선택한다.
+- `sm`, `md`, `lg` 외의 breakpoint를 추가하기 전에는 위 단계로 해결할 수 없는지 검토한다.
+- 작은 화면에서는 숨겨진 hover 정보, 가로 전용 조작, 고정 폭 카드가 남지 않도록 한다.
+- `clamp()`를 사용하는 타이포그래피는 별도 글자 크기 breakpoint를 만들기 전에 그 동작을 우선 유지한다.
+
+## 인터랙션과 상태 스타일
+
+상태 변화는 색상·위치·정보 노출 중 하나 이상으로 명확히 알리되, hover만으로 기능이나 콘텐츠가 드러나게 만들지 않는다. 아래 기준은 현재 Navbar, MenuCard, Footer, ProjectCard의 구현 패턴을 정리하고 새 인터랙티브 요소에 적용할 공통 규칙을 더한 것이다.
+
+| 상태 | 시각 기준 | 적용 및 접근성 기준 |
+| --- | --- | --- |
+| 기본 | `--brown` 또는 `--brown-light` 텍스트, `--line` border, 정적인 카드 정보 | 링크와 버튼은 상호작용 전에도 목적을 알 수 있는 텍스트·아이콘을 제공한다. |
+| Hover | `--brown`으로 색상 강조, 필요 시 최대 `-translate-y-1` 이동 또는 이미지 `scale(1.025)` | hover 효과는 `(hover: hover) and (pointer: fine)` 환경에서만 추가한다. Projects의 패널 노출처럼 중요한 정보는 다른 입력 방식에서도 접근 가능해야 한다. |
+| Keyboard focus | `:focus-visible`에서 `1px solid var(--brown)`, `outline-offset: 4px` | mouse click에는 불필요한 outline을 보이지 않게 하고, Tab 탐색에는 항상 분명한 focus 표시를 제공한다. ProjectCard의 패널·이미지 변화도 focus 시 hover와 동일하게 동작한다. |
+| Active / pressed | 현재 공통 active 스타일은 없다 | 새 버튼·토글처럼 눌림 상태가 의미 있는 UI는 `aria-pressed` 또는 해당 네이티브 상태를 사용하고, 색상 또는 border 변화로 선택 상태를 구분한다. 단순 링크에는 별도 active 스타일을 강제하지 않는다. |
+| Disabled / unavailable | 현재 공통 disabled 스타일은 없다 | 동작할 수 없는 컨트롤은 가능한 한 렌더링하지 않는다. 남겨야 한다면 native `disabled`/`aria-disabled`와 비활성 시각 표현을 함께 제공하고, hover·focus로 실행 가능해 보이게 하지 않는다. |
+| Reduced motion | Projects 이미지·패널 transition을 `0.01ms`로 축소 | `prefers-reduced-motion: reduce`에서 이동·확대·자동 재생을 제거하거나 즉시 완료한다. 콘텐츠를 읽기 위해 애니메이션이 끝날 필요가 없어야 한다. |
+
+### 상태 스타일 운영 원칙
+
+- 새 클릭 가능 요소는 시맨틱 `<a>`, `<button>`, 입력 요소를 우선 사용하며, 키보드로 같은 동작을 할 수 있어야 한다.
+- focus 스타일을 `outline: none`으로 제거했다면 같은 요소에 `:focus-visible` 대체 스타일을 반드시 제공한다.
+- 색상 변화만으로 현재 위치·선택·오류를 전달하지 않는다. 텍스트, 아이콘, border, `aria-current` 등 보조 단서를 함께 사용한다.
+- transition은 `200ms`~`500ms` 범위의 현재 구현을 따른다. 인터랙션을 늦추는 긴 전환이나 무한 반복은 추가하지 않는다.
+- 상태 QA는 pointer, Tab/Shift+Tab, Enter/Space, 터치, reduced-motion 환경을 모두 확인한다. 프로젝트 갤러리의 전체 QA는 별도 로드맵 항목으로 계속 관리한다.
+
 ## 공용 컴포넌트
 
 현재 코드에서 사용 중인 공용 컴포넌트는 다음과 같다.
@@ -160,6 +222,7 @@
 - Home의 `Still Building` hero와 `Between logic and aesthetics.` 카피
 - 모든 페이지의 전역 Navbar와 Footer
 - `/projects`의 카드형 가로 갤러리와 모바일 세로 전환
+- 공통 spacing 조합, `sm`·`md`·`lg` responsive breakpoint, keyboard focus와 reduced-motion을 포함한 상태 스타일 기준
 
 ### 부분 구현
 
@@ -172,7 +235,6 @@
 
 - `/projects/[slug]` 상세 페이지의 콘텐츠 구조와 이미지 배치
 - Notes, Archive의 콘텐츠 모델
-- 페이지별 세부 responsive breakpoint
 - Footer 보조 링크(`/colophon`, `/uses`)를 실제로 구현할 시점
 
 ## 유지해야 하는 기준

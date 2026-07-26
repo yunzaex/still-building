@@ -54,7 +54,7 @@
 - [x] 프로젝트 카드·갤러리 1차 UI 구현
 - [x] Home 반응형 세부 QA
 - [ ] 프로젝트 갤러리의 hover / focus / keyboard / reduced-motion 상태 QA
-- [ ] 공통 spacing, responsive breakpoint, 상태 스타일을 문서화
+- [x] 공통 spacing, responsive breakpoint, 상태 스타일을 문서화 (`docs/design-system.md`)
 - [x] 커스텀 404 페이지
 - [x] `app/layout.tsx`의 starter metadata를 사이트 정보에 맞게 갱신
 
