@@ -12,7 +12,7 @@
 
 ## 현재 기준선
 
-기준일: `2026-07-24`
+기준일: `2026-07-28`
 
 - Stack: `Next.js 16.2.6`, `React 19.2.4`, `Tailwind CSS 4`
 - Router: `app/` 라우터
@@ -20,19 +20,19 @@
 - 글로벌 스타일과 타이포그래피 토큰: `app/globals.css`
 - 폰트 설정: `app/fonts.ts`
 - 사이트 설정: `config/site.ts`
-- 현재 라우트: `/`, `/projects`, `/notes`, `/archive`, `/now`, `/about`
+- 현재 라우트: `/`, `/projects`, `/projects/[slug]`, `/notes`, `/archive`, `/now`, `/about`
 - 푸터 연결 라우트: `/about`은 placeholder 페이지가 있고, `/colophon`과 `/uses`는 아직 없다.
 - 프로젝트 데이터: `data/projects.ts`에 `STILL BUILDING`, `WEARTRACK` 두 항목이 정의되어 있다.
 - 프로젝트 목록 UI: `components/projects/ProjectGallery.tsx`, `ProjectCard.tsx`, `ProjectGallery.module.css` 기반의 가로 갤러리다.
-- 프로젝트 상세 라우트: 아직 없으며, 현재 프로젝트 카드에도 실제 상세 페이지 `href`가 연결되어 있지 않다.
+- 프로젝트 상세 라우트: `app/projects/[slug]/page.tsx`에서 slug 기반으로 구현되어 있다. 목록 카드에서 상세 라우트로 이동하며, 이전/다음 프로젝트 이동과 `/projects` 복귀 링크는 아직 없다.
 
 ## 현재 상태 요약
 
 | 범위 | 상태 | 현재 구현 |
 | --- | --- | --- |
 | Home (`/`) | 1차 구현 완료·QA 중 | `Still Building` hero, 실제 hero 이미지, 4개 메뉴 카드, 반응형 레이아웃 |
-| Projects (`/projects`) | 1차 구현 완료·상세 페이지 미구현 | `PageHeader`와 프로젝트 갤러리, 데스크톱 가로 스크롤, 모바일 세로 스택, 이미지·연도·설명·역할·태그 패널 |
-| Project detail (`/projects/[slug]`) | 미구현 | slug 기반 라우트, 상세 콘텐츠, 이전/다음 이동, 목록 카드 연결이 필요하다. |
+| Projects (`/projects`) | 1차 구현 완료·QA 대기 | `PageHeader`와 프로젝트 갤러리, 데스크톱 가로 스크롤, 모바일 세로 스택, 이미지·연도·설명·역할·태그 패널, 상세 라우트 연결 |
+| Project detail (`/projects/[slug]`) | 1차 구현 완료·탐색/QA 대기 | slug 기반 상세 라우트, hero 이미지, 메타 정보, 본문, 태그, 외부 링크, 프로젝트별 metadata, not-found 처리가 구현되어 있다. 이전/다음 이동, 목록 복귀 링크, 상세 QA가 남아 있다. |
 | Notes (`/notes`) | placeholder | 페이지 헤더와 “Notes Archive” 안내만 있다. |
 | Now (`/now`) | placeholder | 페이지 헤더와 현재 집중 영역 안내만 있다. |
 | Archive (`/archive`) | placeholder | 제목만 있으며 콘텐츠 모델과 상세 디자인이 정해지지 않았다. |
@@ -40,7 +40,7 @@
 | Colophon (`/colophon`) | 미구현 | 푸터 링크만 존재한다. |
 | Uses (`/uses`) | 미구현 | 푸터 링크만 존재한다. |
 | Footer | 기본 구현 완료 | About, Email, GitHub, Colophon, Uses 링크를 제공한다. 연결 대상 라우트 정리가 남아 있다. |
-| 404 | 미구현 | 커스텀 not-found 화면이 필요하다. |
+| 404 | 기본 구현 완료 | `app/not-found.tsx`에 커스텀 not-found 화면이 구현되어 있으며, 존재하지 않는 프로젝트 slug도 이 화면으로 처리된다. |
 
 ## 우선순위 로드맵
 
@@ -63,12 +63,12 @@
 프로젝트 목록은 이미 1차 갤러리로 구현되어 있으므로, 다음 단계는 각 프로젝트를 실제로 읽을 수 있는 상세 경험을 연결하는 것이다.
 
 - [x] `/projects` 페이지의 프로젝트 갤러리 구현
-- [ ] 프로젝트 데이터에 `slug`와 상세 콘텐츠 필드 추가
-- [ ] `/projects/[slug]` 동적 라우트 구현
-- [ ] 상세 페이지 구성: hero 이미지, 제목, 연도, 카테고리, 역할, 태그, 설명, 외부 링크
-- [ ] 프로젝트 목록 카드의 `href`와 “View project” CTA를 상세 라우트에 연결
+- [x] 프로젝트 데이터에 `slug`와 상세 콘텐츠 필드 추가
+- [x] `/projects/[slug]` 동적 라우트 구현
+- [x] 상세 페이지 구성: hero 이미지, 제목, 연도, 카테고리, 역할, 태그, 설명, 외부 링크
+- [x] 프로젝트 목록 카드와 “View project” CTA를 상세 라우트에 연결
 - [ ] 상세 페이지의 이전/다음 프로젝트 이동 및 `/projects` 복귀 링크 추가
-- [ ] 존재하지 않는 slug의 not-found 처리
+- [x] 존재하지 않는 slug의 not-found 처리
 - [ ] 상세 페이지 반응형·접근성·이미지 최적화 QA
 
 ### 3. Notes와 Now 구현
@@ -93,7 +93,7 @@
 
 ### 6. 콘텐츠와 콘텐츠 워크플로
 
-- [ ] STILL BUILDING과 WEARTRACK 프로젝트 상세 콘텐츠 작성
+- [x] STILL BUILDING과 WEARTRACK 프로젝트 상세 콘텐츠 작성
 - [ ] Notes 글 작성
 - [ ] Archive 콘텐츠 추가
 - [ ] About 및 Now의 실제 콘텐츠 작성
@@ -147,6 +147,8 @@
 - `app/layout.tsx`
 - `app/page.tsx`
 - `app/projects/page.tsx`
+- `app/projects/[slug]/page.tsx`
+- `app/not-found.tsx`
 - `app/globals.css`
 - `data/projects.ts`
 - `components/Navbar.tsx`

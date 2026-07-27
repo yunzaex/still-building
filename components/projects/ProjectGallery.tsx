@@ -9,10 +9,7 @@ type ProjectGalleryProps = {
 
 export default function ProjectGallery({ projects }: ProjectGalleryProps) {
   return (
-    <section
-      className="mt-6 sm:mt-8"
-      aria-labelledby="projects-gallery-title"
-    >
+    <section className="mt-6 sm:mt-8" aria-label="Projects gallery">
       <p
         id="projects-gallery-instructions"
         className="type-label py-6 text-(--brown-light)"
@@ -26,7 +23,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
         aria-describedby="projects-gallery-instructions"
       >
         {projects.map((project) => (
-          <li key={project.title} className={styles.item}>
+          <li key={project.slug} className={styles.item}>
             <ProjectCard project={project} />
           </li>
         ))}

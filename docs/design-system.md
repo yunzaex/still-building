@@ -7,7 +7,7 @@
 - 현재 코드에 적용된 디자인 방향
 - 컬러, 폰트, 레이아웃 기준
 - 공용 컴포넌트의 역할
-- 프로젝트 목록과 향후 상세 페이지의 UI 기준
+- 프로젝트 목록과 상세 페이지의 UI 기준
 
 실제 화면 작업은 이 문서를 우선 기준으로 삼는다.
 
@@ -140,18 +140,18 @@
 - `ProjectCard`
   - 이미지, 제목, 연도, 설명, 카테고리, 역할, 태그를 표시한다.
   - hover/focus 시 하단 정보 패널이 올라온다.
-  - `project.href`가 있을 때만 링크 카드가 되며, 현재 데이터에는 상세 라우트가 연결되어 있지 않다.
+  - `project.slug`를 사용해 `/projects/[slug]` 상세 라우트로 이동하는 링크 카드다.
 
 ## 프로젝트 상세 페이지 기준
 
-향후 `/projects/[slug]`는 목록 카드의 시각 언어를 확장하는 상세 화면으로 설계한다.
+`/projects/[slug]`는 목록 카드의 시각 언어를 확장한 상세 화면이다.
 
 - hero 이미지와 제목을 첫 화면의 핵심으로 둔다.
 - 연도, 카테고리, 역할, 태그는 제목 주변 또는 첫 콘텐츠 영역에서 빠르게 읽을 수 있어야 한다.
-- 본문은 프로젝트 배경, 문제 정의, 작업 범위, 결과 순서로 확장할 수 있어야 한다.
-- 외부 링크와 `/projects` 복귀 링크를 명확히 제공한다.
-- 프로젝트 간 이전/다음 이동은 같은 데이터 모델과 slug를 사용한다.
-- 목록 카드의 `View project` CTA는 상세 라우트가 연결된 경우에만 활성 링크로 동작한다.
+- 본문은 `content` 배열을 사용하며, 프로젝트 배경, 문제 정의, 작업 범위, 결과 순서로 확장할 수 있다.
+- 외부 링크는 `links` 데이터가 있을 때만 표시한다.
+- 프로젝트 간 이전/다음 이동과 `/projects` 복귀 링크는 같은 데이터 모델과 slug를 사용해 후속 구현한다.
+- 목록 카드의 `View project` CTA는 항상 해당 프로젝트의 상세 라우트로 이동한다.
 - 이미지에는 실제 콘텐츠를 설명하는 alt 텍스트를 제공하고, 상세 이미지가 늘어나면 `sizes`와 loading 우선순위를 다시 검토한다.
 
 ## 컬러 기준
@@ -222,18 +222,19 @@
 - Home의 `Still Building` hero와 `Between logic and aesthetics.` 카피
 - 모든 페이지의 전역 Navbar와 Footer
 - `/projects`의 카드형 가로 갤러리와 모바일 세로 전환
+- `/projects/[slug]`의 hero 이미지, 프로젝트 메타데이터, 본문, 태그, 외부 링크 기반 상세 화면
+- `slug` 기반 프로젝트 데이터 조회, 상세 라우트 연결, 존재하지 않는 slug의 not-found 처리
 - 공통 spacing 조합, `sm`·`md`·`lg` responsive breakpoint, keyboard focus와 reduced-motion을 포함한 상태 스타일 기준
 
 ### 부분 구현
 
 - `/notes`, `/now`, `/about`, `/archive`는 헤더와 placeholder 콘텐츠만 있다.
-- `/projects` 데이터에는 이미지와 목록용 메타데이터가 있지만 `slug`와 상세 콘텐츠는 없다.
+- 프로젝트 상세 페이지의 이전/다음 이동, `/projects` 복귀 링크, 반응형·접근성·이미지 최적화 QA가 남아 있다.
 - `/colophon`, `/uses`는 Footer 링크만 있고 라우트가 없다.
 - 카드의 overlay, focus, reduced-motion 상태는 구현되어 있으나 전체 페이지 QA가 남아 있다.
 
 ### 아직 미확정
 
-- `/projects/[slug]` 상세 페이지의 콘텐츠 구조와 이미지 배치
 - Notes, Archive의 콘텐츠 모델
 - Footer 보조 링크(`/colophon`, `/uses`)를 실제로 구현할 시점
 
@@ -251,6 +252,8 @@
 - [`app/layout.tsx`](/Users/jeje/Documents/GitHub/still-building/app/layout.tsx)
 - [`app/page.tsx`](/Users/jeje/Documents/GitHub/still-building/app/page.tsx)
 - [`app/projects/page.tsx`](/Users/jeje/Documents/GitHub/still-building/app/projects/page.tsx)
+- [`app/projects/[slug]/page.tsx`](/Users/jeje/Documents/GitHub/still-building/app/projects/[slug]/page.tsx)
+- [`app/not-found.tsx`](/Users/jeje/Documents/GitHub/still-building/app/not-found.tsx)
 - [`data/projects.ts`](/Users/jeje/Documents/GitHub/still-building/data/projects.ts)
 - [`components/Navbar.tsx`](/Users/jeje/Documents/GitHub/still-building/components/Navbar.tsx)
 - [`components/Footer.tsx`](/Users/jeje/Documents/GitHub/still-building/components/Footer.tsx)

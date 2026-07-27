@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {project.image ? (
           <Image
             src={project.image}
-            alt={`${project.title} project preview`}
+            alt={project.imageAlt}
             fill
             loading="eager"
             sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1199px) 58vw, 640px"
@@ -50,25 +50,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     </>
   );
 
-  if (project.href) {
-    return (
-      <Link
-        href={project.href}
-        className={styles.card}
-        aria-label={`${project.title} 프로젝트 보기`}
-      >
-        {content}
-      </Link>
-    );
-  }
-
   return (
-    <article
+    <Link
+      href={`/projects/${project.slug}`}
       className={styles.card}
-      tabIndex={0}
-      aria-label={`${project.title} 프로젝트 정보`}
+      aria-label={`${project.title} 프로젝트 보기`}
     >
       {content}
-    </article>
+    </Link>
   );
 }
