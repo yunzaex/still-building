@@ -34,7 +34,7 @@
 - 강한 박스보다 `--line` 기반의 얇은 border와 여백으로 영역을 구분한다.
 - Home은 hero 2단 그리드와 4열 메뉴 카드 구조를 사용한다.
 - 서브 페이지는 `Container` + `PageHeader`를 기본으로 사용하고, 콘텐츠 성격에 따라 `Divider`와 `SectionTitle`을 조합한다.
-- 모바일에서는 가로 탐색이 필요한 프로젝트 갤러리만 스크롤 레일을 유지하고, 카드 콘텐츠는 세로로 읽을 수 있게 전환한다.
+- 모바일에서는 프로젝트 갤러리의 가로 스크롤 레일을 세로 목록으로 전환하고, 카드 콘텐츠는 세로로 읽을 수 있게 한다.
 
 ## Spacing 기준
 
@@ -55,7 +55,7 @@
 - `Container` 밖에서 페이지별 좌우 여백을 다시 정의하지 않는다. 전체 폭이 필요한 영역만 예외로 하고, 그 안의 콘텐츠는 다시 `Container`에 맞춘다.
 - 읽기 흐름의 큰 단위는 `48px` 이상, 카드·메타데이터 같은 작은 단위는 `8px`의 배수 범위에서 조정한다.
 - border는 간격을 대체하지 않는다. 구분선 앞뒤에도 콘텐츠 역할에 맞는 여백을 둔다.
-- 같은 화면에서 같은 정보 계층에는 같은 간격을 쓴다. 예를 들어 eyebrow와 제목 사이에는 `mt-4`, 카드 CTA 앞에는 `mt-6`을 기본으로 한다.
+- 같은 화면에서 같은 정보 계층에는 같은 간격을 쓴다. 예를 들어 eyebrow와 제목 사이에는 `mt-4`, 일반 카드 CTA 앞에는 `mt-6`을 기본으로 하되, 프로젝트 확장 패널 CTA는 패널 하단 정렬 규칙을 우선한다.
 - 새 숫자 값이 필요하면 기존 조합으로 해결되지 않는 이유와 적용 범위를 함께 기록한다.
 
 ## Responsive breakpoint 기준
@@ -84,18 +84,18 @@
 | 상태 | 시각 기준 | 적용 및 접근성 기준 |
 | --- | --- | --- |
 | 기본 | `--brown` 또는 `--brown-light` 텍스트, `--line` border, 정적인 카드 정보 | 링크와 버튼은 상호작용 전에도 목적을 알 수 있는 텍스트·아이콘을 제공한다. |
-| Hover | `--brown`으로 색상 강조, 필요 시 최대 `-translate-y-1` 이동 또는 이미지 `scale(1.025)` | hover 효과는 `(hover: hover) and (pointer: fine)` 환경에서만 추가한다. Projects의 패널 노출처럼 중요한 정보는 다른 입력 방식에서도 접근 가능해야 한다. |
-| Keyboard focus | `:focus-visible`에서 `1px solid var(--brown)`, `outline-offset: 4px` | mouse click에는 불필요한 outline을 보이지 않게 하고, Tab 탐색에는 항상 분명한 focus 표시를 제공한다. ProjectCard의 패널·이미지 변화도 focus 시 hover와 동일하게 동작한다. |
+| Hover | `--brown`으로 색상 강조, 필요 시 최대 `-translate-y-1` 이동 | hover 효과는 `(hover: hover) and (pointer: fine)` 환경에서만 추가한다. Projects의 패널 확장처럼 중요한 정보는 다른 입력 방식에서도 접근 가능해야 한다. |
+| Keyboard focus | `:focus-visible`에서 `1px solid var(--brown)`, `outline-offset: 4px` | mouse click에는 불필요한 outline을 보이지 않게 하고, Tab 탐색에는 항상 분명한 focus 표시를 제공한다. ProjectCard의 패널 확장도 focus 시 hover와 동일하게 동작한다. |
 | Active / pressed | 현재 공통 active 스타일은 없다 | 새 버튼·토글처럼 눌림 상태가 의미 있는 UI는 `aria-pressed` 또는 해당 네이티브 상태를 사용하고, 색상 또는 border 변화로 선택 상태를 구분한다. 단순 링크에는 별도 active 스타일을 강제하지 않는다. |
 | Disabled / unavailable | 현재 공통 disabled 스타일은 없다 | 동작할 수 없는 컨트롤은 가능한 한 렌더링하지 않는다. 남겨야 한다면 native `disabled`/`aria-disabled`와 비활성 시각 표현을 함께 제공하고, hover·focus로 실행 가능해 보이게 하지 않는다. |
-| Reduced motion | Projects 이미지·패널 transition을 `0.01ms`로 축소 | `prefers-reduced-motion: reduce`에서 이동·확대·자동 재생을 제거하거나 즉시 완료한다. 콘텐츠를 읽기 위해 애니메이션이 끝날 필요가 없어야 한다. |
+| Reduced motion | Projects grid·상세 정보 opacity transition을 `0.01ms`로 축소 | `prefers-reduced-motion: reduce`에서 이동·확대·자동 재생을 제거하거나 즉시 완료한다. 콘텐츠를 읽기 위해 애니메이션이 끝날 필요가 없어야 한다. |
 
 ### 상태 스타일 운영 원칙
 
 - 새 클릭 가능 요소는 시맨틱 `<a>`, `<button>`, 입력 요소를 우선 사용하며, 키보드로 같은 동작을 할 수 있어야 한다.
 - focus 스타일을 `outline: none`으로 제거했다면 같은 요소에 `:focus-visible` 대체 스타일을 반드시 제공한다.
 - 색상 변화만으로 현재 위치·선택·오류를 전달하지 않는다. 텍스트, 아이콘, border, `aria-current` 등 보조 단서를 함께 사용한다.
-- transition은 `200ms`~`500ms` 범위의 현재 구현을 따른다. 인터랙션을 늦추는 긴 전환이나 무한 반복은 추가하지 않는다.
+- transition은 일반적으로 `200ms`~`500ms` 범위의 현재 구현을 따른다. 단, Projects 카드 패널은 차분한 확장을 위해 `600ms`를 사용한다. 그 외에 인터랙션을 늦추는 긴 전환이나 무한 반복은 추가하지 않는다.
 - 상태 QA는 pointer, Tab/Shift+Tab, Enter/Space, 터치, reduced-motion 환경을 모두 확인한다. 프로젝트 갤러리의 전체 QA는 별도 로드맵 항목으로 계속 관리한다.
 
 ## 공용 컴포넌트
@@ -137,9 +137,14 @@
 - `ProjectGallery`
   - 프로젝트 목록을 `<ol>` 기반의 갤러리로 출력한다.
   - 데스크톱에서는 가로 스크롤과 scroll snap을 사용하고, 작은 화면에서는 세로 목록으로 바뀐다.
+  - `640px` 이상에서는 카드 최소 폭 `33rem`을 보장해 1/3 높이의 확장 패널 안에서도 상세 정보가 잘리지 않도록 한다.
 - `ProjectCard`
   - 이미지, 제목, 연도, 설명, 카테고리, 역할, 태그를 표시한다.
-  - hover/focus 시 하단 정보 패널이 올라온다.
+  - 카드 외곽은 데스크톱에서 `4:5` 비율과 고정 이미지 크기를 유지하며, 이미지는 확대하지 않는다.
+  - 흰색 하단 정보 패널은 접힌 상태에서 `7.25rem` 높이로 제목과 연도를 항상 표시하고, 데스크톱 hover 또는 `focus-within`에서 카드 높이의 약 `1/3`까지 grid 두 번째 행으로 부드럽게 확장되어 이미지 일부를 가린다.
+  - 확장 상태에서는 설명, 카테고리·역할, 태그, CTA를 표시한다. `639px` 이하에서는 이미지가 `4:3` 비율을 사용하고 모든 상세 정보를 항상 표시한다.
+  - `View project` CTA는 패널의 `1.5rem` 내부 여백을 기준으로 오른쪽 아래에 정렬한다. 모바일에서는 콘텐츠 흐름의 마지막 항목으로 자연스럽게 배치한다.
+  - `:focus-visible` outline을 유지하며, `prefers-reduced-motion: reduce`에서는 grid와 상세 정보 전환을 사실상 즉시 완료한다.
   - `project.slug`를 사용해 `/projects/[slug]` 상세 라우트로 이동하는 링크 카드다.
 
 ## 프로젝트 상세 페이지 기준
@@ -151,7 +156,7 @@
 - 본문은 `content` 배열을 사용하며, 프로젝트 배경, 문제 정의, 작업 범위, 결과 순서로 확장할 수 있다.
 - 외부 링크는 `links` 데이터가 있을 때만 표시한다.
 - 프로젝트 간 이전/다음 이동과 `/projects` 복귀 링크는 같은 데이터 모델과 slug를 사용해 후속 구현한다.
-- 목록 카드의 `View project` CTA는 항상 해당 프로젝트의 상세 라우트로 이동한다.
+- 목록 카드의 `View project` CTA는 항상 해당 프로젝트의 상세 라우트로 이동하며, 확장 패널에서는 오른쪽 아래에 배치한다.
 - 이미지에는 실제 콘텐츠를 설명하는 alt 텍스트를 제공하고, 상세 이미지가 늘어나면 `sizes`와 loading 우선순위를 다시 검토한다.
 
 ## 컬러 기준
@@ -166,8 +171,8 @@
 | `--brown` | `#3b2823` | 브랜드와 주요 제목 |
 | `--brown-light` | `#88665c` | eyebrow, 보조 설명 |
 | `--line` | `#c1ccd8` | border와 구분선 |
-| `--white` | `#f7f7f5` | 프로젝트 패널의 밝은 텍스트 |
-| `--accent` | `#4c6074` | Footer와 프로젝트 정보 패널 |
+| `--white` | `#f7f7f5` | 프로젝트 패널 배경과 밝은 면 |
+| `--accent` | `#4c6074` | Footer와 프로젝트 정보 패널 텍스트 |
 
 ### 컬러 운영 원칙
 
@@ -231,7 +236,7 @@
 - `/notes`, `/now`, `/about`, `/archive`는 헤더와 placeholder 콘텐츠만 있다.
 - 프로젝트 상세 페이지의 이전/다음 이동, `/projects` 복귀 링크, 반응형·접근성·이미지 최적화 QA가 남아 있다.
 - `/colophon`, `/uses`는 Footer 링크만 있고 라우트가 없다.
-- 카드의 overlay, focus, reduced-motion 상태는 구현되어 있으나 전체 페이지 QA가 남아 있다.
+- 카드의 grid 기반 패널 확장, focus, reduced-motion 상태는 구현되어 있으나 전체 페이지 QA가 남아 있다.
 
 ### 아직 미확정
 

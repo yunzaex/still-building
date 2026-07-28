@@ -12,7 +12,7 @@
 
 ## 현재 기준선
 
-기준일: `2026-07-28`
+기준일: `2026-07-29`
 
 - Stack: `Next.js 16.2.6`, `React 19.2.4`, `Tailwind CSS 4`
 - Router: `app/` 라우터
@@ -23,7 +23,7 @@
 - 현재 라우트: `/`, `/projects`, `/projects/[slug]`, `/notes`, `/archive`, `/now`, `/about`
 - 푸터 연결 라우트: `/about`은 placeholder 페이지가 있고, `/colophon`과 `/uses`는 아직 없다.
 - 프로젝트 데이터: `data/projects.ts`에 `STILL BUILDING`, `WEARTRACK` 두 항목이 정의되어 있다.
-- 프로젝트 목록 UI: `components/projects/ProjectGallery.tsx`, `ProjectCard.tsx`, `ProjectGallery.module.css` 기반의 가로 갤러리다.
+- 프로젝트 목록 UI: `components/projects/ProjectGallery.tsx`, `ProjectCard.tsx`, `ProjectGallery.module.css` 기반의 가로 갤러리다. 데스크톱 카드는 `4:5` 비율을 유지하고, 흰색 정보 패널이 접힌 `7.25rem`에서 카드 높이의 약 `1/3`까지 `600ms`로 확장된다. `View project` CTA는 패널 오른쪽 아래에 정렬한다.
 - 프로젝트 상세 라우트: `app/projects/[slug]/page.tsx`에서 slug 기반으로 구현되어 있다. 목록 카드에서 상세 라우트로 이동하며, 이전/다음 프로젝트 이동과 `/projects` 복귀 링크는 아직 없다.
 
 ## 현재 상태 요약
@@ -31,7 +31,7 @@
 | 범위 | 상태 | 현재 구현 |
 | --- | --- | --- |
 | Home (`/`) | 1차 구현 완료·QA 중 | `Still Building` hero, 실제 hero 이미지, 4개 메뉴 카드, 반응형 레이아웃 |
-| Projects (`/projects`) | 1차 구현 완료·QA 대기 | `PageHeader`와 프로젝트 갤러리, 데스크톱 가로 스크롤, 모바일 세로 스택, 이미지·연도·설명·역할·태그 패널, 상세 라우트 연결 |
+| Projects (`/projects`) | 1차 구현 완료·부분 QA 대기 | `PageHeader`와 프로젝트 갤러리, 데스크톱 가로 스크롤, `4:5` 카드, 모바일 세로 스택, `1/3` 확장 정보 패널, 우측 하단 CTA, 상세 라우트 연결 |
 | Project detail (`/projects/[slug]`) | 1차 구현 완료·탐색/QA 대기 | slug 기반 상세 라우트, hero 이미지, 메타 정보, 본문, 태그, 외부 링크, 프로젝트별 metadata, not-found 처리가 구현되어 있다. 이전/다음 이동, 목록 복귀 링크, 상세 QA가 남아 있다. |
 | Notes (`/notes`) | placeholder | 페이지 헤더와 “Notes Archive” 안내만 있다. |
 | Now (`/now`) | placeholder | 페이지 헤더와 현재 집중 영역 안내만 있다. |
@@ -53,7 +53,8 @@
 - [x] `PageHeader`, `SectionTitle`, `Divider` 기반 서브 페이지 구조 적용
 - [x] 프로젝트 카드·갤러리 1차 UI 구현
 - [x] Home 반응형 세부 QA
-- [ ] 프로젝트 갤러리의 hover / focus / keyboard / reduced-motion 상태 QA
+- [x] 프로젝트 카드의 hover / focus / reduced-motion 인터랙션 구현 및 문서화
+- [ ] 프로젝트 갤러리의 320/639/640px 경계와 터치 실기기 QA
 - [x] 공통 spacing, responsive breakpoint, 상태 스타일을 문서화 (`docs/design-system.md`)
 - [x] 커스텀 404 페이지
 - [x] `app/layout.tsx`의 starter metadata를 사이트 정보에 맞게 갱신
@@ -63,6 +64,8 @@
 프로젝트 목록은 이미 1차 갤러리로 구현되어 있으므로, 다음 단계는 각 프로젝트를 실제로 읽을 수 있는 상세 경험을 연결하는 것이다.
 
 - [x] `/projects` 페이지의 프로젝트 갤러리 구현
+- [x] 카드 정보 패널을 흰색 grid 영역으로 통합하고 접힌 상태와 `1/3` 확장 상태 구현
+- [x] 패널 확장 전환을 `600ms`로 조정하고 `View project` CTA를 오른쪽 아래에 배치
 - [x] 프로젝트 데이터에 `slug`와 상세 콘텐츠 필드 추가
 - [x] `/projects/[slug]` 동적 라우트 구현
 - [x] 상세 페이지 구성: hero 이미지, 제목, 연도, 카테고리, 역할, 태그, 설명, 외부 링크
@@ -138,6 +141,7 @@
 - 전체 무드는 `editorial`, `calm`, `archive-like` 방향을 유지한다.
 - 새 화면은 가능한 한 CSS 토큰과 공용 컴포넌트를 먼저 재사용한다.
 - 상세 라우트가 연결된 프로젝트는 실제 링크 CTA로 제공하고, 그 전에는 정보 패널로만 표시한다.
+- 프로젝트 카드의 `View project` CTA는 확장된 흰색 정보 패널의 기존 내부 여백을 기준으로 오른쪽 아래에 둔다.
 - `/projects`의 상세 페이지는 목록 갤러리와 동일한 타이포그래피·색상·여백 체계를 공유한다.
 - `/archive`는 다른 페이지보다 감성적이고 아날로그한 실험을 허용하는 공간으로 둔다.
 

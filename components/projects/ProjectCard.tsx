@@ -19,33 +19,32 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             alt={project.imageAlt}
             fill
             loading="eager"
-            sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1199px) 58vw, 640px"
+            sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 910px) 33rem, (max-width: 1199px) 58vw, 640px"
             className={styles.image}
           />
         ) : null}
       </div>
 
-      <div className={styles.summary}>
-        <h3 className="type-title text-(--accent)">{project.title}</h3>
-        <p className="type-meta text-(--accent)">{project.year}</p>
-      </div>
-
       <div className={styles.panel}>
-        <div className={styles.panelHeader} aria-hidden="true">
-          <h3 className="type-title text-(--white)">{project.title}</h3>
-          <p className="type-meta text-(--white)">{project.year}</p>
+        <div className={styles.panelHeader}>
+          <h3 className="type-title text-(--accent)">{project.title}</h3>
+          <p className="type-meta text-(--accent)">{project.year}</p>
         </div>
 
-        <p className="type-body-small max-w-md">{project.description}</p>
+        <div className={styles.panelDetails}>
+          <p className="type-body-small max-w-md">{project.description}</p>
 
-        <div className={styles.meta}>
-          <p className="type-meta text-(--white)">
-            {project.category} · {project.role}
-          </p>
-          <p className="type-meta text-(--white)">{project.tags.join(" · ")}</p>
+          <div className={styles.meta}>
+            <p className="type-meta text-(--accent)">
+              {project.category} · {project.role}
+            </p>
+            <p className="type-meta text-(--accent)">{project.tags.join(" · ")}</p>
+          </div>
+
+          <span className={`type-label text-(--accent) ${styles.cta}`}>
+            View project →
+          </span>
         </div>
-
-        <span className="type-label self-end">View project →</span>
       </div>
     </>
   );
