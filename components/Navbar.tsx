@@ -5,9 +5,9 @@ import Container from "@/components/Container";
 
 const navItems = [
   { name: "Projects", href: "/projects" },
-  { name: "Notes", href: "/notes" },
   { name: "Archive", href: "/archive" },
-  { name: "Now", href: "/now" },
+  { name: "Lab", href: "/lab" },
+  { name: "About", href: "/about" },
 ];
 
 export default function Navbar() {

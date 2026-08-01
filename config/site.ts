@@ -4,8 +4,8 @@ export const siteConfig = {
   description:
     "A personal website and digital archive for design, development, and things still in progress.",
 
-  email: "yunjae27@gmail.com",
   githubUrl: "https://github.com/yunzaex",
+  velogUrl: "https://velog.io/@yunzaex/posts",
 
   copyright: `© ${new Date().getFullYear()} YOONJAE ARCHIVE — STILL BUILDING`,
 };

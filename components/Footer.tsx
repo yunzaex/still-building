@@ -2,11 +2,6 @@ import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
 
-const footerLinks = [
-  { name: "Colophon", href: "/colophon" },
-  { name: "Uses", href: "/uses" },
-];
-
 const footerTextStyle = [
   "type-label",
   "text-(--surface)",
@@ -27,15 +22,7 @@ export default function Footer() {
       >
         <p className={footerTextStyle}>{siteConfig.copyright}</p>
 
-        <nav aria-label="Contact links" className={footerNavStyle}>
-          <Link href="/about" className={footerTextStyle}>
-            About this site
-          </Link>
-
-          <a href={`mailto:${siteConfig.email}`} className={footerTextStyle}>
-            Email
-          </a>
-
+        <nav aria-label="External links" className={footerNavStyle}>
           <a
             href={siteConfig.githubUrl}
             target="_blank"
@@ -44,14 +31,19 @@ export default function Footer() {
           >
             GitHub
           </a>
-        </nav>
 
-        <nav aria-label="Site information" className={footerNavStyle}>
-          {footerLinks.map(({ name, href }) => (
-            <Link key={href} href={href} className={footerTextStyle}>
-              {name}
-            </Link>
-          ))}
+          <a
+            href={siteConfig.velogUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={footerTextStyle}
+          >
+            Velog
+          </a>
+
+          <Link href="/colophon" className={footerTextStyle}>
+            Colophon
+          </Link>
         </nav>
       </div>
     </footer>

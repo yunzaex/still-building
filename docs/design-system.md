@@ -24,7 +24,8 @@
 
 - `Home`: 전시 포스터와 건축 잡지에 가까운 절제된 Editorial / Swiss Grid
 - `Projects`: 이미지와 메타데이터를 중심으로 탐색하는 큐레이션 갤러리
-- `Archive`: 향후 콜라주, 필름, 폴라로이드, 손글씨 같은 아날로그 표현을 허용
+- `Archive`: envelope, postcard, 필름, 티켓, 플레이리스트 같은 아날로그 표현을 허용
+- `Lab`: 구체적인 UI보다 실험별 렌더링과 상호작용을 우선하는 확장 영역
 
 ## 레이아웃 기준
 
@@ -116,13 +117,13 @@
 
 - `Navbar`
   - 고정 상단 네비게이션
-  - `STILL BUILDING` 브랜드와 `/`, `/projects`, `/notes`, `/archive`, `/now` 링크 제공
+  - `STILL BUILDING` 브랜드와 `/`, `/projects`, `/archive`, `/lab`, `/about` 링크 제공
   - 데스크톱에서는 hover 시 번호와 텍스트 이동 효과를 사용한다.
   - 모바일에서는 메뉴가 여러 줄로 감싸질 수 있다.
 - `Footer`
   - `--accent` 배경과 `--surface` 텍스트를 사용하는 하단 영역
-  - About, Email, GitHub, Colophon, Uses 링크를 제공한다.
-  - `/colophon`과 `/uses`는 라우트 구현 전까지 연결 상태를 함께 관리해야 한다.
+  - GitHub, Velog, Colophon 링크를 제공한다.
+  - 외부 링크는 새 탭으로 열고 내부 링크는 Next Link를 사용한다.
 - `Container`
   - `max-w-6xl`과 반응형 좌우 padding을 제공하는 공통 래퍼
 - `PageHeader`
@@ -143,6 +144,14 @@
   - 카드 외곽은 데스크톱에서 `4:5` 비율과 고정 이미지 크기를 유지하며, 이미지는 확대하지 않는다.
   - 흰색 하단 정보 패널은 접힌 상태에서 `7.25rem` 높이로 제목과 연도를 항상 표시하고, 데스크톱 hover 또는 `focus-within`에서 카드 높이의 약 `1/3`까지 grid 두 번째 행으로 부드럽게 확장되어 이미지 일부를 가린다.
   - 확장 상태에서는 설명, 카테고리·역할, 태그, CTA를 표시한다. `639px` 이하에서는 이미지가 `4:3` 비율을 사용하고 모든 상세 정보를 항상 표시한다.
+
+- `EnvelopeArchive`
+  - `data/archive.ts`의 다섯 카테고리를 envelope 안의 엽서로 출력한다.
+  - 엽서는 서로 다른 `rotation`, `offset`, `z-index`를 가지며 hover/focus 시 위로 올라온다.
+
+- `ArchiveRecords`
+  - category의 `presentation` 값에 따라 gallery, filmstrip, tickets, playlist, field-notes를 선택한다.
+  - 공통 메타데이터는 공유하되 기록의 `kind`별 콘텐츠 필드는 강제하지 않는다.
   - `View project` CTA는 패널의 `1.5rem` 내부 여백을 기준으로 오른쪽 아래에 정렬한다. 모바일에서는 콘텐츠 흐름의 마지막 항목으로 자연스럽게 배치한다.
   - `:focus-visible` outline을 유지하며, `prefers-reduced-motion: reduce`에서는 grid와 상세 정보 전환을 사실상 즉시 완료한다.
   - `project.slug`를 사용해 `/projects/[slug]` 상세 라우트로 이동하는 링크 카드다.
@@ -233,15 +242,15 @@
 
 ### 부분 구현
 
-- `/notes`, `/now`, `/about`, `/archive`는 헤더와 placeholder 콘텐츠만 있다.
-- 프로젝트 상세 페이지의 이전/다음 이동, `/projects` 복귀 링크, 반응형·접근성·이미지 최적화 QA가 남아 있다.
-- `/colophon`, `/uses`는 Footer 링크만 있고 라우트가 없다.
+- `/lab`은 향후 실험을 담을 placeholder 상태이며 구체적인 개발은 후순위다.
+- Archive의 실제 기록 콘텐츠와 실기기 QA가 남아 있다.
+- `/about`, `/colophon`은 `PageHeader`만 있는 미완성 상태다.
+- `/lab`은 `PageHeader`와 짧은 `type-body` 설명문만 있는 미완성 상태다.
 - 카드의 grid 기반 패널 확장, focus, reduced-motion 상태는 구현되어 있으나 전체 페이지 QA가 남아 있다.
 
 ### 아직 미확정
 
-- Notes, Archive의 콘텐츠 모델
-- Footer 보조 링크(`/colophon`, `/uses`)를 실제로 구현할 시점
+- Archive 실제 기록 콘텐츠의 범위와 Lab 실험을 추가할 시점
 
 ## 유지해야 하는 기준
 

@@ -1,163 +1,127 @@
 # Project Plan
 
-## 목적
+`still-building`은 콘텐츠를 많이 쌓는 사이트가 아니라, 프로젝트·개인 아카이브·시각적 실험이 서로 다른 역할을 가지는 하나의 완성도 높은 웹사이트를 목표로 한다.
 
-이 문서는 `still-building` 프로젝트의 현재 코드 기준선과 다음 작업 순서를 정리하는 살아 있는 로드맵이다.
+## 목표와 역할
 
-- 무엇이 구현되어 있는지
-- 어떤 페이지와 기능이 아직 placeholder인지
-- 다음 작업을 어떤 순서로 확장할지
+- `Projects`: 대표 작업과 프로젝트 상세를 보여준다.
+- `Archive`: 프로젝트 밖의 사진, 여행, 공연, 음악, 일상을 보관한다.
+- `Lab`: CSS, motion, canvas, SVG, typography 등의 실험 결과를 전시한다.
+- `About`: 사이트를 만든 사람과 작업 방식, 사이트의 목적을 설명한다.
+- `Colophon`: 사이트의 폰트, 색상, 기술 스택, 배포, 디자인 레퍼런스를 기록한다.
+- Velog는 글과 학습 기록, GitHub는 소스와 구현 기록을 담당한다. 사이트 안에서 이 역할을 중복하지 않는다.
 
-앞으로의 디자인과 개발 작업은 이 문서를 기준으로 맞춘다.
+## IA와 라우팅
 
-## 현재 기준선
+| 영역 | 라우트 | 페이지 역할 | 현재 상태 |
+| --- | --- | --- | --- |
+| Home | `/` | 사이트의 인상과 네 가지 핵심 영역으로 진입하는 홈 | 구현 완료 |
+| Projects | `/projects` | 대표 프로젝트 목록과 관련 정보 | 구현 완료 |
+| Project detail | `/projects/[slug]` | 프로젝트 상세, 메타데이터, 결과, 관련 링크 | 구현 완료 |
+| Archive | `/archive` | envelope 안의 postcard 다섯 장으로 카테고리 탐색 | 기반 구현 완료 |
+| Archive detail | `/archive/[slug]` | 카테고리 성격에 맞는 gallery, filmstrip, tickets, playlist, field-notes | 기반 구현 완료 |
+| Lab | `/lab` | 시각적 실험을 전시할 확장 영역 | 헤더·설명만 구현 |
+| About | `/about` | 자기소개, 작업 방식, 사이트의 목적 | 헤더만 구현 |
+| Colophon | `/colophon` | 사이트 자체를 설명하는 정보 페이지 | 헤더만 구현 |
+| Not found | `/_not-found` | 존재하지 않는 주소와 삭제된 페이지 안내 | 구현 완료 |
 
-기준일: `2026-07-29`
+### 전역 영역
 
-- Stack: `Next.js 16.2.6`, `React 19.2.4`, `Tailwind CSS 4`
-- Router: `app/` 라우터
-- 전역 레이아웃: `app/layout.tsx`에서 `Navbar`와 `Footer` 적용
-- 글로벌 스타일과 타이포그래피 토큰: `app/globals.css`
-- 폰트 설정: `app/fonts.ts`
-- 사이트 설정: `config/site.ts`
-- 현재 라우트: `/`, `/projects`, `/projects/[slug]`, `/notes`, `/archive`, `/now`, `/about`
-- 푸터 연결 라우트: `/about`은 placeholder 페이지가 있고, `/colophon`과 `/uses`는 아직 없다.
-- 프로젝트 데이터: `data/projects.ts`에 `STILL BUILDING`, `WEARTRACK` 두 항목이 정의되어 있다.
-- 프로젝트 목록 UI: `components/projects/ProjectGallery.tsx`, `ProjectCard.tsx`, `ProjectGallery.module.css` 기반의 가로 갤러리다. 데스크톱 카드는 `4:5` 비율을 유지하고, 흰색 정보 패널이 접힌 `7.25rem`에서 카드 높이의 약 `1/3`까지 `600ms`로 확장된다. `View project` CTA는 패널 오른쪽 아래에 정렬한다.
-- 프로젝트 상세 라우트: `app/projects/[slug]/page.tsx`에서 slug 기반으로 구현되어 있다. 목록 카드에서 상세 라우트로 이동하며, 이전/다음 프로젝트 이동과 `/projects` 복귀 링크는 아직 없다.
+- Navbar: `Projects / Archive / Lab / About`
+- Footer: `GitHub / Velog / Colophon`
+- GitHub와 Velog는 외부 링크, Colophon은 내부 라우트다.
+- Notes, Now, Uses, Resume, About this site는 현재 IA에서 제거했다.
 
-## 현재 상태 요약
+## 현재 구현 상태
 
-| 범위 | 상태 | 현재 구현 |
-| --- | --- | --- |
-| Home (`/`) | 1차 구현 완료·QA 중 | `Still Building` hero, 실제 hero 이미지, 4개 메뉴 카드, 반응형 레이아웃 |
-| Projects (`/projects`) | 1차 구현 완료·부분 QA 대기 | `PageHeader`와 프로젝트 갤러리, 데스크톱 가로 스크롤, `4:5` 카드, 모바일 세로 스택, `1/3` 확장 정보 패널, 우측 하단 CTA, 상세 라우트 연결 |
-| Project detail (`/projects/[slug]`) | 1차 구현 완료·탐색/QA 대기 | slug 기반 상세 라우트, hero 이미지, 메타 정보, 본문, 태그, 외부 링크, 프로젝트별 metadata, not-found 처리가 구현되어 있다. 이전/다음 이동, 목록 복귀 링크, 상세 QA가 남아 있다. |
-| Notes (`/notes`) | placeholder | 페이지 헤더와 “Notes Archive” 안내만 있다. |
-| Now (`/now`) | placeholder | 페이지 헤더와 현재 집중 영역 안내만 있다. |
-| Archive (`/archive`) | placeholder | 제목만 있으며 콘텐츠 모델과 상세 디자인이 정해지지 않았다. |
-| About (`/about`) | placeholder | 페이지 헤더만 있다. |
-| Colophon (`/colophon`) | 미구현 | 푸터 링크만 존재한다. |
-| Uses (`/uses`) | 미구현 | 푸터 링크만 존재한다. |
-| Footer | 기본 구현 완료 | About, Email, GitHub, Colophon, Uses 링크를 제공한다. 연결 대상 라우트 정리가 남아 있다. |
-| 404 | 기본 구현 완료 | `app/not-found.tsx`에 커스텀 not-found 화면이 구현되어 있으며, 존재하지 않는 프로젝트 slug도 이 화면으로 처리된다. |
+### 구현 완료 또는 기반이 준비된 영역
 
-## 우선순위 로드맵
+- Home hero, 메뉴 카드, 기존 디자인 시스템 적용
+- Projects 목록의 가로 갤러리와 모바일 세로 전환
+- Project detail의 slug 라우트, 상세 콘텐츠, 이전/다음 탐색, not-found 처리
+- Archive 카테고리 데이터와 동적 상세 라우트
+- Archive envelope/postcard의 각도·위치·겹침·hover/focus 인터랙션
+- Archive 상세 표현 타입: `gallery`, `filmstrip`, `tickets`, `playlist`, `field-notes`
+- 공통 Navbar, Footer, Container, PageHeader, SectionTitle, Divider
+- 삭제된 `/notes`, `/now`, `/uses`, `/resume` 파일과 내부 링크 정리
 
-### 1. 공통 기반과 품질 정리
+### 미완성 정보 페이지
 
-- [x] 전역 `Navbar`, `Footer`, `Container` 구성
-- [x] Home 실제 이미지 적용
-- [x] Home 1차 반응형 레이아웃 적용
-- [x] `type-*` 타이포그래피 토큰 정리
-- [x] `PageHeader`, `SectionTitle`, `Divider` 기반 서브 페이지 구조 적용
-- [x] 프로젝트 카드·갤러리 1차 UI 구현
-- [x] Home 반응형 세부 QA
-- [x] 프로젝트 카드의 hover / focus / reduced-motion 인터랙션 구현 및 문서화
-- [ ] 프로젝트 갤러리의 320/639/640px 경계와 터치 실기기 QA
-- [x] 공통 spacing, responsive breakpoint, 상태 스타일을 문서화 (`docs/design-system.md`)
-- [x] 커스텀 404 페이지
-- [x] `app/layout.tsx`의 starter metadata를 사이트 정보에 맞게 갱신
+- About은 `PageHeader`만 있는 상태다. 이후 자기소개, frontend practice, 협업·연락 맥락을 추가한다.
+- Colophon은 `PageHeader`만 있는 상태다. 이후 fonts, color system, stack, deployment, design references를 추가한다.
+- Lab은 `PageHeader`와 `type-body` 설명문만 있는 상태다. 구체적인 실험 구현은 가장 후순위로 진행한다.
 
-### 2. Projects 목록과 프로젝트 상세 페이지
+## 작업 순서
 
-프로젝트 목록은 이미 1차 갤러리로 구현되어 있으므로, 다음 단계는 각 프로젝트를 실제로 읽을 수 있는 상세 경험을 연결하는 것이다.
+### 0. 구조와 공통 기반 — 완료
 
-- [x] `/projects` 페이지의 프로젝트 갤러리 구현
-- [x] 카드 정보 패널을 흰색 grid 영역으로 통합하고 접힌 상태와 `1/3` 확장 상태 구현
-- [x] 패널 확장 전환을 `600ms`로 조정하고 `View project` CTA를 오른쪽 아래에 배치
-- [x] 프로젝트 데이터에 `slug`와 상세 콘텐츠 필드 추가
-- [x] `/projects/[slug]` 동적 라우트 구현
-- [x] 상세 페이지 구성: hero 이미지, 제목, 연도, 카테고리, 역할, 태그, 설명, 외부 링크
-- [x] 프로젝트 목록 카드와 “View project” CTA를 상세 라우트에 연결
-- [ ] 상세 페이지의 이전/다음 프로젝트 이동 및 `/projects` 복귀 링크 추가
-- [x] 존재하지 않는 slug의 not-found 처리
-- [ ] 상세 페이지 반응형·접근성·이미지 최적화 QA
+- [x] App Router 기준 전체 페이지 구조 정리
+- [x] Navbar를 `Projects / Archive / Lab / About`으로 변경
+- [x] Footer를 `GitHub / Velog / Colophon`으로 변경
+- [x] Notes, Now, Uses, Resume 페이지와 링크 제거
+- [x] 공통 색상·타이포그래피·간격 토큰 유지
+- [x] 404 페이지와 삭제된 주소의 fallback 확인
 
-### 3. Notes와 Now 구현
+### 1. Projects — 구현 완료, 품질 검수 남음
 
-- [ ] `/notes` 목록 구현: 카테고리/태그, 글 목록, 작성일, 읽기 시간, 페이지네이션 또는 더보기 CTA
-- [ ] `/now` 구현: 현재 집중 영역, 체크리스트, 월별 기록, Archive 연결
-- [ ] Notes와 Now에 프로젝트 갤러리에서 검증한 공통 헤더·구분선·메타 패턴 확장
+- [x] 프로젝트 목록과 카드 갤러리 구현
+- [x] 프로젝트 상세 동적 라우트 구현
+- [x] 관련 링크, 메타데이터, 이전/다음 탐색 연결
+- [x] 실제 프로젝트 이미지·본문 최종 검수
+- [x] 320/639/640px 경계와 터치 환경 QA
 
-### 4. Information 페이지와 Footer 연결 정리
+### 2. Archive — 기반 구현 완료, 콘텐츠 확장 단계
 
-- [ ] `/about` 구현: Purpose / Approach / Philosophy / 이미지
-- [ ] `/colophon` 라우트와 페이지 구현: 사이트, 작성자, 디자인·코드, 폰트, 배포 정보
-- [ ] `/uses` 라우트와 페이지 구현: Development / Design / Writing / Assets 도구 목록
-- [ ] Footer의 모든 링크가 실제 라우트로 연결되도록 정리
+- [x] 다섯 개 카테고리와 공통/개별 콘텐츠 데이터 구조 정의
+- [x] envelope와 겹쳐진 postcard 메인 화면 구현
+- [x] postcard hover, focus, reduced-motion 처리
+- [x] `/archive/[slug]` 동적 라우트 구현
+- [x] 카테고리별 표현 컴포넌트 구조 구현
+- [ ] 실제 사진·기록·음악·티켓 콘텐츠 추가
+- [ ] 실제 이미지 비율과 콘텐츠 밀도에 맞춘 상세 화면 조정
+- [ ] 모바일·터치·키보드 실기기 QA
 
-### 5. Archive 방향과 구현
+### 3. About — 다음 구현 대상
 
-- [ ] `/archive`의 콘텐츠 유형과 상세 디자인 방향 확정
-- [ ] `/archive` 페이지 구축
-- [ ] 사진·여행·공연·일상 등 Archive 콘텐츠 모델 정의
-- [ ] 필요할 경우 Archive 상세 페이지 라우트 추가
+- [ ] 자기소개와 브랜드 소개 콘텐츠 확정
+- [ ] 작업 방식, frontend practice, 협업 가능 범위 작성
+- [ ] 텍스트 중심 레이아웃과 필요한 이미지 방향 결정
+- [ ] 헤더 아래에 자기소개와 브랜드 소개 섹션 추가
+- [ ] 모바일·접근성·metadata QA
 
-### 6. 콘텐츠와 콘텐츠 워크플로
+### 4. Colophon — About 이후 구현
 
-- [x] STILL BUILDING과 WEARTRACK 프로젝트 상세 콘텐츠 작성
-- [ ] Notes 글 작성
-- [ ] Archive 콘텐츠 추가
-- [ ] About 및 Now의 실제 콘텐츠 작성
-- [ ] MDX 기반 Notes 시스템 도입
-- [ ] MDX 기반 Project detail 시스템 도입
-- [ ] 자동 목차와 코드 하이라이팅
+- [ ] 실제 사용 폰트와 typography token 문서화
+- [ ] color system과 주요 UI 규칙 정리
+- [ ] stack, deployment, design references 확정
+- [ ] 헤더 아래에 폰트·색상·스택·배포·레퍼런스 목록 추가
+- [ ] 정보가 늘어나도 읽기 쉬운 목록·표현 방식 검수
 
-### 7. 탐색·유틸리티 기능
+### 5. Lab — 가장 후순위
 
-- [ ] 태그 필터
-- [ ] 검색 기능
-- [ ] Random Archive
-- [ ] 사이트맵 페이지
-- [ ] 방명록 (`Supabase` CRUD)
-- [ ] Mood Stamp
-- [ ] 방문자 통계
+- [ ] 첫 실험의 범위와 구현 방식 결정
+- [ ] 실험 데이터 모델과 독립적인 렌더링 구조 설계
+- [ ] 첫 CSS 또는 Motion 실험 구현
+- [ ] Canvas, SVG, Three.js 실험을 추가할 수 있는 확장 규칙 마련
+- [ ] 실험별 컨트롤, 상태, 키보드 접근성, reduced-motion 기준 마련
 
-### 8. 출시 준비
+Lab은 구현하고 싶은 실험이 생겼을 때 자유롭게 확장할 수 있도록 고정된 콘텐츠 형식을 먼저 만들지 않는다.
 
-- [ ] SEO metadata 설정
-- [ ] Open Graph 이미지
-- [ ] favicon 제작 또는 정리
-- [ ] `Vercel` 배포
-- [ ] Google Analytics 적용 여부 결정 및 적용
-- [ ] 커스텀 도메인 연결
+### 6. 출시 전 통합 QA
 
-### 9. 이후 확장
+- [ ] 모든 내부 링크와 삭제된 라우트 재검수
+- [ ] Navbar/Footer의 desktop·mobile 상태 검수
+- [ ] 전체 페이지의 spacing, typography, color token 일관성 검수
+- [ ] hover, focus-visible, touch, reduced-motion 검수
+- [ ] SEO metadata와 Open Graph 이미지 추가
+- [ ] favicon, 배포 환경, 커스텀 도메인 정리
 
-- [ ] Guestbook 디자인 개선
-- [ ] 연도별 Archive
-- [ ] Reading List
-- [ ] Learning Progress
-- [ ] Tech Stack 페이지
-- [ ] Changelog 페이지
-- [ ] Uses 페이지 고도화
-- [ ] Inspirations 페이지
-- [ ] Photography 페이지
-- [ ] Bookmarks 페이지
+## 데이터와 폴더 구조
 
-## 운영 원칙
+- `data/projects.ts`: 프로젝트 목록과 상세 콘텐츠
+- `data/archive.ts`: Archive 카테고리, 공통 메타데이터, `kind`별 콘텐츠
+- `components/projects/`: 프로젝트 목록과 상세용 컴포넌트
+- `components/archive/`: envelope, postcard, Archive 상세 표현 컴포넌트
+- `app/globals.css`: 디자인 토큰, 전역 타입, 페이지별 최소 레이아웃 스타일
 
-- 전체 무드는 `editorial`, `calm`, `archive-like` 방향을 유지한다.
-- 새 화면은 가능한 한 CSS 토큰과 공용 컴포넌트를 먼저 재사용한다.
-- 상세 라우트가 연결된 프로젝트는 실제 링크 CTA로 제공하고, 그 전에는 정보 패널로만 표시한다.
-- 프로젝트 카드의 `View project` CTA는 확장된 흰색 정보 패널의 기존 내부 여백을 기준으로 오른쪽 아래에 둔다.
-- `/projects`의 상세 페이지는 목록 갤러리와 동일한 타이포그래피·색상·여백 체계를 공유한다.
-- `/archive`는 다른 페이지보다 감성적이고 아날로그한 실험을 허용하는 공간으로 둔다.
-
-## 참고 문서와 파일
-
-- `docs/design-system.md`
-- `app/layout.tsx`
-- `app/page.tsx`
-- `app/projects/page.tsx`
-- `app/projects/[slug]/page.tsx`
-- `app/not-found.tsx`
-- `app/globals.css`
-- `data/projects.ts`
-- `components/Navbar.tsx`
-- `components/Footer.tsx`
-- `components/PageHeader.tsx`
-- `components/SectionTitle.tsx`
-- `components/projects/ProjectGallery.tsx`
-- `components/projects/ProjectCard.tsx`
+새 콘텐츠는 페이지 컴포넌트에 반복해서 작성하지 않고 데이터와 표현 컴포넌트를 확장한다.

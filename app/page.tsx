@@ -7,25 +7,25 @@ const menuItems = [
     href: "/projects",
     label: "01",
     title: "Projects",
-    description: "Things I'm building.",
-  },
-  {
-    href: "/notes",
-    label: "02",
-    title: "Notes",
-    description: "Thoughts, studies, and ideas.",
+    description: "Selected work and shipped experiments.",
   },
   {
     href: "/archive",
-    label: "03",
+    label: "02",
     title: "Archive",
-    description: "Snapshots of the past.",
+    description: "Photographs, places, sounds, and small memories.",
   },
   {
-    href: "/now",
+    href: "/lab",
+    label: "03",
+    title: "Lab",
+    description: "Visual tests for motion, type, color, and code.",
+  },
+  {
+    href: "/about",
     label: "04",
-    title: "Now",
-    description: "What I'm into right now.",
+    title: "About",
+    description: "The person and practice behind this site.",
   },
 ];
 
