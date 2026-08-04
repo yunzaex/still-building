@@ -1,10 +1,13 @@
 import type { ArchiveCategory, ArchiveRecord } from "@/data/archive";
+import Image from "next/image";
 
 function RecordMeta({ record }: { record: ArchiveRecord }) {
   return (
     <div className="archive-record-meta">
       <span className="type-meta text-(--brown-light)">{record.date}</span>
-      {record.place ? <span className="type-meta text-(--brown-light)">{record.place}</span> : null}
+      {record.place ? (
+        <span className="type-meta text-(--brown-light)">{record.place}</span>
+      ) : null}
     </div>
   );
 }
@@ -20,7 +23,9 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
             {record.content.artist} · {record.content.album}
           </p>
         </div>
-        <span className="type-meta text-(--brown-light)">{record.content.duration}</span>
+        <span className="type-meta text-(--brown-light)">
+          {record.content.duration}
+        </span>
         <RecordMeta record={record} />
       </article>
     );
@@ -32,7 +37,9 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
         <div className="archive-ticket-main">
           <RecordMeta record={record} />
           <h2 className="type-title mt-6 text-(--brown)">{record.title}</h2>
-          <p className="type-body-small mt-3 max-w-md text-(--text)">{record.caption}</p>
+          <p className="type-body-small mt-3 max-w-md text-(--text)">
+            {record.caption}
+          </p>
         </div>
         <div className="archive-ticket-stub">
           <span className="type-label">{record.content.ticket}</span>
@@ -69,7 +76,9 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
         <p className="type-body-small mt-3 text-(--text)">{record.caption}</p>
         <div className="archive-object-list">
           {record.content.objects.map((object) => (
-            <span key={object} className="type-meta">{object}</span>
+            <span key={object} className="type-meta">
+              {object}
+            </span>
           ))}
         </div>
         <span className="archive-mood type-label">{record.content.mood}</span>
@@ -78,9 +87,16 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
   }
 
   return (
-    <article className={`archive-photo archive-photo-${record.content.tone}`}>
-      <div className="archive-photo-art" aria-hidden="true">
-        <span>{record.content.detail}</span>
+    <article className="archive-photo">
+      {" "}
+      <div className="archive-photo-art">
+        <Image
+          src={record.content.image}
+          alt={record.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style={{ objectFit: "cover" }}
+        />
       </div>
       <RecordMeta record={record} />
       <h2 className="type-title mt-4 text-(--brown)">{record.title}</h2>
@@ -89,7 +105,11 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
   );
 }
 
-export default function ArchiveRecords({ category }: { category: ArchiveCategory }) {
+export default function ArchiveRecords({
+  category,
+}: {
+  category: ArchiveCategory;
+}) {
   return (
     <div className={`archive-records archive-records-${category.presentation}`}>
       {category.records.map((record) => (

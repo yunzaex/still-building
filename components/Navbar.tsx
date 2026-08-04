@@ -15,10 +15,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-(--line) bg-(--bg)/90 backdrop-blur-md">
       <Container>
         <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-          <Link
-            href="/"
-            className="type-nav group w-fit text-(--brown)"
-          >
+          <Link href="/" className="type-nav group w-fit text-(--brown)">
             <span>STILL BUILDING</span>
             <span className="ml-0.5 inline-block opacity-0 animate-cursor">
               |
@@ -27,14 +24,14 @@ export default function Navbar() {
 
           <nav
             aria-label="주요 메뉴"
-            className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:justify-end sm:gap-x-7"
+            className="flex flex-wrap items-center gap-x-15 gap-y-2 sm:justify-end sm:gap-x-15"
           >
             {navItems.map((item, index) => {
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group relative flex min-w-24 items-center overflow-visible text-(--brown-light) transition-colors duration-200 hover:text-(--brown)"
+                  className="group relative flex shrink-0 items-center overflow-visible text-(--brown-light) transition-colors duration-200 hover:text-(--brown)"
                 >
                   <span
                     className="

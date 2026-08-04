@@ -16,7 +16,7 @@ type ArchiveRecordBase = {
 export type ArchiveRecord =
   | (ArchiveRecordBase & {
       kind: "photo";
-      content: { tone: string; detail: string };
+      content: { image: string };
     })
   | (ArchiveRecordBase & {
       kind: "journey";
@@ -37,32 +37,28 @@ export type ArchiveRecord =
 
 export type ArchiveCategory = {
   slug: string;
-  number: string;
   title: string;
-  subtitle: string;
+  image: string;
   description: string;
   presentation: ArchivePresentation;
   accent: string;
   paper: string;
   rotation: number;
   offset: string;
-  stamp: string;
   records: ArchiveRecord[];
 };
 
 export const archiveCategories: ArchiveCategory[] = [
   {
     slug: "photographs",
-    number: "01",
     title: "Photographs",
-    subtitle: "light, held still",
+    image: "/photographs/IMG_0701.webp",
     description: "Small frames of light, weather, and whatever stayed in view.",
     presentation: "gallery",
     accent: "#b36d55",
     paper: "#f1e6d7",
     rotation: -4,
-    offset: "8%",
-    stamp: "PHOTO",
+    offset: "19%",
     records: [
       {
         id: "late-sun",
@@ -71,7 +67,7 @@ export const archiveCategories: ArchiveCategory[] = [
         date: "2025.09.18",
         place: "Seoul",
         caption: "The room turned gold for about seven minutes.",
-        content: { tone: "sunset", detail: "07 MINUTES OF LIGHT" },
+        content: { image: "/photographs/IMG_0218.webp" },
       },
       {
         id: "blue-hour",
@@ -80,7 +76,7 @@ export const archiveCategories: ArchiveCategory[] = [
         date: "2025.06.02",
         place: "Busan",
         caption: "A horizon that looked like a screen loading slowly.",
-        content: { tone: "blue", detail: "AFTER THE LAST TRAIN" },
+        content: { image: "/photographs/IMG_0218.webp" },
       },
       {
         id: "window-study",
@@ -89,22 +85,20 @@ export const archiveCategories: ArchiveCategory[] = [
         date: "2024.11.11",
         place: "Home",
         caption: "Clouds, glass, and the soft geometry of a Sunday.",
-        content: { tone: "cloud", detail: "SUNDAY / 11:14" },
+        content: { image: "/photographs/IMG_0218.webp" },
       },
     ],
   },
   {
     slug: "journeys",
-    number: "02",
     title: "Journeys",
-    subtitle: "routes remembered",
+    image: "/journeys/IMG_3105.webp",
     description: "Routes, detours, and the details that make a place return.",
     presentation: "filmstrip",
     accent: "#6f877a",
     paper: "#e8eadb",
     rotation: 3,
-    offset: "25%",
-    stamp: "ROUTE",
+    offset: "35%",
     records: [
       {
         id: "coastline-bus",
@@ -113,7 +107,10 @@ export const archiveCategories: ArchiveCategory[] = [
         date: "2025.08.04",
         place: "Jeju",
         caption: "A slow ride with the window open and nowhere urgent to be.",
-        content: { route: "Aewol → Hyeopjae", stops: ["09:20", "10:45", "12:10"] },
+        content: {
+          route: "Aewol → Hyeopjae",
+          stops: ["09:20", "10:45", "12:10"],
+        },
       },
       {
         id: "three-stations",
@@ -122,22 +119,24 @@ export const archiveCategories: ArchiveCategory[] = [
         date: "2024.03.22",
         place: "Tokyo",
         caption: "A notebook map assembled between small stations.",
-        content: { route: "Shibuya → Setagaya", stops: ["coffee", "bookshop", "rain"] },
+        content: {
+          route: "Shibuya → Setagaya",
+          stops: ["coffee", "bookshop", "rain"],
+        },
       },
     ],
   },
   {
     slug: "performances",
-    number: "03",
     title: "Performances",
-    subtitle: "rooms in the dark",
-    description: "Tickets, setlists, and the particular electricity of a live room.",
+    image: "/photographs/IMG_4431.webp",
+    description:
+      "Tickets, setlists, and the particular electricity of a live room.",
     presentation: "tickets",
     accent: "#9a6a7f",
     paper: "#efe3eb",
     rotation: -1,
-    offset: "43%",
-    stamp: "LIVE",
+    offset: "51%",
     records: [
       {
         id: "small-theatre",
@@ -146,7 +145,11 @@ export const archiveCategories: ArchiveCategory[] = [
         date: "2025.04.19",
         place: "Daehangno",
         caption: "The kind of performance that makes the walk home quiet.",
-        content: { venue: "Daehangno Art Center", ticket: "B-17", time: "19:30" },
+        content: {
+          venue: "Daehangno Art Center",
+          ticket: "B-17",
+          time: "19:30",
+        },
       },
       {
         id: "summer-festival",
@@ -161,16 +164,15 @@ export const archiveCategories: ArchiveCategory[] = [
   },
   {
     slug: "listening",
-    number: "04",
     title: "Listening",
-    subtitle: "songs with a season",
-    description: "Albums, single tracks, and the sounds attached to certain days.",
+    image: "/photographs/IMG_4433.webp",
+    description:
+      "Albums, single tracks, and the sounds attached to certain days.",
     presentation: "playlist",
     accent: "#687b9a",
     paper: "#e4ebf4",
     rotation: 5,
-    offset: "60%",
-    stamp: "SIDE A",
+    offset: "67%",
     records: [
       {
         id: "november-loop",
@@ -178,7 +180,11 @@ export const archiveCategories: ArchiveCategory[] = [
         title: "November loop",
         date: "2025.11.03",
         caption: "One album, repeated on the walk between two places.",
-        content: { artist: "Hiroshi Yoshimura", album: "Green", duration: "43:12" },
+        content: {
+          artist: "Hiroshi Yoshimura",
+          album: "Green",
+          duration: "43:12",
+        },
       },
       {
         id: "morning-mix",
@@ -186,7 +192,11 @@ export const archiveCategories: ArchiveCategory[] = [
         title: "A morning mix",
         date: "2025.01.15",
         caption: "Soft starts for a new notebook and an empty desk.",
-        content: { artist: "Various artists", album: "First Light", duration: "38:06" },
+        content: {
+          artist: "Various artists",
+          album: "First Light",
+          duration: "38:06",
+        },
       },
       {
         id: "night-drive",
@@ -200,16 +210,15 @@ export const archiveCategories: ArchiveCategory[] = [
   },
   {
     slug: "everyday",
-    number: "05",
     title: "Everyday",
-    subtitle: "ordinary, kept",
-    description: "Receipts, objects, meals, and the small rituals that make a life.",
+    image: "/photographs/IMG_2542.webp",
+    description:
+      "Receipts, objects, meals, and the small rituals that make a life.",
     presentation: "field-notes",
     accent: "#aa8a52",
     paper: "#f1ead1",
     rotation: -3,
-    offset: "77%",
-    stamp: "DAILY",
+    offset: "83%",
     records: [
       {
         id: "desk-reset",
@@ -217,7 +226,10 @@ export const archiveCategories: ArchiveCategory[] = [
         title: "The desk reset",
         date: "2025.12.31",
         caption: "A little order before starting again.",
-        content: { mood: "clear / ready", objects: ["blue tape", "one pen", "empty cup"] },
+        content: {
+          mood: "clear / ready",
+          objects: ["blue tape", "one pen", "empty cup"],
+        },
       },
       {
         id: "market-bag",
@@ -225,7 +237,10 @@ export const archiveCategories: ArchiveCategory[] = [
         title: "Saturday market bag",
         date: "2025.05.10",
         caption: "The groceries looked better than the plan.",
-        content: { mood: "bright / hungry", objects: ["tomatoes", "bread", "flowers"] },
+        content: {
+          mood: "bright / hungry",
+          objects: ["tomatoes", "bread", "flowers"],
+        },
       },
       {
         id: "rainy-laundry",
@@ -233,7 +248,10 @@ export const archiveCategories: ArchiveCategory[] = [
         title: "Rainy laundry",
         date: "2024.08.16",
         caption: "A domestic weather report from the living room.",
-        content: { mood: "slow / soft", objects: ["linen", "window", "warm tea"] },
+        content: {
+          mood: "slow / soft",
+          objects: ["linen", "window", "warm tea"],
+        },
       },
     ],
   },

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "optimize:archive": "node scripts/optimize-archive-images.mjs"
+    "optimize:archive": "node scripts/optimize-archive-image.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.28.0",

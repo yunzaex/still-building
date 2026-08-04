@@ -13,7 +13,7 @@ const menuItems = [
     href: "/archive",
     label: "02",
     title: "Archive",
-    description: "Photographs, places, sounds, and small memories.",
+    description: "Every piece of time I want to remember.",
   },
   {
     href: "/lab",

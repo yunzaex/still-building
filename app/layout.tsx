@@ -6,6 +6,7 @@ import {
   bodyKoreanFont,
   bodyLatinFont,
   heroFont,
+  postcardFont,
   quoteFont,
 } from "@/app/fonts";
 
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${heroFont.variable} ${quoteFont.variable} ${bodyLatinFont.variable} ${bodyKoreanFont.variable} h-full antialiased`}
+      className={`${heroFont.variable} ${quoteFont.variable} ${postcardFont.variable} ${bodyLatinFont.variable} ${bodyKoreanFont.variable} h-full antialiased`}
     >
       <body>
         <Navbar />

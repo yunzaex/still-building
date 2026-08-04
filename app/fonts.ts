@@ -1,4 +1,9 @@
-import { EB_Garamond, Hanken_Grotesk, Monomakh } from "next/font/google";
+import {
+  EB_Garamond,
+  Hanken_Grotesk,
+  Marck_Script,
+  Monomakh,
+} from "next/font/google";
 import localFont from "next/font/local";
 
 export const heroFont = Monomakh({
@@ -12,6 +17,13 @@ export const quoteFont = EB_Garamond({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-quote",
+});
+
+export const postcardFont = Marck_Script({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-postcard",
 });
 
 export const bodyLatinFont = Hanken_Grotesk({
