@@ -307,35 +307,69 @@
   padding: clamp(4rem, 8vw, 7rem) 0;
 }
 .archive-records-gallery {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 2.5rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 2.5vw, 2.5rem);
+  padding-inline: clamp(0.25rem, 1vw, 1rem);
 }
 .archive-photo {
-  grid-column: span 5;
+  --photo-offset-y: 0rem;
+  --photo-shift-x: 0rem;
+  --photo-rotation: 0deg;
+
+  flex: 0 0 auto;
+  height: fit-content;
+  margin-top: var(--photo-offset-y);
   padding: 1rem;
   border: 1px solid var(--line);
   background: var(--white);
+  box-shadow:
+    0 4px 8px rgb(59 40 35 / 0.05),
+    0 12px 20px rgb(59 40 35 / 0.07);
+  transform: translateX(var(--photo-shift-x)) rotate(var(--photo-rotation));
+  transform-origin: center;
 }
-.archive-photo:nth-child(2) {
-  grid-column: 7 / span 6;
-  margin-top: 5rem;
+.archive-photo-portrait {
+  width: clamp(15rem, 27%, 19rem);
+}
+.archive-photo-square {
+  width: clamp(17rem, 30%, 22rem);
+}
+.archive-photo-landscape {
+  width: clamp(19rem, 36%, 25rem);
+}
+.archive-photo:nth-child(6n + 1) {
+  --photo-rotation: -1.1deg;
+}
+.archive-photo:nth-child(6n + 2) {
+  --photo-offset-y: clamp(2rem, 4vw, 3.5rem);
+  --photo-rotation: 0.8deg;
+}
+.archive-photo:nth-child(6n + 3) {
+  --photo-offset-y: clamp(0.5rem, 2vw, 1.5rem);
+  --photo-shift-x: clamp(0.5rem, 1.5vw, 1.5rem);
+  --photo-rotation: -0.6deg;
+}
+.archive-photo:nth-child(6n + 4) {
+  --photo-offset-y: clamp(2.5rem, 5vw, 4.5rem);
+  --photo-shift-x: -1.5vw;
+  --photo-rotation: 1deg;
+}
+.archive-photo:nth-child(6n + 5) {
+  --photo-offset-y: clamp(1rem, 2.5vw, 2rem);
+  --photo-shift-x: 1vw;
+  --photo-rotation: 0.4deg;
+}
+.archive-photo:nth-child(6n + 6) {
+  --photo-offset-y: clamp(2rem, 4vw, 3.5rem);
+  --photo-shift-x: -1vw;
+  --photo-rotation: -0.8deg;
 }
 .archive-photo-art {
   position: relative;
-  display: grid;
-  min-height: 20rem;
-  place-items: end start;
-  padding: 1rem;
   overflow: hidden;
-  color: rgb(255 255 255 / 75%);
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-}
-.archive-photo-art span {
-  position: relative;
-  z-index: 1;
 }
 .archive-record-meta {
   display: flex;
@@ -505,14 +539,12 @@ body {
     margin-top: 0.7rem;
   }
 
-  .archive-photo-art {
-    position: relative;
-    overflow: hidden;
-    min-height: 280px;
-  }
-  .archive-photo:nth-child(2) {
-    grid-column: 1 / -1;
-    margin-top: 0;
+  .archive-photo {
+    --photo-offset-y: 0rem;
+    --photo-shift-x: 0rem;
+    --photo-rotation: 0deg;
+
+    width: 100%;
   }
   .archive-film-frame,
   .archive-records-field-notes {

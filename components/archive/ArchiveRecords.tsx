@@ -4,9 +4,11 @@ import Image from "next/image";
 function RecordMeta({ record }: { record: ArchiveRecord }) {
   return (
     <div className="archive-record-meta">
-      <span className="type-meta text-(--brown-light)">{record.date}</span>
+      <span className="type-meta mt-2 text-(--brown-light)">{record.date}</span>
       {record.place ? (
-        <span className="type-meta text-(--brown-light)">{record.place}</span>
+        <span className="type-meta mt-2 text-(--brown-light)">
+          {record.place}
+        </span>
       ) : null}
     </div>
   );
@@ -86,15 +88,21 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
     );
   }
 
+  const { image, width, height } = record.content;
+  const orientation =
+    width > height ? "landscape" : width < height ? "portrait" : "square";
+
   return (
-    <article className="archive-photo">
-      {" "}
-      <div className="archive-photo-art">
+    <article className={`archive-photo archive-photo-${orientation}`}>
+      <div
+        className="archive-photo-art"
+        style={{ aspectRatio: `${width} / ${height}` }}
+      >
         <Image
-          src={record.content.image}
+          src={image}
           alt={record.title}
           fill
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 767px) calc(100vw - 4rem), (max-width: 1152px) 58vw, 640px"
           style={{ objectFit: "cover" }}
         />
       </div>

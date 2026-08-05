@@ -16,7 +16,7 @@ type ArchiveRecordBase = {
 export type ArchiveRecord =
   | (ArchiveRecordBase & {
       kind: "photo";
-      content: { image: string };
+      content: { image: string; width: number; height: number };
     })
   | (ArchiveRecordBase & {
       kind: "journey";
@@ -61,31 +61,99 @@ export const archiveCategories: ArchiveCategory[] = [
     offset: "19%",
     records: [
       {
-        id: "late-sun",
+        id: "first-taste-of-break",
         kind: "photo",
-        title: "Late sun on the table",
-        date: "2025.09.18",
-        place: "Seoul",
-        caption: "The room turned gold for about seven minutes.",
-        content: { image: "/photographs/IMG_0218.webp" },
+        title: "The first taste of summer",
+        date: "2026.06.23",
+        place: "Seongsu",
+        caption:
+          "Wine, gelato, and a combination that somehow made perfect sense.",
+        content: {
+          image: "/photographs/IMG_2993.webp",
+          width: 1350,
+          height: 1800,
+        },
       },
       {
-        id: "blue-hour",
+        id: "after-class",
         kind: "photo",
-        title: "Blue hour, twice",
-        date: "2025.06.02",
-        place: "Busan",
-        caption: "A horizon that looked like a screen loading slowly.",
-        content: { image: "/photographs/IMG_0218.webp" },
+        title: "On the way down",
+        date: "2026.06.11",
+        place: "School",
+        caption:
+          "The day faded slowly, somewhere between studying and going home.",
+        content: {
+          image: "/photographs/IMG_0757.webp",
+          width: 1350,
+          height: 1800,
+        },
       },
       {
-        id: "window-study",
+        id: "blue-bloom",
         kind: "photo",
-        title: "Window study no. 03",
-        date: "2024.11.11",
-        place: "Home",
-        caption: "Clouds, glass, and the soft geometry of a Sunday.",
-        content: { image: "/photographs/IMG_0218.webp" },
+        title: "Evening blossoms",
+        date: "2026.04.02",
+        place: "Yeouinaru",
+        caption: "The blossoms borrowed their glow from the evening sky.",
+        content: {
+          image: "/photographs/IMG_0611.webp",
+          width: 1350,
+          height: 1800,
+        },
+      },
+      {
+        id: "ttukseom-sunset",
+        kind: "photo",
+        title: "Where the light shimmered",
+        date: "2026.03.28",
+        place: "ttukseom",
+        caption: "The river held the last light of the day in its reflection.",
+        content: {
+          image: "/photographs/IMG_0450.webp",
+          width: 1800,
+          height: 1350,
+        },
+      },
+      {
+        id: "room-for-wonder",
+        kind: "photo",
+        title: "Room for Wonder",
+        date: "2026.03.17",
+        place: "GROUNDSEESAW",
+        caption: "In case of love at first sight, break the glass.",
+        content: {
+          image: "/photographs/IMG_0218.webp",
+          width: 1350,
+          height: 1800,
+        },
+      },
+      {
+        id: "shared-birthday",
+        kind: "photo",
+        title: "Shared candles",
+        date: "2026.03.08",
+        place: "Gangnam",
+        caption:
+          "One date, two birthdays, and a table that felt a little fuller than usual.",
+        content: {
+          image: "/photographs/IMG_0871.webp",
+          width: 1012,
+          height: 1800,
+        },
+      },
+      {
+        id: "gathered-ingredients",
+        kind: "photo",
+        title: "Before the pour",
+        date: "2026.02.19",
+        place: "Hongdae",
+        caption:
+          "A place where fruit, herbs, and time were all part of the recipe.",
+        content: {
+          image: "/photographs/IMG_0483.webp",
+          width: 1350,
+          height: 1800,
+        },
       },
     ],
   },
