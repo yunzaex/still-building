@@ -28,7 +28,6 @@ export default function EnvelopeArchive({ categories }: EnvelopeArchiveProps) {
               label={`${category.title} archive category`}
               style={
                 {
-                  "--postcard-accent": category.accent,
                   "--postcard-paper": category.paper,
                   "--postcard-rotation": `${category.rotation}deg`,
                   "--postcard-offset": category.offset,

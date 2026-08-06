@@ -20,7 +20,9 @@ export type ArchiveRecord =
     })
   | (ArchiveRecordBase & {
       kind: "journey";
-      content: { route: string; stops: string[] };
+      content: {
+        image: string;
+      };
     })
   | (ArchiveRecordBase & {
       kind: "performance";
@@ -41,7 +43,6 @@ export type ArchiveCategory = {
   image: string;
   description: string;
   presentation: ArchivePresentation;
-  accent: string;
   paper: string;
   rotation: number;
   offset: string;
@@ -55,11 +56,24 @@ export const archiveCategories: ArchiveCategory[] = [
     image: "/photographs/IMG_0701.webp",
     description: "Small frames of light, weather, and whatever stayed in view.",
     presentation: "gallery",
-    accent: "#b36d55",
     paper: "#f1e6d7",
     rotation: -4,
     offset: "19%",
     records: [
+      {
+        id: "demo-day",
+        kind: "photo",
+        title: "ON:TRACK",
+        date: "2026.07.18",
+        place: "Seolleung",
+        caption:
+          "Every late night, every review, every small improvement led to this table.",
+        content: {
+          image: "/photographs/IMG_3978.webp",
+          width: 1400,
+          height: 1400,
+        },
+      },
       {
         id: "first-taste-of-break",
         kind: "photo",
@@ -79,7 +93,7 @@ export const archiveCategories: ArchiveCategory[] = [
         kind: "photo",
         title: "On the way down",
         date: "2026.06.11",
-        place: "School",
+        place: "Campus",
         caption:
           "The day faded slowly, somewhere between studying and going home.",
         content: {
@@ -144,7 +158,7 @@ export const archiveCategories: ArchiveCategory[] = [
       {
         id: "gathered-ingredients",
         kind: "photo",
-        title: "Before the pour",
+        title: "Waiting in jars",
         date: "2026.02.19",
         place: "Hongdae",
         caption:
@@ -155,41 +169,201 @@ export const archiveCategories: ArchiveCategory[] = [
           height: 1800,
         },
       },
+      {
+        id: "ggrapefruit-note",
+        kind: "photo",
+        title: "Something citrus",
+        date: "2025.09.26",
+        place: "Cafe",
+        caption: "The drink was new, but the music already felt like home.",
+        content: {
+          image: "/photographs/IMG_4442.webp",
+          width: 1013,
+          height: 1800,
+        },
+      },
+      {
+        id: "moving-together",
+        kind: "photo",
+        title: "Sunset Practice",
+        date: "2025.04.30",
+        place: "Campus",
+        caption: "The studio wasn't big enough, so the sky became our ceiling.",
+        content: {
+          image: "/photographs/IMG_5402.webp",
+          width: 1800,
+          height: 1350,
+        },
+      },
+      {
+        id: "after-dark",
+        kind: "photo",
+        title: "Carousel light",
+        date: "2025.01.21",
+        place: "LotteWorld",
+        caption:
+          "The brightest thing in the room wasn't the ride—it was the moment.",
+        content: {
+          image: "/photographs/IMG_2470.webp",
+          width: 1080,
+          height: 1440,
+        },
+      },
+      {
+        id: "small-surprise",
+        kind: "photo",
+        title: "The smallest snowman",
+        date: "2024.11.24",
+        place: "Neighborhood",
+        caption: "A tiny snowman quietly waiting by the stairs.",
+        content: {
+          image: "/photographs/IMG_9381.webp",
+          width: 1004,
+          height: 1784,
+        },
+      },
     ],
   },
   {
     slug: "journeys",
     title: "Journeys",
     image: "/journeys/IMG_3105.webp",
-    description: "Routes, detours, and the details that make a place return.",
+    description: "Places remembered through small moments.",
     presentation: "filmstrip",
-    accent: "#6f877a",
     paper: "#e8eadb",
     rotation: 3,
     offset: "35%",
     records: [
       {
-        id: "coastline-bus",
+        id: "always-together",
         kind: "journey",
-        title: "The coastline bus",
-        date: "2025.08.04",
-        place: "Jeju",
-        caption: "A slow ride with the window open and nowhere urgent to be.",
+        title: "Together, as always",
+        date: "2026.07.29 ~ 2026.07.30",
+        place: "Yangpyeong",
+        caption:
+          "The shirts matched, the laughter did too, and the day slipped by before we noticed.",
         content: {
-          route: "Aewol → Hyeopjae",
-          stops: ["09:20", "10:45", "12:10"],
+          image: "/journeys/IMG_4309.webp",
         },
       },
       {
-        id: "three-stations",
+        id: "old-friend-new-city",
         kind: "journey",
-        title: "Three stations west",
-        date: "2024.03.22",
-        place: "Tokyo",
-        caption: "A notebook map assembled between small stations.",
+        title: "Old friend, new city",
+        date: "2026.07.02 ~ 2026.07.03",
+        place: "Jeonju",
+        caption:
+          "We had known each other for years, but there were still new places waiting for us.",
         content: {
-          route: "Shibuya → Setagaya",
-          stops: ["coffee", "bookshop", "rain"],
+          image: "/journeys/IMG_3315.webp",
+        },
+      },
+      {
+        id: "across-the-vltava",
+        kind: "journey",
+        title: "Across the Vltava",
+        date: "2026.02.12 ~ 2026.02.13",
+        place: "Prague",
+        caption:
+          "Crossing Charles Bridge, the city unfolded one rooftop and one tower at a time.",
+        content: {
+          image: "/journeys/IMG_0102.webp",
+        },
+      },
+      {
+        id: "yellow-lines",
+        kind: "journey",
+        title: "Waiting for the tram",
+        date: "2026.02.09 ~ 2026.02.11",
+        place: "Budapest",
+        caption:
+          "Just another tram stop, until it became one of the places we kept remembering.",
+        content: {
+          image: "/journeys/IMG_0372.webp",
+        },
+      },
+      {
+        id: "after-the-lifts",
+        kind: "journey",
+        title: "After the lifts",
+        date: "2026.01.22 ~ 2026.01.23",
+        place: "Ski Resort",
+        caption:
+          "Back from the snow, we traded gloves for chopsticks, gathering around a warm table.",
+        content: {
+          image: "/journeys/IMG_8871.webp",
+        },
+      },
+      {
+        id: "between-years",
+        kind: "journey",
+        title: "The last trip of the year",
+        date: "2025.12.29 ~ 2025.12.30",
+        place: "Sokcho",
+        caption:
+          "Cold waves, a roll of film, and six friends sharing one last memory before the year came to an end.",
+        content: {
+          image: "/journeys/IMG_1230.webp",
+        },
+      },
+      {
+        id: "lido-afternoon",
+        kind: "journey",
+        title: "Beyond the canals",
+        date: "2025.08.24 ~ 2025.08.25",
+        place: "Venice",
+        caption:
+          "Just another beach, until it became one of the memories worth keeping.",
+        content: {
+          image: "/journeys/IMG_4013.webp",
+        },
+      },
+      {
+        id: "city-of-rooftops",
+        kind: "journey",
+        title: "Above the red roofs",
+        date: "2025.08.22 ~ 2025.08.23",
+        place: "Florence",
+        caption:
+          "Red roofs, distant hills, and an afternoon that asked for nothing else.",
+        content: {
+          image: "/journeys/IMG_0694.webp",
+        },
+      },
+      {
+        id: "roman-afternoon",
+        kind: "journey",
+        title: "Beneath the Pantheon",
+        date: "2025.08.19 ~ 2025.08.21",
+        place: "Rome",
+        caption:
+          "One of those places where even a short pause became part of the journey.",
+        content: {
+          image: "/journeys/IMG_4365.webp",
+        },
+      },
+      {
+        id: "night-cheomseongdae",
+        kind: "journey",
+        title: "Where the light stayed",
+        date: "2025.07.29 ~ 2025.07.31",
+        place: "Gyeongju",
+        caption:
+          "An evening spent following old streets, with one conversation carrying us farther than the map.",
+        content: {
+          image: "/journeys/IMG_8370.webp",
+        },
+      },
+      {
+        id: "first-break",
+        kind: "journey",
+        title: "Every break after this",
+        date: "2025.02.19 ~ 2025.02.20",
+        place: "Gapyeong",
+        caption:
+          "Six friends, and the trip that quietly became our tradition every school break.",
+        content: {
+          image: "/journeys/IMG_4362.webp",
         },
       },
     ],
@@ -201,7 +375,6 @@ export const archiveCategories: ArchiveCategory[] = [
     description:
       "Tickets, setlists, and the particular electricity of a live room.",
     presentation: "tickets",
-    accent: "#9a6a7f",
     paper: "#efe3eb",
     rotation: -1,
     offset: "51%",
@@ -237,7 +410,6 @@ export const archiveCategories: ArchiveCategory[] = [
     description:
       "Albums, single tracks, and the sounds attached to certain days.",
     presentation: "playlist",
-    accent: "#687b9a",
     paper: "#e4ebf4",
     rotation: 5,
     offset: "67%",
@@ -283,7 +455,6 @@ export const archiveCategories: ArchiveCategory[] = [
     description:
       "Receipts, objects, meals, and the small rituals that make a life.",
     presentation: "field-notes",
-    accent: "#aa8a52",
     paper: "#f1ead1",
     rotation: -3,
     offset: "83%",

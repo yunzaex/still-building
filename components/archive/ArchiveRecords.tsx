@@ -55,16 +55,19 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
   if (record.kind === "journey") {
     return (
       <article className="archive-film-frame">
-        <div className="film-image" aria-hidden="true">
-          <span>{record.content.route}</span>
+        <div className="film-image">
+          <Image
+            src={record.content.image}
+            alt={`${record.title} — ${record.place ?? "Journey"}`}
+            fill
+            sizes="(max-width: 767px) calc(100vw - 4rem), 55vw"
+            style={{ objectFit: "cover" }}
+          />
         </div>
         <div className="film-copy">
           <RecordMeta record={record} />
           <h2 className="type-title mt-5 text-(--brown)">{record.title}</h2>
           <p className="type-body-small mt-3 text-(--text)">{record.caption}</p>
-          <p className="type-meta mt-5 text-(--brown-light)">
-            {record.content.stops.join(" / ")}
-          </p>
         </div>
       </article>
     );

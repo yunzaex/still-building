@@ -392,21 +392,9 @@
 }
 .film-image {
   position: relative;
-  display: flex;
   min-height: 18rem;
-  align-items: end;
-  padding: 1rem;
-  background: linear-gradient(145deg, #bfd1be, #6e9185 48%, #415964);
-  color: rgb(255 255 255 / 80%);
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-}
-.film-image::before {
-  position: absolute;
-  inset: 12%;
-  border: 1px solid rgb(255 255 255 / 45%);
-  content: "";
+  overflow: hidden;
+  background: #bfd1be;
 }
 .film-copy {
   padding: 1rem 1rem 1rem 0;
