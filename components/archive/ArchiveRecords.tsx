@@ -1,6 +1,45 @@
 import type { ArchiveCategory, ArchiveRecord } from "@/data/archive";
 import Image from "next/image";
 
+function TicketBarcode({ code }: { code: string }) {
+  const bars = Array.from({ length: 30 }, (_, index) => {
+    const character = code.charCodeAt(index % code.length);
+    return 2 + ((character + index * 3) % 3);
+  });
+
+  return (
+    <div
+      className="archive-ticket-barcode"
+      style={{
+        alignSelf: "stretch",
+        justifyContent: "space-between",
+        gap: 0,
+        marginBlock: "1rem",
+      }}
+      aria-hidden="true"
+    >
+      {bars.map((height, index) => (
+        <span key={index} style={{ height: `${height}px` }} />
+      ))}
+    </div>
+  );
+}
+
+function TicketDatum({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li className="archive-ticket-datum">
+      <span className="archive-ticket-label text-(--brown-light)">{label}</span>
+      <div className="archive-ticket-value">{children}</div>
+    </li>
+  );
+}
+
 function RecordMeta({ record }: { record: ArchiveRecord }) {
   return (
     <div className="archive-record-meta">
@@ -34,19 +73,74 @@ function ArchiveRecordCard({ record }: { record: ArchiveRecord }) {
   }
 
   if (record.kind === "performance") {
+    const songColumnLength = Math.ceil(record.content.songs.length / 2);
+    const songColumns =
+      record.content.songs.length >= 4
+        ? [
+            record.content.songs.slice(0, songColumnLength),
+            record.content.songs.slice(songColumnLength),
+          ]
+        : [record.content.songs];
+
     return (
       <article className="archive-ticket">
         <div className="archive-ticket-main">
-          <RecordMeta record={record} />
-          <h2 className="type-title mt-6 text-(--brown)">{record.title}</h2>
-          <p className="type-body-small mt-3 max-w-md text-(--text)">
-            {record.caption}
-          </p>
+          <h2 className="archive-ticket-title type-heading">{record.title}</h2>
+          <div className="archive-ticket-details type-body text-(--text)">
+            <ul className="archive-ticket-facts">
+              <TicketDatum label="Date">{record.date}</TicketDatum>
+              <TicketDatum label="Genre">
+                {record.content.performanceType}
+              </TicketDatum>
+              <TicketDatum label="Credits">
+                {record.content.roles.join(" · ")}
+              </TicketDatum>
+              <TicketDatum label="Type">{record.content.stageType}</TicketDatum>
+              <TicketDatum label="Location">{record.content.venue}</TicketDatum>
+            </ul>
+            <div className="archive-ticket-setlist-group grid min-w-0 grid-cols-[4.5rem_minmax(0,1fr)] items-start gap-x-5">
+              <span className="archive-ticket-label text-(--brown-light)">
+                Track
+              </span>
+              <div
+                className={`archive-ticket-setlist-columns grid grid-cols-1 gap-y-[0.28rem]${
+                  songColumns.length > 1
+                    ? " md:grid-cols-[max-content_max-content] md:gap-x-4 md:gap-y-0"
+                    : ""
+                }`}
+              >
+                {songColumns.map((songs, columnIndex) => (
+                  <ul
+                    key={columnIndex}
+                    className="m-0 grid list-none gap-y-[0.62rem] p-0 text-(--text)"
+                  >
+                    {songs.map((song) => (
+                      <li key={song.title}>
+                        <a
+                          href={song.url}
+                          className="text-(--text) no-underline underline-offset-[0.2em] hover:text-(--brown) hover:underline focus-visible:text-(--brown) focus-visible:underline"
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Watch ${song.title} performance (opens in a new tab)`}
+                        >
+                          {song.title} <span aria-hidden="true">↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="archive-ticket-stub">
-          <span className="type-label">{record.content.ticket}</span>
-          <span className="type-meta">{record.content.time}</span>
-          <span className="type-meta">{record.content.venue}</span>
+        <div
+          className="archive-ticket-stub"
+          style={{ padding: "0.5rem 0.75rem" }}
+        >
+          <TicketBarcode code={record.content.code} />
+          <span className="archive-ticket-code type-meta">
+            {record.content.code}
+          </span>
         </div>
       </article>
     );

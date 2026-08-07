@@ -9,7 +9,7 @@ type ArchiveRecordBase = {
   id: string;
   title: string;
   date: string;
-  caption: string;
+  caption?: string;
   place?: string;
 };
 
@@ -26,7 +26,17 @@ export type ArchiveRecord =
     })
   | (ArchiveRecordBase & {
       kind: "performance";
-      content: { venue: string; ticket: string; time: string };
+      content: {
+        performanceType: string;
+        songs: {
+          title: string;
+          url: string;
+        }[];
+        roles: string[];
+        stageType: string;
+        venue: string;
+        code: `${"BLM" | "EPU"}-${number}`;
+      };
     })
   | (ArchiveRecordBase & {
       kind: "track";
@@ -56,7 +66,7 @@ export const archiveCategories: ArchiveCategory[] = [
     image: "/photographs/IMG_0701.webp",
     description: "Small frames of light, weather, and whatever stayed in view.",
     presentation: "gallery",
-    paper: "#f1e6d7",
+    paper: "var(--archive-photographs)",
     rotation: -4,
     offset: "19%",
     records: [
@@ -230,7 +240,7 @@ export const archiveCategories: ArchiveCategory[] = [
     image: "/journeys/IMG_3105.webp",
     description: "Places remembered through small moments.",
     presentation: "filmstrip",
-    paper: "#e8eadb",
+    paper: "var(--archive-journeys)",
     rotation: 3,
     offset: "35%",
     records: [
@@ -375,31 +385,377 @@ export const archiveCategories: ArchiveCategory[] = [
     description:
       "Tickets, setlists, and the particular electricity of a live room.",
     presentation: "tickets",
-    paper: "#efe3eb",
+    paper: "var(--archive-performances)",
     rotation: -1,
     offset: "51%",
     records: [
       {
-        id: "small-theatre",
+        id: "epu-023",
         kind: "performance",
-        title: "A small theatre in spring",
-        date: "2025.04.19",
-        place: "Daehangno",
-        caption: "The kind of performance that makes the walk home quiet.",
+        title: "Fi:nale",
+        date: "2026.01.17",
         content: {
-          venue: "Daehangno Art Center",
-          ticket: "B-17",
-          time: "19:30",
+          performanceType: "CHOREOGRAPHY",
+          songs: [
+            {
+              title: "Paradis Lost and 2 other songs",
+              url: "https://youtu.be/m9LX4IAO-gc?si=mCJz1YG99cNqiWhR",
+            },
+            {
+              title: "Same old love - I like it",
+              url: "https://youtu.be/_wg9Z0Zq3wk?si=wSB0-iCh0ITWuz5j",
+            },
+          ],
+          roles: ["DIRECTOR", "DANCER"],
+          stageType: "REGULAR PERFORMANCE",
+          venue: "YEUM HALL",
+          code: "EPU-023",
         },
       },
       {
-        id: "summer-festival",
+        id: "blooming-022",
         kind: "performance",
-        title: "Summer festival / side stage",
-        date: "2024.07.27",
-        place: "Seoul",
-        caption: "A set caught from the edge of the crowd.",
-        content: { venue: "River Stage", ticket: "S-04", time: "21:10" },
+        title: "Now playing: Final scene",
+        date: "2026.01.09",
+        content: {
+          performanceType: "COVER",
+          songs: [
+            {
+              title: "10minutes - Lip&Hip",
+              url: "https://youtu.be/ljtTwMq-2gs?si=Z43dQVuwZ-z_J8ux",
+            },
+            {
+              title: "TOXIC",
+              url: "https://youtu.be/-muqoh2F-OA?si=AgMRnAzdJWRFAKyW",
+            },
+            {
+              title: "Savage",
+              url: "https://youtu.be/Ka33y6bPES4?si=2VJ26Bv3XhAv-aev",
+            },
+          ],
+          roles: ["DANCER", "STAFF"],
+          stageType: "REGULAR PERFORMANCE",
+          venue: "YEUM HALL",
+          code: "BLM-022",
+        },
+      },
+      {
+        id: "blooming-004",
+        kind: "performance",
+        title: "Blooming 5th busking",
+        date: "2025.10.29",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "Body",
+              url: "https://youtu.be/K7_pC4sQ_Y8?si=VZ3cInbKd7w5FaEk",
+            },
+            {
+              title: "Rich Man",
+              url: "https://youtu.be/TUSA7FI19W0?si=1ZqLhuD5qEncRUFP",
+            },
+            {
+              title: "Dirty Work",
+              url: "https://youtu.be/dwfp_-tuEH4?si=49xv6LHA3vUECv-b",
+            },
+          ],
+          roles: ["LEADER", "DANCER", "STAFF"],
+          stageType: "BUSKING",
+          venue: "STARDOM SQUARE",
+          code: "BLM-004",
+        },
+      },
+      {
+        id: "epu-012",
+        kind: "performance",
+        title: "2025 Gachon Festival",
+        date: "2025.09.09",
+        content: {
+          performanceType: "K-POP COVER | CHOREOGRAPHY",
+          songs: [
+            {
+              title: "PLAY",
+              url: "https://youtu.be/tzdFXI6I4-c?si=Z5a_Rou7GqZo41_Y",
+            },
+            {
+              title: "PDA - Baby Back Home",
+              url: "https://youtu.be/7mOwPIZIisM?si=d3vjifjccGWVLdI3",
+            },
+          ],
+          roles: ["DIRECTOR", "DANCER"],
+          stageType: "FESTIVAL STAGE",
+          venue: "MAIN PLAYGROUND",
+          code: "EPU-012",
+        },
+      },
+      {
+        id: "epu-022",
+        kind: "performance",
+        title: "Fly to Summer, Fly with E.PU",
+        date: "2025.07.18",
+        content: {
+          performanceType: "CHOREOGRAPHY",
+          songs: [
+            {
+              title: "Lowlife Princess and 2 other songs",
+              url: "https://youtu.be/ObuTFeIupPQ?si=3F0OjJ6ho4b4fN48",
+            },
+            {
+              title: "Rascal - devil I know",
+              url: "https://youtu.be/0yKbgdpfrLg?si=lIA2QIVRWf5gKZGW",
+            },
+          ],
+          roles: ["DIRECTOR", "DANCER"],
+          stageType: "REGULAR PERFORMANCE",
+          venue: "YEUM HALL",
+          code: "EPU-022",
+        },
+      },
+      {
+        id: "epu-002",
+        kind: "performance",
+        title: "The Union, 28th",
+        date: "2025.05.06",
+        content: {
+          performanceType: "AFRO",
+          songs: [
+            {
+              title: "Bola Rebola and 2 other songs",
+              url: "https://youtu.be/SS2gZpX7h-c?si=qckOmN6ODbTwrTMQ",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "REGULAR PERFORMANCE",
+          venue: "Konkuk University Grand Auditorium",
+          code: "EPU-002",
+        },
+      },
+      {
+        id: "blooming-003",
+        kind: "performance",
+        title: "Blooming promotion busking",
+        date: "2025.03.14",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "Kick It",
+              url: "https://youtu.be/dYkAvdkPB8o?si=WHGJo6Uxk1SwulxX",
+            },
+            {
+              title: "Whiplash",
+              url: "https://youtu.be/04rhSllHmSk?si=x4nLsrklfSYW3iam",
+            },
+          ],
+          roles: ["DANCER", "STAFF"],
+          stageType: "BUSKING",
+          venue: "STARDOM SQUARE",
+          code: "BLM-003",
+        },
+      },
+      {
+        id: "epu-001",
+        kind: "performance",
+        title: "E.PU promotion busking",
+        date: "2025.03.05",
+        content: {
+          performanceType: "CHOREOGRAPHY",
+          songs: [
+            {
+              title: "Sticky - Tie a Cherry",
+              url: "https://youtu.be/eLvmrjBD28w?si=qDninlG9TudYS5eU",
+            },
+          ],
+          roles: ["DIRECTOR", "DANCER"],
+          stageType: "BUSKING",
+          venue: "STARDOM SQUARE",
+          code: "EPU-001",
+        },
+      },
+      {
+        id: "epu-021",
+        kind: "performance",
+        title: "CREDIT",
+        date: "2025.01.16",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "DRIP",
+              url: "https://youtu.be/mNr7rm16AHo?si=y5dAO1uvOdaBAlXv",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "REGULAR PERFORMANCE",
+          venue: "YEUM HALL",
+          code: "EPU-021",
+        },
+      },
+      {
+        id: "blooming-021",
+        kind: "performance",
+        title: "Blooming 3rd performance",
+        date: "2024.12.15",
+        content: {
+          performanceType: "COVER",
+          songs: [
+            {
+              title: "policemen remix",
+              url: "https://youtu.be/5Dt47LPQyXI?si=p7__kIQb_vCNDXUJ",
+            },
+            {
+              title: "Nobody knows - Whiplash",
+              url: "https://youtu.be/TGTuv_DZ8vo?si=2OEkyANd9h8Z7MGV",
+            },
+          ],
+          roles: ["DANCER", "STAFF"],
+          stageType: "REGULAR PERFORMANCE",
+          venue: "YEUM HALL",
+          code: "BLM-021",
+        },
+      },
+      {
+        id: "blooming-013",
+        kind: "performance",
+        title: "Walk film",
+        date: "2024.11.11",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "Walk",
+              url: "https://youtu.be/vWV-u9enTVU?si=UYE4_EjO1k7Hve6g",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "PERFORMANCE VIDEO",
+          venue: "BLACK VINTAGE, ROOFTOP STUDIO",
+          code: "BLM-013",
+        },
+      },
+      {
+        id: "epu-011",
+        kind: "performance",
+        title: "2024 Gachon Festival",
+        date: "2024.10.31",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "DM",
+              url: "https://youtu.be/mNr7rm16AHo?si=y5dAO1uvOdaBAlXv",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "FESTIVAL STAGE",
+          venue: "MAIN PLAYGROUND",
+          code: "EPU-011",
+        },
+      },
+      {
+        id: "blooming-002",
+        kind: "performance",
+        title: "Blooming 3rd busking",
+        date: "2024.09.10",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "HEYA",
+              url: "https://youtu.be/4m1CSKTkfJs?si=p9ouUWrvLDHKC-mv",
+            },
+            {
+              title: "aespa medley",
+              url: "https://youtu.be/kU5Ne8m1IXI?si=aalpe597Z0sJIJly",
+            },
+            {
+              title: "Walk",
+              url: "https://youtu.be/jC5_KUmz89E?si=LTC9oBO3ytdx7fXz",
+            },
+            {
+              title: "Loving U - Sticky",
+              url: "https://youtu.be/gMWBXJtLn-Q?si=vCLwPfPdrspEI-ZS",
+            },
+            {
+              title: "Armageddon",
+              url: "https://youtu.be/T2W49HBR3QE?si=zE52J4rhoS7Ns08q",
+            },
+            {
+              title: "Accendio",
+              url: "https://youtu.be/mgBJ557henY?si=FU5HDGH99rEUhRpe",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "BUSKING",
+          venue: "STARDOM SQUARE",
+          code: "BLM-002",
+        },
+      },
+      {
+        id: "blooming-012",
+        kind: "performance",
+        title: "Armageddon film",
+        date: "2024.07.15",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "Armageddon",
+              url: "https://youtu.be/HPIDGTzRq4o?si=SEt2rb5qw2Y8yHDL",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "PERFORMANCE VIDEO",
+          venue: "STUDIO MONG",
+          code: "BLM-012",
+        },
+      },
+      {
+        id: "blooming-011",
+        kind: "performance",
+        title: "ETA film",
+        date: "2024.07.12",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "ETA",
+              url: "https://youtu.be/iSIyRwiCvDY?si=oBd_I2DnIv_vflDy",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "PERFORMANCE VIDEO",
+          venue: "GYM",
+          code: "BLM-011",
+        },
+      },
+      {
+        id: "blooming-001",
+        kind: "performance",
+        title: "Blooming 2nd busking",
+        date: "2024.05.14",
+        content: {
+          performanceType: "K-POP COVER",
+          songs: [
+            {
+              title: "Attention",
+              url: "https://youtu.be/72gdIsQQ-Fw?si=wsO2WjIpQFtit_Kx",
+            },
+            {
+              title: "Magnetic",
+              url: "https://youtu.be/-d8dmzDRpmc?si=-khcJBn2u4KS35jN",
+            },
+            {
+              title: "Sheesh",
+              url: "https://youtu.be/kNnmb81tB_I?si=GDhVAHSRVGGG2_yg",
+            },
+          ],
+          roles: ["DANCER"],
+          stageType: "BUSKING",
+          venue: "STARDOM SQUARE",
+          code: "BLM-001",
+        },
       },
     ],
   },
@@ -410,7 +766,7 @@ export const archiveCategories: ArchiveCategory[] = [
     description:
       "Albums, single tracks, and the sounds attached to certain days.",
     presentation: "playlist",
-    paper: "#e4ebf4",
+    paper: "var(--archive-listening)",
     rotation: 5,
     offset: "67%",
     records: [
@@ -455,7 +811,7 @@ export const archiveCategories: ArchiveCategory[] = [
     description:
       "Receipts, objects, meals, and the small rituals that make a life.",
     presentation: "field-notes",
-    paper: "#f1ead1",
+    paper: "var(--archive-everyday)",
     rotation: -3,
     offset: "83%",
     records: [

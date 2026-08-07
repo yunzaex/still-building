@@ -10,6 +10,11 @@
   --white: #f7f7f5;
   --accent: #4c6074;
   --font-body: var(--font-body-latin), var(--font-body-korean), sans-serif;
+  --archive-photographs: #f7eddf;
+  --archive-journeys: #e8eadb;
+  --archive-performances: #efe3eb;
+  --archive-listening: #b8cbe9;
+  --archive-everyday: #f1edd1;
 }
 
 @layer components {
@@ -324,7 +329,7 @@
   margin-top: var(--photo-offset-y);
   padding: 1rem;
   border: 1px solid var(--line);
-  background: var(--white);
+  background: var(--archive-photographs);
   box-shadow:
     0 4px 8px rgb(59 40 35 / 0.05),
     0 12px 20px rgb(59 40 35 / 0.07);
@@ -388,7 +393,7 @@
   gap: 2rem;
   padding: 1rem;
   border: 1px solid var(--line);
-  background: #d3ddcf;
+  background: var(--archive-journeys);
 }
 .film-image {
   position: relative;
@@ -402,33 +407,113 @@
 
 .archive-records-tickets {
   display: grid;
-  max-width: 52rem;
-  gap: 1.5rem;
+  max-width: 68rem;
+  gap: 2rem;
   margin: 0 auto;
 }
 .archive-ticket {
+  --archive-ticket-notch-size: 1.25rem;
+  --archive-ticket-stub-width: 8rem;
+
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 9rem;
-  min-height: 12rem;
-  border: 1px solid #c7b1bd;
-  background: #f4eaf0;
+  grid-template-columns: minmax(0, 1fr) var(--archive-ticket-stub-width);
+  min-height: 0;
+  overflow: visible;
+  border: 1px solid var(--line);
+  background: var(--archive-performances);
+  color: var(--text);
+}
+.archive-ticket::before,
+.archive-ticket::after {
+  position: absolute;
+  z-index: 2;
+  right: calc(var(--archive-ticket-stub-width) - 0.625rem);
+  width: var(--archive-ticket-notch-size);
+  height: calc(var(--archive-ticket-notch-size) / 2);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  content: "";
+  pointer-events: none;
+}
+.archive-ticket::before {
+  top: -1px;
+  border-top: 0;
+  border-radius: 0 0 999px 999px;
+}
+.archive-ticket::after {
+  bottom: -1px;
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
 }
 .archive-ticket-main {
-  padding: 1.5rem;
+  padding: 1.75rem;
+}
+.archive-ticket-title {
+  color: var(--brown);
+}
+.archive-ticket-details {
+  display: grid;
+  grid-template-columns: minmax(13.5rem, 17rem) minmax(12rem, 1fr);
+  align-items: start;
+  column-gap: clamp(2.5rem, 6vw, 5rem);
+  margin-top: 1.5rem;
+  color: var(--text);
+}
+.archive-ticket-facts {
+  display: grid;
+  gap: 0.62rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.archive-ticket-datum {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  column-gap: 1.25rem;
+  overflow-wrap: anywhere;
+}
+.archive-ticket-label {
+  color: var(--brown-light);
+}
+.archive-ticket-value {
+  min-width: 0;
+  color: var(--text);
 }
 .archive-ticket-stub {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 1rem;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-left: 1px dashed var(--line);
+  color: var(--brown-light);
+}
+.archive-ticket-barcode {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border-left: 1px dashed #c7b1bd;
-  padding: 1.5rem 1rem;
-  color: #815b70;
+  align-items: stretch;
+  width: 4rem;
+}
+.archive-ticket-barcode span {
+  display: block;
+  width: 100%;
+  flex: 0 0 auto;
+  background: var(--brown);
+}
+.archive-ticket-code {
+  color: var(--brown-light);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transform: rotate(-90deg);
 }
 
 .archive-records-playlist {
   max-width: 54rem;
   margin: 0 auto;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--archive-listening);
 }
 .archive-track {
   display: grid;
@@ -436,16 +521,16 @@
   gap: 1rem;
   align-items: center;
   padding: 1.5rem 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--archive-listening);
 }
 .archive-track-index {
   display: grid;
   place-items: center;
   width: 2rem;
   height: 2rem;
-  border: 1px solid #91a4c2;
+  background: var(--archive-listening);
   border-radius: 50%;
-  color: #5d7598;
+  color: var(--white);
 }
 .archive-track .archive-record-meta {
   grid-column: 2 / -1;
@@ -461,7 +546,7 @@
   min-height: 19rem;
   padding: 1.5rem;
   border: 1px solid #d4c795;
-  background: #f4edcf;
+  background: var(--archive-everyday);
   box-shadow: 0 0.5rem 0 rgb(212 199 149 / 35%);
 }
 .archive-daily-note:nth-child(2) {
@@ -539,7 +624,24 @@ body {
     grid-template-columns: 1fr;
   }
   .archive-ticket {
-    grid-template-columns: 1fr 7rem;
+    --archive-ticket-stub-width: 6.5rem;
+
+    grid-template-columns: minmax(0, 1fr) var(--archive-ticket-stub-width);
+    min-height: 0;
+  }
+  .archive-ticket-main {
+    padding: 1.35rem;
+  }
+  .archive-ticket-stub {
+    grid-template-columns: 3rem 0.85rem;
+  }
+  .archive-ticket-barcode {
+    width: 3rem;
+  }
+  .archive-ticket-details {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+    margin-top: 1.25rem;
   }
   .archive-track {
     grid-template-columns: 2.5rem 1fr auto;
